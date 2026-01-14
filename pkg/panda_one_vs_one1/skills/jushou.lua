@@ -21,7 +21,7 @@ jushou:addEffect(fk.RoundEnd,{
   end,
   on_cost = function (self, event, target, player, data)
     local n = player:getMark("@pang__jushou")
-    if player:getMark("@pang__jushou_restrict-round") == 0 then
+    if player:getMark("pang__jushou_restrict-round") == 0 then
       n = n + 1
     else
       n = 0
@@ -56,7 +56,7 @@ jushou:addEffect(fk.TargetSpecifying, {
   on_refresh = function(self, event, target, player, data)
     local room = player.room
     player.room:setPlayerMark(player,"@pang__jushou", 0)
-    player.room:setPlayerMark(player,"@pang__jushou_restrict-round", 1)
+    player.room:setPlayerMark(player,"pang__jushou_restrict-round", 1)
   end,
 })
 
