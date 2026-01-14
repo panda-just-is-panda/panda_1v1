@@ -4,7 +4,7 @@ local jushou = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__jushou"] = "据守",
-  [":pang__jushou"] = "你连续四轮未对对手使用牌后，你摸三张牌或令你的最大登场数+1。",
+  [":pang__jushou"] = "你连续五轮未对对手使用牌后，你摸三张牌或令你的最大登场数+1。",
   ["@pang__jushou"] = "据守",
   ["jushou_draw"] = "摸三张牌",
   ["jushou_yuanjun"] = "最大登场数+1",
@@ -26,7 +26,7 @@ jushou:addEffect(fk.RoundEnd,{
     else
       n = 0
     end
-    if n >= 4 and player:hasSkill(jushou.name) then
+    if n >= 5 and player:hasSkill(jushou.name) then
       player.room:setPlayerMark(player,"@pang__jushou", 0)
       return true
     else
