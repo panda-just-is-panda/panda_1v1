@@ -17,7 +17,7 @@ Fk:loadTranslationTable{
 xianzhen:addEffect(fk.TargetSpecified, {
   anim_type = "offensive",
   can_trigger = function(self, event, target, player, data)
-    return player:hasSkill(xianzhen.name) and target == player and not data.to == player
+    return player:hasSkill(xianzhen.name) and target == player and data.to ~= player
   end,
   on_cost = function (self, event, target, player, data)
     return player.room:askToSkillInvoke(player,{
