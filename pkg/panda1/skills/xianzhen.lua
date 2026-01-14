@@ -10,7 +10,6 @@ Fk:loadTranslationTable{
   ["#xianzhen_discard"] = "陷阵：弃置对手两张牌",
 
 
-
   ["$xianzhen1"] = "攻无不克，战无不胜！",
   ["$xianzhen2"] = "破阵斩将，易如反掌！",
 }
@@ -18,7 +17,7 @@ Fk:loadTranslationTable{
 xianzhen:addEffect(fk.TargetSpecified, {
   anim_type = "offensive",
   can_trigger = function(self, event, target, player, data)
-    return player:hasSkill(xianzhen.name) and target == player
+    return player:hasSkill(xianzhen.name) and target == player and not data.to == player
   end,
   on_cost = function (self, event, target, player, data)
     return player.room:askToSkillInvoke(player,{
