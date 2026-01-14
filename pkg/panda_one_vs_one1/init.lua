@@ -21,4 +21,18 @@ Fk:loadTranslationTable{
   ["~pang__gaoshun"] = "生死有命……",
 }
 
+local weiyan = General:new(extension, "pang__weiyan", "shu", 4, 4, General.Male)
+weiyan:addSkill("pang__qimou")
+Fk:loadTranslationTable{
+  ["pang__weiyan"] = "魏延",
+  ["#pang__weiyan"] = "嗜血的独狼",
+  ["designer:pang__weiyan"] = "胖即是胖",
+  ["illustrator:pang__weiyan"] = "瞌瞌一休",
+
+  ["~pang__weiyan"] = "汝，且勿为杨仪奸计所蔽……呃啊！",
+}
+
+
+
+
 return extension
