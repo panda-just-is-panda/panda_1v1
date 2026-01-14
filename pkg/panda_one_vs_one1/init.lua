@@ -32,6 +32,18 @@ Fk:loadTranslationTable{
   ["~pang__weiyan"] = "汝，且勿为杨仪奸计所蔽……呃啊！",
 }
 
+local sunshangxiang = General:new(extension, "pang__sunshangxiang", "wu", 3, 3, General.Female)
+sunshangxiang:addSkill("pang__xiaoji")
+sunshangxiang:addSkill("pang__saying")
+Fk:loadTranslationTable{
+  ["pang__sunshangxiang"] = "孙尚香",
+  ["#pang__sunshangxiang"] = "弓腰姬",
+  ["designer:pang__sunshangxiang"] = "胖即是胖",
+  ["illustrator:pang__sunshangxiang"] = "Thinking",
+
+  ["~pang__sunshangxiang"] = "哎呀，这次弓箭射歪了。",
+}
+
 
 
 
