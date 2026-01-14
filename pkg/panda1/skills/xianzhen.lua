@@ -10,8 +10,8 @@ Fk:loadTranslationTable{
   ["#xianzhen_discard"] = "陷阵：弃置对手两张牌",
 
 
-  ["$xianzhen1"] = "攻无不克，战无不胜！",
-  ["$xianzhen2"] = "破阵斩将，易如反掌！",
+  ["$pang__xianzhen1"] = "攻无不克，战无不胜！",
+  ["$pang__xianzhen2"] = "破阵斩将，易如反掌！",
 }
 
 xianzhen:addEffect(fk.TargetSpecified, {

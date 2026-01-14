@@ -19,7 +19,7 @@ Fk:loadTranslationTable{
   ["designer:pang__gaoshun"] = "胖即是胖",
   ["illustrator:pang__gaoshun"] = "鄧Sir",
 
-  ["~gaoshun"] = "生死有命……",
+  ["~pang__gaoshun"] = "生死有命……",
 }
 
 return extension
