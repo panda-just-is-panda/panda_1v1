@@ -8,7 +8,7 @@ Fk:loadTranslationTable{
 
   ["#pang__saying1"] = "飒影：你可以和对手交换装备区内的牌，然后摸两张牌",
   ["#pang__saying2"] = "飒影：你可以和对手交换装备区内的牌，然后视为使用【杀】",
-  ["#pang__saying3"] = "飒影：你可以和对手交换装备区内的牌",
+  ["#pang__saying3"] = "飒影：你可以和对手交换装备区内的牌，然后失去此技能",
 
   ["$pang__saying1"] = "倩影映江汀，巾帼犹飒爽！",
   ["$pang__saying2"] = "我有一袭红袖，欲揾英雄泪！"
@@ -42,6 +42,7 @@ saying:addEffect("viewas", {
         return saying.name
     elseif #player:getCardIds("e") > #to:getCardIds("e") then
         room:handleAddLoseSkills(player, "-pang__saying", nil, false, true)
+        return saying.name
     end
   end,
   enabled_at_play = function(self, player)
