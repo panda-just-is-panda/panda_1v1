@@ -6,7 +6,7 @@ Fk:loadTranslationTable{
   ["pang__jushou"] = "据守",
   [":pang__jushou"] = "你连续五轮未对对手使用牌后，你摸五张牌或令你的最大登场数+1。",
   ["@pang__jushou"] = "据守",
-  ["jushou_draw"] = "摸三张牌",
+  ["jushou_draw"] = "摸五张牌",
   ["jushou_yuanjun"] = "最大登场数+1",
 
   ["$pang__jushou1"] = "白马沉河共歃誓，怒涛没城亦不悔！",
