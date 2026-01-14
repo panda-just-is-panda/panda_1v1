@@ -4,7 +4,7 @@ local saying = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__saying"] = "飒影",
-  [":pang__saying"] = "当你需要使用【杀】时，你可以和对手交换装备区内的牌，然后若你装备区内的牌数因此：减少，你摸两张牌；不变，你视为使用之。",
+  [":pang__saying"] = "当你需要使用【杀】时，你可以和对手交换装备区内的牌，然后若你装备区内的牌数因此：减少，你摸两张牌；不变，你视为使用之；增加，你失去此技能。",
 
   ["#pang__saying1"] = "飒影：你可以和对手交换装备区内的牌，然后摸两张牌",
   ["#pang__saying2"] = "飒影：你可以和对手交换装备区内的牌，然后视为使用【杀】",
@@ -41,7 +41,7 @@ saying:addEffect("viewas", {
         player:drawCards(2, saying.name)
         return saying.name
     elseif #player:getCardIds("e") > #to:getCardIds("e") then
-        return saying.name
+        room:handleAddLoseSkills(player, "-pang__saying", nil, false, true)
     end
   end,
   enabled_at_play = function(self, player)
