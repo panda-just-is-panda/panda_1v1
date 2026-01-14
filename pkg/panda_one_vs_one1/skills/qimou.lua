@@ -55,7 +55,7 @@ qimou:addEffect(fk.Damage, {
     return target == player and data.card and table.contains(data.card.skillNames, qimou.name)
   end,
   on_refresh = function(self, event, target, player, data)
-      plaer.room:addPlayerMark(player, "qimou_damage", 1)
+      player.room:addPlayerMark(player, "qimou_damage", 1)
   end,
 })
 
