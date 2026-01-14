@@ -43,7 +43,7 @@ jushou:addEffect(fk.RoundEnd,{
     if choice == "jushou_draw" then
         player:drawCards(3, jushou.name)
     else
-       U.addPlayercount(player.next,0,1)
+       U.addPlayercount(player,0,1)
     end
   end,
 })
