@@ -2,6 +2,9 @@ local extension = Package:new("panda1")
 extension.extensionName = "panda"
 
 extension:loadSkillSkelsByPath("./packages/panda_one_vs_one/pkg/panda1/skills")
+extension.game_modes_whitelist = {
+  "klee_1v1",
+}
 
 Fk:loadTranslationTable{
   ["panda1"] = "胖胖扩",
