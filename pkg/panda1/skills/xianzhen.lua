@@ -50,11 +50,11 @@ xianzhen:addEffect(fk.TargetSpecifying, {
   anim_type = "offensive",
   can_refresh = function (self, event, target, player, data)
     return target == player and player:hasSkill(xianzhen.name) and not table.contains(data.use.tos, player)
-    and (target:getMark("xianzhen_draw-turn") > 0 or target:getMark("xianzhen_discard-turn") > 0)
+    and (data.to:getMark("xianzhen_draw-turn") > 0 or data.to:getMark("xianzhen_discard-turn") > 0)
   end,
   on_refresh = function(self, event, target, player, data)
     local room = player.room
-    local to = data.use.tos[1]
+    local to = data.to
     if to:getMark("xianzhen_draw-turn") > 0 then
         to:drawCards(1, xianzhen.name)
         room:setPlayerMark(to, "xianzhen_draw-turn", 0)
