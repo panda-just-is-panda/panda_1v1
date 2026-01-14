@@ -16,7 +16,7 @@ Fk:loadTranslationTable{
   ["pang__gaoshun"] = "高顺",
   ["#pang__gaoshun"] = "攻无不克",
   ["designer:pang__gaoshun"] = "胖即是胖",
-  ["illustrator:pang__gaoshun"] = "官方",
+  ["illustrator:pang__gaoshun"] = "鄧Sir",
 
   ["~pang__gaoshun"] = "生死有命……",
 }
