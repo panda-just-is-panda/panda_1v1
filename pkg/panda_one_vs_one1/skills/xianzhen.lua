@@ -17,7 +17,7 @@ Fk:loadTranslationTable{
 xianzhen:addEffect(fk.TargetSpecified, {
   anim_type = "offensive",
   can_trigger = function(self, event, target, player, data)
-    return player:hasSkill(xianzhen.name) and target == player and data.to ~= player
+    return player:hasSkill(xianzhen.name) and target == player and data.to == player.next
   end,
   on_cost = function (self, event, target, player, data)
     return player.room:askToSkillInvoke(player,{
@@ -48,7 +48,7 @@ xianzhen:addEffect(fk.TargetSpecified, {
 xianzhen:addEffect(fk.TargetSpecifying, {
   anim_type = "offensive",
   can_refresh = function (self, event, target, player, data)
-    return target == player and player:hasSkill(xianzhen.name) and not table.contains(data.use.tos, player)
+    return target == player and player:hasSkill(xianzhen.name) and data.to == player.next
     and (data.to:getMark("xianzhen_draw-turn") > 0 or data.to:getMark("xianzhen_discard-turn") > 0)
   end,
   on_refresh = function(self, event, target, player, data)

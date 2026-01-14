@@ -44,6 +44,17 @@ Fk:loadTranslationTable{
   ["~pang__sunshangxiang"] = "哎呀，这次弓箭射歪了。",
 }
 
+local caoren = General:new(extension, "pang__caoren", "wei", 4, 4, General.Male)
+caoren:addSkill("pang__jushou")
+caoren:addSkill("pang__jiewei")
+Fk:loadTranslationTable{
+  ["pang__caoren"] = "曹仁",
+  ["#pang__caoren"] = "固若金汤",
+  ["designer:pang__caoren"] = "胖即是胖",
+  ["illustrator:pang__caoren"] = "铁杵",
+
+  ["~pang__caoren"] = "吾身可殉，然襄樊之地万不可落于吴蜀之手……",
+}
 
 
 
