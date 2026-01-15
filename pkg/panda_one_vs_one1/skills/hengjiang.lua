@@ -6,7 +6,7 @@ local hengjiang = fk.CreateSkill({
 local bingxin = {
   anim_type = "defensive",
   can_trigger = function (self, event, target, player, data)
-    return player:hasSkill(hengjiang.name) and data.to and data.to:getMaxCards() > 0
+    return target == player and player:hasSkill(hengjiang.name) and data.to and data.to:getMaxCards() > 0
   end,
   on_cost = function (self, event, target, player, data)
     return player.room:askToSkillInvoke(player,{
