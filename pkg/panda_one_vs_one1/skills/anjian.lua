@@ -12,6 +12,8 @@ Fk:loadTranslationTable{
   ["$pang__anjian&2"] = "明枪易躲，暗箭难防！",
 }
 
+local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
+
 anjian:addEffect(fk.EventPhaseStart, {
   anim_type = "control",
   can_trigger = function(self, event, target, player, data)
@@ -33,3 +35,5 @@ anjian:addEffect(fk.EventPhaseStart, {
     }
   end,
 })
+
+return anjian
