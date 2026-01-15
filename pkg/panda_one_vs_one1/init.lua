@@ -45,7 +45,7 @@ Fk:loadTranslationTable{
 }
 
 local yujin = General:new(extension, "pang__yujin", "wei", 4, 4, General.Male)
-yujin:addSkill("pang__zhenjun")
+yujin:addSkill("pang__zhenjun&")
 yujin:addSkill("pang__yizhong")
 Fk:loadTranslationTable{
   ["pang__yujin"] = "于禁",
