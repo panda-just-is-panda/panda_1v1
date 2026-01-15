@@ -44,16 +44,16 @@ Fk:loadTranslationTable{
   ["~pang__sunshangxiang"] = "哎呀，这次弓箭射歪了。",
 }
 
-local caoren = General:new(extension, "pang__caoren", "wei", 4, 4, General.Male)
-caoren:addSkill("pang__jushou")
-caoren:addSkill("pang__jiewei")
+local yujin = General:new(extension, "pang__yujin", "wei", 4, 4, General.Male)
+yujin:addSkill("pang__zhenjun")
+yujin:addSkill("pang__yizhong")
 Fk:loadTranslationTable{
-  ["pang__caoren"] = "曹仁",
-  ["#pang__caoren"] = "固若金汤",
-  ["designer:pang__caoren"] = "胖即是胖",
-  ["illustrator:pang__caoren"] = "铁杵",
+  ["pang__yujin"] = "于禁",
+  ["#pang__yujin"] = "讨暴坚垒",
+  ["designer:pang__yujin"] = "胖即是胖",
+  ["illustrator:pang__yujin"] = "biou09",
 
-  ["~pang__caoren"] = "吾身可殉，然襄樊之地万不可落于吴蜀之手……",
+  ["~pang__yujin"] = "如今临危处难，却负丞相三十年之赏识，唉……",
 }
 
 
