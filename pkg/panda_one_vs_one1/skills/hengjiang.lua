@@ -38,6 +38,9 @@ Fk:loadTranslationTable {["pang__hengjiang"] = "横江",
 [":pang__hengjiang"] = "当你造成或受到伤害时，若受伤角色的手牌上限大于0，你可以令其手牌上限-1，然后你选择一项：其摸两张牌；防止此伤害。",
 ["#pang__hengjiang"] = "横江：你可以令 %src 手牌上限-1，然后选择防止此伤害或令 %src 摸两张牌",
 
+["hengjiang_prevent"] = "防止伤害",
+["hengjiang__drawcard"] = "摸两张牌",
+
 
   ["$pang__hengjiang1"] = "霸必奋勇杀敌，一雪夷陵之耻！",
   ["$pang__hengjiang2"] = "江横索寒，阻敌绝境之中！",
