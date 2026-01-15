@@ -22,7 +22,7 @@ duodao:addEffect(U.AfterDebut,{
   end,
   on_cost = function (self, event, target, player, data)
     return player.room:askToSkillInvoke(player,{
-      prompt = "#pang__zhenjun",
+      prompt = "#pang__duodao",
       skill_name = duodao.name,
     })
   end,
