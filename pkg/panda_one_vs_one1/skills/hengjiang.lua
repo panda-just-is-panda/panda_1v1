@@ -17,8 +17,17 @@ local bingxin = {
   on_use = function (self, event, target, player, data)
     local room = player.room
     local to = data.to
-    data:preventDamage()
     room:addPlayerMark(to, MarkEnum.MinusMaxCards, 1)
+    local choices = {"hengjiang_prevent", "hengjiang__drawcard"}
+    local choice = room:askToChoice(player, {
+      choices = choices,
+      skill_name = hengjiang.name,
+    })
+    if choice == "hengjiang_prevent" then
+        data:preventDamage()
+    else
+        to:drawCards(2, hengjiang.name)
+    end
   end
 }
 hengjiang:addEffect(fk.DamageCaused, bingxin)
@@ -26,8 +35,8 @@ hengjiang:addEffect(fk.DamageInflicted, bingxin)
 
 
 Fk:loadTranslationTable {["pang__hengjiang"] = "横江",
-[":pang__hengjiang"] = "当你造成或受到伤害时，若受伤角色的手牌上限大于0，你可以防止此伤害并令其手牌上限-1。",
-["#pang__hengjiang"] = "横江：你可以防止对 %src 造成的伤害并令 %src 手牌上限-1",
+[":pang__hengjiang"] = "当你造成或受到伤害时，若受伤角色的手牌上限大于0，你可以令其手牌上限-1，然后你选择一项：其摸两张牌；防止此伤害。",
+["#pang__hengjiang"] = "横江：你可以令 %src 手牌上限-1，然后选择防止此伤害或令 %src 摸两张牌",
 
 
   ["$pang__hengjiang1"] = "霸必奋勇杀敌，一雪夷陵之耻！",
