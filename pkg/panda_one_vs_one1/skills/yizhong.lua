@@ -4,7 +4,7 @@ local yizhong = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__yizhong"] = "毅重",
-  [":pang__yizhong"] = "当你成为伤害牌的目标后，你可以摸一张牌；若如此做，你本回合下次成为伤害牌的目标时失去此技能。",
+  [":pang__yizhong"] = "当你成为伤害牌的目标后，你可以摸一张牌，然后你本回合下次成为伤害牌的目标时失去此技能。",
   ["#pang__yizhong"] = "毅重：你可以摸一张牌",
 
   ["$pang__yizhong1"] = "奉令无犯，当敌制决！",

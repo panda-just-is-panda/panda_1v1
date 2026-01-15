@@ -5,7 +5,7 @@ local zhenjun = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__zhenjun&"] = "镇军",
-  [":pang__zhenjun&"] = "备场技，一名角色登场后，你可以观看其手牌并弃置其中任意张，然后其摸等量张牌；若其不为我方角色，你失去此技能。",
+  [":pang__zhenjun&"] = "备场技，一名角色登场后，你可以观看其手牌并弃置其中任意张，然后其摸等量张牌。",
   ["#pang__zhenjun&"] = "镇军：你可以观看 %src 手牌并弃置其中任意张，然后 %src 摸等量张牌",
 
   ["$pang__zhenjun&1"] = "按丞相之命，此部今由余统摄！",
@@ -36,9 +36,6 @@ zhenjun:addEffect(U.AfterDebut,{
     })
     room:throwCard(cards, zhenjun.name, target, player)
     target:drawCards(#cards, zhenjun.name)
-    if target ~= player then
-      room:handleAddLoseSkills(player, "pang__zhenjun&", nil, false, true)
-    end
   end,
 })
 
