@@ -37,7 +37,7 @@ yizhong:addEffect(fk.TargetConfirming, {
   end,
   on_refresh = function(self, event, target, player, data)
     local room = player.room
-    room:handleAddLoseSkills(player, "pang__yizhong", nil, false, true)
+    room:handleAddLoseSkills(player, "-pang__yizhong", nil, false, true)
     player:broadcastSkillInvoke(yizhong.name, 2)
   end,
 })
