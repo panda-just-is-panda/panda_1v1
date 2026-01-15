@@ -27,7 +27,7 @@ hengjiang:addEffect(fk.DamageInflicted, bingxin)
 
 Fk:loadTranslationTable {["pang__hengjiang"] = "横江",
 [":pang__hengjiang"] = "当你造成或受到伤害时，若受伤角色的手牌上限大于0，你可以防止此伤害并令其手牌上限-1。",
-["#pang__hengjiang"] = "横江：你可以防止对 %src 造成的伤害并令其手牌上限-1",
+["#pang__hengjiang"] = "横江：你可以防止对 %src 造成的伤害并令 %src 手牌上限-1",
 
 
   ["$pang__hengjiang1"] = "霸必奋勇杀敌，一雪夷陵之耻！",
