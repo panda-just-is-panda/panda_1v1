@@ -44,16 +44,15 @@ Fk:loadTranslationTable{
   ["~pang__sunshangxiang"] = "哎呀，这次弓箭射歪了。",
 }
 
-local yujin = General:new(extension, "pang__yujin", "wei", 4, 4, General.Male)
-yujin:addSkill("pang__zhenjun&")
-yujin:addSkill("pang__yizhong")
+local zangba = General:new(extension, "pang__zangba", "wei", 4, 4, General.Male)
+zangba:addSkill("pang__hengjiang")
 Fk:loadTranslationTable{
-  ["pang__yujin"] = "于禁",
-  ["#pang__yujin"] = "讨暴坚垒",
-  ["designer:pang__yujin"] = "胖即是胖",
-  ["illustrator:pang__yujin"] = "biou09",
+  ["pang__zangba"] = "臧霸",
+  ["#pang__zangba"] = "节度青徐",
+  ["designer:pang__zangba"] = "胖即是胖",
+  ["illustrator:pang__zangba"] = "HOOO",
 
-  ["~pang__yujin"] = "如今临危处难，却负丞相三十年之赏识，唉……",
+  ["~pang__zangba"] = "断刃沉江，负主重托……",
 }
 
 local panzhangmazhong = General:new(extension, "pang__panzhangmazhong", "wu", 4, 4, General.Male)
