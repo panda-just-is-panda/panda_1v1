@@ -56,6 +56,18 @@ Fk:loadTranslationTable{
   ["~pang__yujin"] = "如今临危处难，却负丞相三十年之赏识，唉……",
 }
 
+local panzhangmazhong = General:new(extension, "pang__panzhangmazhong", "wu", 4, 4, General.Male)
+panzhangmazhong:addSkill("pang__anjian&")
+panzhangmazhong:addSkill("pang__duodao")
+Fk:loadTranslationTable{
+  ["pang__panzhangmazhong"] = "潘璋马忠",
+  ["#pang__panzhangmazhong"] = "擒龙伏虎",
+  ["designer:pang__panzhangmazhong"] = "胖即是胖",
+  ["illustrator:pang__panzhangmazhong"] = "凝聚永恒",
+
+  ["~pang__panzhangmazhong"] = "埋伏得这么好，怎会……",
+}
+
 
 
 return extension
