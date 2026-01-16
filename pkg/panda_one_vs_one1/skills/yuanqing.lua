@@ -43,3 +43,5 @@ yuanqing:addEffect(fk.CardUsing, {
     end
   end,
 })
+
+return yuanqing

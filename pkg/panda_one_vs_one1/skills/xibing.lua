@@ -28,3 +28,5 @@ xibing:addEffect("maxcards", {
     end
   end,
 })
+
+return xibing
