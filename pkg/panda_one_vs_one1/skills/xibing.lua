@@ -46,7 +46,7 @@ xibing:addEffect(fk.CardUsing, {
 
 xibing:addEffect(U.Farewell, {
   can_refresh = function (self, event, target, player, data)
-    return player:hasSkill(xibing.name,true,true)
+    return target == player and player:hasSkill(xibing.name,true,true)
   end,
   on_refresh = function (self, event, target, player, data)
     player.room:setPlayerMark(target, "xibing__shangxian", 0)
