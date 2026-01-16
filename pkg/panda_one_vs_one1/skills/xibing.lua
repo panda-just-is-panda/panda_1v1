@@ -15,7 +15,7 @@ Fk:loadTranslationTable{
 
 xibing:addEffect("maxcards", {
   correct_func = function(self, player)
-    local room = player.room
+    local room = Fk:currentRoom()
     local num = 0
     room.logic:getEventsOfScope(GameEvent.UseCard, 1, function(e)
       local use = e.data
