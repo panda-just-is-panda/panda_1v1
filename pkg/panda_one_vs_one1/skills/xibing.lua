@@ -41,7 +41,7 @@ xibing:addEffect(fk.CardUsing, {
   end,
   on_refresh = function(self, event, target, player, data)
     local room = player.room
-    room:setPlayerMark(p, "xibing__use-round", 1)
+    room:setPlayerMark(player, "xibing__use-round", 1)
   end,
 })
 

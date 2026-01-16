@@ -14,7 +14,7 @@ Fk:loadTranslationTable{
 yuanqing:addEffect(fk.CardUseFinished, {
     anim_type = "drawcard",
     can_trigger = function(self, event, target, player, data)
-        return player:hasSkill(yuanqing.name) and 
+        return target == player and player:hasSkill(yuanqing.name) and 
         player:getMark("yuanqing_equip") + player:getMark("yuanqing_basic") + player:getMark("yuanqing_Trick") < 2
     end,
     on_cost = function (self, event, target, player, data)
