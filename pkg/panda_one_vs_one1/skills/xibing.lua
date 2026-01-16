@@ -15,17 +15,33 @@ Fk:loadTranslationTable{
 
 xibing:addEffect("maxcards", {
   correct_func = function(self, player)
-    local room = Fk:currentRoom()
-    local num = 0
-    room.logic:getEventsOfScope(GameEvent.UseCard, 1, function(e)
-      local use = e.data
-      if use.from == player and use.card.trueName == "slash" then
-        num = num + 1
-      end
-    end, Player.HistoryRound)
-    if num == 0 then
+    if player:getMark("xibing__use-round") == 0 then
         return 2
     end
+  end,
+})
+
+xibing:addAcquireEffect(function(self, player, is_start)
+    if not is_start then
+        local room = player.room
+        for _, p in ipairs(Fk:currentRoom().alive_players) do
+            room.logic:getEventsOfScope(GameEvent.UseCard, 1, function(e)
+                local use = e.data
+                if use.from == p and use.card.trueName == "slash" then
+                    room:setPlayerMark(p, "xibing__use-round", 1)
+                end
+            end, Player.HistoryRound)
+        end
+    end
+end)
+
+xibing:addEffect(fk.CardUsing, {
+  can_refresh = function(self, event, target, player, data)
+    return target == player and data.card and data.card.trueName == "slash"
+  end,
+  on_refresh = function(self, event, target, player, data)
+    local room = player.room
+    room:setPlayerMark(p, "xibing__use-round", 1)
   end,
 })
 
