@@ -6,7 +6,7 @@ local hengjiang = fk.CreateSkill({
 hengjiang:addEffect(fk.Damaged, {
   anim_type = "control",
   can_trigger = function (self, event, target, player, data)
-    return player:hasSkill(hengjiang.name) and data.to
+    return player:hasSkill(hengjiang.name) and data.to and not data.to.dead
   end,
   on_cost = function (self, event, target, player, data)
     return player.room:askToSkillInvoke(player,{
