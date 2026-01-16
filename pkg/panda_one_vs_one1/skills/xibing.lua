@@ -9,6 +9,8 @@ Fk:loadTranslationTable{
   ["pang__xibing"] = "息兵",
   [":pang__xibing"] = "锁定技，本轮未使用过【杀】的角色的手牌上限+2。",
 
+  ["$pang__xibing1"] = "千里运粮，非用兵之利。",
+  ["$pang__xibing2"] = "宜弘一代之治，绍三王之迹。",
 }
 
 xibing:addEffect("maxcards", {

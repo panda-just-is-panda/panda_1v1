@@ -47,6 +47,7 @@ duodao:addEffect(U.Farewell, {
   end,
   on_refresh = function (self, event, target, player, data)
     player.room:setPlayerMark(target, "@@pang__duodao", 0)
+    player.room:setPlayerMark(target.next, "@@pang__duodao", 0)
   end,
 })
 

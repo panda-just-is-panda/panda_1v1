@@ -44,17 +44,6 @@ Fk:loadTranslationTable{
   ["~pang__sunshangxiang"] = "哎呀，这次弓箭射歪了。",
 }
 
-local zangba = General:new(extension, "pang__zangba", "wei", 4, 4, General.Male)
-zangba:addSkill("pang__hengjiang")
-Fk:loadTranslationTable{
-  ["pang__zangba"] = "臧霸",
-  ["#pang__zangba"] = "节度青徐",
-  ["designer:pang__zangba"] = "胖即是胖",
-  ["illustrator:pang__zangba"] = "HOOO",
-
-  ["~pang__zangba"] = "断刃沉江，负主重托……",
-}
-
 local panzhangmazhong = General:new(extension, "pang__panzhangmazhong", "wu", 4, 4, General.Male)
 panzhangmazhong:addSkill("pang__anjian&")
 panzhangmazhong:addSkill("pang__duodao")
@@ -65,6 +54,29 @@ Fk:loadTranslationTable{
   ["illustrator:pang__panzhangmazhong"] = "凝聚永恒",
 
   ["~pang__panzhangmazhong"] = "埋伏得这么好，怎会……",
+}
+
+local huayun = General:new(extension, "pang__huayun", "wei", 3, 3, General.Male)
+huayun:addSkill("pang__yuanqing")
+huayun:addSkill("pang__xibing")
+Fk:loadTranslationTable{
+  ["pang__huayun"] = "华歆",
+  ["#pang__huayun"] = "玉洁望归",
+  ["designer:pang__huayun"] = "胖即是胖",
+  ["illustrator:pang__huayun"] = "秋呆呆",
+
+  ["~pang__huayun"] = "大举发兵，劳民伤国。",
+}
+
+local zangba = General:new(extension, "pang__zangba", "wei", 4, 4, General.Male)
+zangba:addSkill("pang__hengjiang")
+Fk:loadTranslationTable{
+  ["pang__zangba"] = "臧霸",
+  ["#pang__zangba"] = "节度青徐",
+  ["designer:pang__zangba"] = "胖即是胖",
+  ["illustrator:pang__zangba"] = "HOOO",
+
+  ["~pang__zangba"] = "断刃沉江，负主重托……",
 }
 
 
