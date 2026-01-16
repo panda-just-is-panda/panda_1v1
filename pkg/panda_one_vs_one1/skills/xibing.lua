@@ -7,7 +7,7 @@ local xibing = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__xibing"] = "息兵",
-  [":pang__xibing"] = "锁定技，本轮未使用过【杀】的角色的手牌上限+2。",
+  [":pang__xibing"] = "锁定技，你登场后首名使用【杀】的角色需弃置两张牌，然后另一名角色的手牌上限+2直到你退场。",
 
   ["$pang__xibing1"] = "千里运粮，非用兵之利。",
   ["$pang__xibing2"] = "宜弘一代之治，绍三王之迹。",
@@ -15,33 +15,40 @@ Fk:loadTranslationTable{
 
 xibing:addEffect("maxcards", {
   correct_func = function(self, player)
-    if player:getMark("xibing__use-round") == 0 then
+    if player:getMark("xibing__shangxian") == 1 then
         return 2
     end
   end,
 })
 
-xibing:addAcquireEffect(function(self, player, is_start)
-    if not is_start then
-        local room = player.room
-        for _, p in ipairs(Fk:currentRoom().alive_players) do
-            room.logic:getEventsOfScope(GameEvent.UseCard, 1, function(e)
-                local use = e.data
-                if use.from == p and use.card.trueName == "slash" then
-                    room:setPlayerMark(p, "xibing__use-round", 1)
-                end
-            end, Player.HistoryRound)
-        end
-    end
-end)
 
 xibing:addEffect(fk.CardUsing, {
-  can_refresh = function(self, event, target, player, data)
-    return target == player and data.card and data.card.trueName == "slash"
+  can_trigger = function(self, event, target, player, data)
+    return target == player and data.card and data.card.trueName == "slash" 
+    and player.next:getMark("xibing__shangxian") == 0 and player:getMark("xibing__shangxian") == 0
   end,
-  on_refresh = function(self, event, target, player, data)
+  on_use = function(self, event, target, player, data)
     local room = player.room
-    room:setPlayerMark(player, "xibing__use-round", 1)
+    room:setPlayerMark(player.next, "xibing__shangxian", 1)
+    if not player:isNude() then
+        local card = room:askToDiscard(player, {
+          skill_name = xibing.name,
+          cancelable = false,
+          min_num = 2,
+          max_num = 2,
+          include_equip = true,
+        })
+    end
+  end,
+})
+
+xibing:addEffect(U.Farewell, {
+  can_refresh = function (self, event, target, player, data)
+    return player:hasSkill(xibing.name,true,true)
+  end,
+  on_refresh = function (self, event, target, player, data)
+    player.room:setPlayerMark(target, "xibing__shangxian", 0)
+    player.room:setPlayerMark(target.next, "xibing__shangxian", 0)
   end,
 })
 
