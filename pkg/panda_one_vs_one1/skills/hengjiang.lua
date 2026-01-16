@@ -19,6 +19,7 @@ hengjiang:addEffect(fk.Damaged, {
     local to = data.to
     local cards = room:askToDiscard(to, {
           skill_name = hengjiang.name,
+          prompt = "#hengjiang_discard",
           cancelable = true,
           min_num = 2,
           max_num = 2,
@@ -36,6 +37,7 @@ hengjiang:addEffect(fk.Damaged, {
 Fk:loadTranslationTable {["pang__hengjiang"] = "横江",
 [":pang__hengjiang"] = "当一名角色受到伤害后，你可以令其摸两张牌，然后手牌上限-1；其可以先弃置两张手牌，然后手牌上限+1。",
 ["#pang__hengjiang"] = "横江：你可以令 %src 摸两张牌且手牌上限-1，%src 可以先弃置两张牌并令手牌上限+1",
+["#hengjiang_discard"] = "横江：你可以弃置两张手牌，令手牌上限+1",
 
 ["hengjiang_prevent"] = "防止伤害",
 ["hengjiang__drawcard"] = "摸两张牌",

@@ -8,6 +8,7 @@ local xibing = fk.CreateSkill {
 Fk:loadTranslationTable{
   ["pang__xibing"] = "息兵",
   [":pang__xibing"] = "锁定技，你登场后首名使用【杀】的角色需弃置两张牌，然后另一名角色的手牌上限+2直到你退场。",
+  ["#xibing_discard"] = "息兵：你需弃置两张牌",
 
   ["$pang__xibing1"] = "千里运粮，非用兵之利。",
   ["$pang__xibing2"] = "宜弘一代之治，绍三王之迹。",
@@ -35,6 +36,7 @@ xibing:addEffect(fk.CardUsing, {
     if not player:isNude() then
         local card = room:askToDiscard(player, {
           skill_name = xibing.name,
+          prompt = "#xibing_discard",
           cancelable = false,
           min_num = 2,
           max_num = 2,
