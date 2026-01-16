@@ -7,7 +7,7 @@ local xibing = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__xibing"] = "息兵",
-  [":pang__xibing"] = "锁定技，你登场后首名使用【杀】的角色需弃置两张牌，然后另一名角色的手牌上限+2直到你退场。",
+  [":pang__xibing"] = "锁定技，你登场后首名使用【杀】的角色需弃置两张牌，然后另一名角色的手牌上限+2直到你或其退场。",
   ["#xibing_discard"] = "息兵：你需弃置两张牌",
 
   ["$pang__xibing1"] = "千里运粮，非用兵之利。",
@@ -48,7 +48,7 @@ xibing:addEffect(fk.CardUsing, {
 
 xibing:addEffect(U.Farewell, {
   can_refresh = function (self, event, target, player, data)
-    return target == player and player:hasSkill(xibing.name,true,true)
+    return (target == player or target:getMark("xibing__shangxian") == 1) and player:hasSkill(xibing.name,true,true)
   end,
   on_refresh = function (self, event, target, player, data)
     player.room:setPlayerMark(target, "xibing__shangxian", 0)
