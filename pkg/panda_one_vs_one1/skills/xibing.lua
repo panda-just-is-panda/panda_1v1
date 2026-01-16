@@ -13,6 +13,8 @@ Fk:loadTranslationTable{
   ["$pang__xibing2"] = "宜弘一代之治，绍三王之迹。",
 }
 
+local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
+
 xibing:addEffect("maxcards", {
   correct_func = function(self, player)
     if player:getMark("xibing__shangxian") == 1 then
