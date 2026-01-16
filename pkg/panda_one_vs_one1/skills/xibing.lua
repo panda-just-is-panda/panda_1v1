@@ -18,7 +18,8 @@ local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
 
 xibing:addEffect("maxcards", {
   correct_func = function(self, player)
-    if player:getMark("xibing__shangxian") == 1 then
+    if (player:hasSkill(xibing.name) or player.next:hasSkill(xibing.name)) and 
+    player:getMark("xibing__shangxian") == 1 then
         return 2
     end
   end,
