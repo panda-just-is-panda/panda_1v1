@@ -61,7 +61,7 @@ huayun:addSkill("pang__yuanqing")
 huayun:addSkill("pang__xibing")
 Fk:loadTranslationTable{
   ["pang__huayun"] = "华歆",
-  ["#pang__huayun"] = "玉洁望归",
+  ["#pang__huayun"] = "清素拂浊",
   ["designer:pang__huayun"] = "胖即是胖",
   ["illustrator:pang__huayun"] = "秋呆呆",
 
