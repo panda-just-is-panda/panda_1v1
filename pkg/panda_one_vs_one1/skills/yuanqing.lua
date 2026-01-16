@@ -4,7 +4,7 @@ local yuanqing = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__yuanqing"] = "渊清",
-  [":pang__yuanqing"] = "当你使用一张牌后，若你登场后使用过的牌类型或颜色均相同，你可以摸一张牌。",
+  [":pang__yuanqing"] = "当你使用一张牌后，若你登场后使用过的牌类型或花色均相同，你可以摸一张牌。",
   ["#pang__yuanqing"] = "渊清：你可以摸一张牌",
 
   ["$pang__yuanqing1"] = "存志太虚，安心玄妙。",
@@ -16,7 +16,7 @@ yuanqing:addEffect(fk.CardUseFinished, {
     can_trigger = function(self, event, target, player, data)
       return target == player and player:hasSkill(yuanqing.name) and 
       (player:getMark("yuanqing_equip") + player:getMark("yuanqing_basic") + player:getMark("yuanqing_Trick") < 2
-      or player:getMark("yuanqing_red") + player:getMark("yuanqing_black") < 2)
+      or player:getMark("yuanqing_club") + player:getMark("yuanqing_spade") + player:getMark("yuanqing_heart") + player:getMark("yuanqing_diamond") < 2)
     end,
     on_cost = function (self, event, target, player, data)
     return player.room:askToSkillInvoke(player,{
@@ -43,10 +43,14 @@ yuanqing:addEffect(fk.CardUsing, {
     elseif data.card.type == Card.TypeTrick then
         room:setPlayerMark(player, "yuanqing_Trick", 1)
     end
-    if data.card.color == Card.Black then
-      room:setPlayerMark(player, "yuanqing_red", 1)
-    elseif data.card.color == Card.Red then
-      room:setPlayerMark(player, "yuanqing_black", 1)
+    if data.card.suit == Card.Club then
+      room:setPlayerMark(player, "yuanqing_club", 1)
+    elseif data.card.suit == Card.Spade then
+      room:setPlayerMark(player, "yuanqing_spade", 1)
+    elseif data.card.suit == Card.Heart then
+      room:setPlayerMark(player, "yuanqing_heart", 1)
+    elseif data.card.suit == Card.Diamond then
+      room:setPlayerMark(player, "yuanqing_diamond", 1)
     end
   end,
 })
