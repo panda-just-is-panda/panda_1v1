@@ -50,10 +50,6 @@ juanxia:addEffect(fk.EventPhaseStart, {
                 generals = listall,
                 n = 1,
                 rule = "klee_1v1_askForGeneralsChosen",
-                extra_data = {
-                    --prompt = "#kleeb__zhenbian_b",
-                    cantchoose = listall,
-                }
             })
             if type(selected) == "table" then
                 selected = selected[1]
