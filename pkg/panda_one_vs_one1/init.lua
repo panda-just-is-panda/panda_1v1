@@ -30,7 +30,7 @@ Fk:loadTranslationTable{
   ["designer:pang__yangyi"] = "胖即是胖",
   ["illustrator:pang__yangyi"] = "官方",
 
-  ["~pang__yangyi"] = "幼主昏聩，群臣无谋，国将亡。",
+  ["~pang__yangyi"] = "魏延庸奴，吾誓杀汝！",
 }
 
 local weiyan = General:new(extension, "pang__weiyan", "shu", 4, 4, General.Male)

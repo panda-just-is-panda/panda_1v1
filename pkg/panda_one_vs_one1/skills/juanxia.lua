@@ -30,7 +30,7 @@ juanxia:addEffect(fk.EventPhaseStart, {
   on_use = function(self, event, target, player, data)
     local room = player.room
     player:drawCards(1, juanxia.name)
-    for _, p in ipairs(Fk:currentRoom().alive_players) do
+    for _, p in ipairs(room.alive_players) do
       if p.kingdom == "shu" and room:getBanner(U.getGeneralsBannerName(p)) then
         local listall = U.getGenerals(p)
         local cards
