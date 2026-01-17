@@ -30,7 +30,7 @@ juanxia:addEffect(fk.EventPhaseStart, {
   on_use = function(self, event, target, player, data)
     local room = player.room
     player:drawCards(1, juanxia.name)
-    for _, p in ipairs(room.alive_players) do
+    for _, p in ipairs({player, player.next}) do
       if p.kingdom == "shu" and room:getBanner(U.getGeneralsBannerName(p)) then
         local listall = U.getGenerals(p)
         local cards
@@ -44,7 +44,7 @@ juanxia:addEffect(fk.EventPhaseStart, {
                 include_equip = false,
             })
         end
-        if (#cards == 0 or p:isKongcheng()) and #listall > 0 then
+        if #cards == 0 and #listall > 0 then
             local name = p.general
             local selected = room:askToChooseGeneral(p,{
                 generals = listall,
