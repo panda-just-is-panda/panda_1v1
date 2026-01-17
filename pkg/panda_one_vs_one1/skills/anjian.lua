@@ -5,8 +5,8 @@ local anjian = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__anjian&"] = "暗箭",
-  [":pang__anjian&"] = "备场技，对手的结束阶段，若其没有手牌，你可以对其造成2点伤害。",
-  ["#pang__anjian"] = "暗箭：你可以对对手造成2点伤害",
+  [":pang__anjian&"] = "备场技，对手的结束阶段，若其没有手牌，你可以对其造成1点伤害，然后移出此武将。",
+  ["#pang__anjian"] = "暗箭：你可以对对手造成1点伤害",
 
   ["$pang__anjian&1"] = "看我一箭索命！",
   ["$pang__anjian&2"] = "明枪易躲，暗箭难防！",
@@ -30,9 +30,10 @@ anjian:addEffect(fk.EventPhaseStart, {
     room:damage{
         from = player,
         to = target,
-        damage = 2,
+        damage = 1,
         skillName = anjian.name,
     }
+    U.removeGeneral(player,"pang__panzhangmazhong")
   end,
 })
 
