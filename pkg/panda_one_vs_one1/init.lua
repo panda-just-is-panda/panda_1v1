@@ -21,6 +21,18 @@ Fk:loadTranslationTable{
   ["~pang__gaoshun"] = "生死有命……",
 }
 
+local yangyi = General:new(extension, "pang__yangyi", "shu", 3, 3, General.Male)
+yangyi:addSkill("pang__duoduan")
+yangyi:addSkill("pang__juanxia")
+Fk:loadTranslationTable{
+  ["pang__yangyi"] = "杨仪",
+  ["#pang__yangyi"] = "武侯长史",
+  ["designer:pang__yangyi"] = "胖即是胖",
+  ["illustrator:pang__yangyi"] = "官方",
+
+  ["~pang__yangyi"] = "幼主昏聩，群臣无谋，国将亡。",
+}
+
 local weiyan = General:new(extension, "pang__weiyan", "shu", 4, 4, General.Male)
 weiyan:addSkill("pang__qimou")
 Fk:loadTranslationTable{
