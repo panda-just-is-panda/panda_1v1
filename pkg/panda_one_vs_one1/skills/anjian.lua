@@ -34,6 +34,7 @@ anjian:addEffect(fk.EventPhaseStart, {
         skillName = anjian.name,
     }
     U.removeGeneral(player,"pang__panzhangmazhong")
+    U.addGeneral(player,"pang__panzhangmazhong",nil,"dead")
   end,
 })
 
