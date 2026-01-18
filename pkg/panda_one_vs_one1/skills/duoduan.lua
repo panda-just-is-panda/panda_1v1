@@ -4,7 +4,7 @@ local duoduan = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__duoduan"] = "度断",
-  [":pang__duoduan"] = "每回合限一次，当你造成伤害时，你观看牌堆顶的两张牌，然后你可以防止此伤害并获得这些牌。",
+  [":pang__duoduan"] = "你每回合首次造成伤害时，你观看牌堆顶的两张牌，然后你可以防止此伤害并获得这些牌。",
   ["#pang__duoduan"] = "度断：你可以防止此伤害并获得观看的牌",
 
 
@@ -16,9 +16,10 @@ duoduan:addEffect(fk.DamageCaused, {
   anim_type = "offensive",
   can_trigger = function(self, event, target, player, data)
     return player:hasSkill(duoduan.name) and target == player 
-    and player:usedSkillTimes(duoduan.name, Player.HistoryTurn) == 0
+    and player:getMark("duoduan_damage-turn") == 0
   end,
   on_cost = function (self, event, target, player, data)
+    player.room:setPlayerMark(player, "duoduan_damage-turn", 1)
     player.room:viewCards(player, { cards = player.room:getNCards(2), skill_name = duoduan.name })
     return player.room:askToSkillInvoke(player,{
       prompt = "#pang__duoduan",
