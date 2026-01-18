@@ -10,16 +10,6 @@ Fk:loadTranslationTable{
   ["pang"] = "胖",
 }
 
-local gaoshun = General:new(extension, "pang__gaoshun", "qun", 4, 4, General.Male)
-gaoshun:addSkill("pang__xianzhen")
-Fk:loadTranslationTable{
-  ["pang__gaoshun"] = "高顺",
-  ["#pang__gaoshun"] = "攻无不克",
-  ["designer:pang__gaoshun"] = "胖即是胖",
-  ["illustrator:pang__gaoshun"] = "鄧Sir",
-
-  ["~pang__gaoshun"] = "生死有命……",
-}
 
 local yangyi = General:new(extension, "pang__yangyi", "shu", 3, 3, General.Male)
 yangyi:addSkill("pang__duoduan")
@@ -89,6 +79,29 @@ Fk:loadTranslationTable{
   ["illustrator:pang__zangba"] = "HOOO",
 
   ["~pang__zangba"] = "断刃沉江，负主重托……",
+}
+
+local shenpei = General:new(extension, "pang__shenpei", "qun", 3, 3, General.Male)
+shenpei:addSkill("pang__gangshou")
+shenpei:addSkill("pang__liezhi")
+Fk:loadTranslationTable{
+  ["pang__shenpei"] = "审配",
+  ["#pang__shenpei"] = "正南义北",
+  ["designer:pang__shenpei"] = "胖即是胖",
+  ["illustrator:pang__shenpei"] = "官方",
+
+  ["~pang__shenpei"] = "吾君在北，但求面北而亡！",
+}
+
+local gaoshun = General:new(extension, "pang__gaoshun", "qun", 4, 4, General.Male)
+gaoshun:addSkill("pang__xianzhen")
+Fk:loadTranslationTable{
+  ["pang__gaoshun"] = "高顺",
+  ["#pang__gaoshun"] = "攻无不克",
+  ["designer:pang__gaoshun"] = "胖即是胖",
+  ["illustrator:pang__gaoshun"] = "鄧Sir",
+
+  ["~pang__gaoshun"] = "生死有命……",
 }
 
 
