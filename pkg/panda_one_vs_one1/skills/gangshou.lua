@@ -47,7 +47,7 @@ gangshou:addEffect(fk.CardUseFinished, {
         local subcard = event:getCostData(self).card
         local archery_attack = Fk:cloneCard("archery_attack")
         archery_attack:addSubcards(subcard)
-        room:useVirtualCard("archery_attack", archery_attack, player.next, player, gangshou.name, true)
+        room:useVirtualCard("archery_attack", archery_attack, player, player.next, gangshou.name, true)
     end,
 })
 
