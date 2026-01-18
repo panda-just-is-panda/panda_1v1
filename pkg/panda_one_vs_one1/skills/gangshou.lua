@@ -28,8 +28,7 @@ gangshou:addEffect(fk.CardUseFinished, {
             local card = Fk:getCardById(id)
             return card and card.type == type
         end)
-        if #cards > 0 then
-            local card = room:askToCards(player, {
+        local card = room:askToCards(player, {
                 min_num = 1,
                 max_num = 1,
                 include_equip = true,
@@ -38,17 +37,16 @@ gangshou:addEffect(fk.CardUseFinished, {
                 skill_name = gangshou.name,
                 cancelable = true,
             })
-            if #card > 0 then
-                event:setCostData(self, {card = card})
-            end
+        if #card > 0 then
+            event:setCostData(self, {card = card})
         end
   end,
     on_use = function(self, event, target, player, data)
         local room = player.room
         local subcard = event:getCostData(self).card
-        local card = Fk:cloneCard("archery_attack")
-        card:addSubcards(subcard)
-        room:useVirtualCard("archery_attack", card, target, player, gangshou.name, true)
+        local archery_attack = Fk:cloneCard("archery_attack")
+        archery_attack:addSubcards(subcard)
+        room:useVirtualCard("archery_attack", archery_attack, player.next, player, gangshou.name, true)
     end,
 })
 
