@@ -7,7 +7,7 @@ local xibing = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__xibing"] = "息兵",
-  [":pang__xibing"] = "锁定技，你登场后首名使用【杀】的角色需弃置两张牌，然后另一名角色的手牌上限+2直到你或其退场。",
+  [":pang__xibing"] = "锁定技，你登场后首次有角色使用【杀】时，其弃置两张牌，然后另一名角色的手牌上限+2直到你或其退场。",
   ["#xibing_discard"] = "息兵：你需弃置两张牌",
 
   ["$pang__xibing1"] = "千里运粮，非用兵之利。",
