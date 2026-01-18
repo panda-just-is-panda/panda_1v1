@@ -4,7 +4,7 @@ local duoduan = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__duoduan"] = "度断",
-  [":pang__duoduan"] = "你每回合首次造成伤害时，你观看牌堆顶的两张牌，然后你可以防止此伤害并获得这些牌。",
+  [":pang__duoduan"] = "当你每回合首次造成伤害时，你观看牌堆顶的两张牌，然后你可以防止此伤害并获得这些牌。",
   ["#pang__duoduan"] = "度断：你可以防止此伤害并获得观看的牌",
 
 
