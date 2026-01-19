@@ -33,26 +33,14 @@ juanxia:addEffect(fk.EventPhaseStart, {
     for _, p in ipairs({player, player.next}) do
       if p.kingdom == "shu" and room:getBanner(U.getGeneralsBannerName(p)) then
         local listall = U.getGenerals(p)
-        local cards
-        if #listall == 0 then
-          cards = room:askToDiscard(p, {
+        local cards = room:askToDiscard(p, {
                 skill_name = juanxia.name,
                 prompt = "juanxia_discard",
-                cancelable = false,
+                cancelable = #listall > 0 and true or false,
                 min_num = 1,
                 max_num = 1,
                 include_equip = false,
             })
-        else
-          cards = room:askToDiscard(p, {
-                skill_name = juanxia.name,
-                prompt = "juanxia_discard",
-                cancelable = true,
-                min_num = 1,
-                max_num = 1,
-                include_equip = false,
-            })
-        end
         if #cards == 0 and #listall > 0 then
             local name = p.general
             local selected = room:askToChooseGeneral(p,{
