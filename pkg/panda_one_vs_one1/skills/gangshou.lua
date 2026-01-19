@@ -5,7 +5,7 @@ local gangshou = fk.CreateSkill {
 Fk:loadTranslationTable{
   ["pang__gangshou"] = "刚守",
   [":pang__gangshou"] = "当对手使用的指定了你为目标的牌结算后，你可以将一张类型不同的手牌作为【万箭齐发】使用。",
-  ["#pang__gangshou"] = "刚守：你可以将一张类型相同的牌当【万箭齐发】使用",
+  ["#pang__gangshou"] = "刚守：你可以将一张类型不同的手牌当【万箭齐发】使用",
 
 
   ["$pang__gangshou1"] = "敌军攻势渐怠，还望诸位依策坚守。",
