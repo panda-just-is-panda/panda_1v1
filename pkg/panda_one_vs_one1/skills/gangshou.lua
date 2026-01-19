@@ -4,7 +4,7 @@ local gangshou = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__gangshou"] = "刚守",
-  [":pang__gangshou"] = "当对手使用的指定了你为目标的牌结算后，你可以将一张类型相同的牌作为【万箭齐发】使用。",
+  [":pang__gangshou"] = "当对手使用的指定了你为目标的牌结算后，你可以将一张类型不同的手牌作为【万箭齐发】使用。",
   ["#pang__gangshou"] = "刚守：你可以将一张类型相同的牌当【万箭齐发】使用",
 
 
@@ -19,19 +19,19 @@ gangshou:addEffect(fk.CardUseFinished, {
     can_trigger = function(self, event, target, player, data)
         return player:hasSkill(gangshou.name) and target == player.next 
         and data.tos and table.contains(data.tos, player)
-        and #player:getCardIds("he") > 0
+        and #player:getCardIds("h") > 0
     end,
     on_cost = function (self, event, target, player, data)
         local room = player.room
         local type = data.card.type
-        local cards = table.filter(player:getCardIds("he"), function(id)
+        local cards = table.filter(player:getCardIds("h"), function(id)
             local card = Fk:getCardById(id)
-            return card and card.type == type
+            return card and card.type ~= type
         end)
         local card = room:askToCards(player, {
                 min_num = 1,
                 max_num = 1,
-                include_equip = true,
+                include_equip = false,
                 prompt = "#pang__gangshou",
                 pattern = tostring(Exppattern{ id = cards }),
                 skill_name = gangshou.name,
