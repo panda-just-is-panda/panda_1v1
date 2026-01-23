@@ -42,7 +42,7 @@ juanxia:addEffect(fk.EventPhaseStart, {
                 include_equip = false,
             })
         if #cards == 0 and #listall > 0 then
-            U.AskToChangeGeneral(p,juanxia.name,listall,listall)
+            U.AskToChangeGeneral(p,juanxia.name,listall)
           end
       end
     end
