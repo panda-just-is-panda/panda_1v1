@@ -29,7 +29,8 @@ xibing:addEffect("maxcards", {
 xibing:addEffect(fk.CardUsing, {
   can_trigger = function(self, event, target, player, data)
     return target == player and data.card and data.card.trueName == "slash" 
-    and (player:hasSkill(xibing.name) or player.next:hasSkill(xibing.name)) and player:usedSkillTimes(xibing.name, Player.HistoryGame) == 0
+    and (player:hasSkill(xibing.name) or player.next:hasSkill(xibing.name)) 
+    and player:usedSkillTimes(xibing.name, Player.HistoryGame) == 0 and player.next:usedSkillTimes(xibing.name, Player.HistoryGame) == 0
     and player.next:getMark("xibing__shangxian") == 0 and player:getMark("xibing__shangxian") == 0
   end,
   on_use = function(self, event, target, player, data)
