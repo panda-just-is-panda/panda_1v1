@@ -28,16 +28,17 @@ xibing:addEffect("maxcards", {
 
 xibing:addEffect(fk.CardUsing, {
   can_trigger = function(self, event, target, player, data)
-    return target == player and data.card and data.card.trueName == "slash" 
-    and (player:hasSkill(xibing.name) or player.next:hasSkill(xibing.name)) 
-    and player:usedSkillTimes(xibing.name, Player.HistoryGame) == 0 and player.next:usedSkillTimes(xibing.name, Player.HistoryGame) == 0
+    return target and data.card and data.card.trueName == "slash" 
+    and player:hasSkill(xibing.name) 
+    and player:usedSkillTimes(xibing.name, Player.HistoryGame) == 0
     and player.next:getMark("xibing__shangxian") == 0 and player:getMark("xibing__shangxian") == 0
   end,
   on_use = function(self, event, target, player, data)
     local room = player.room
-    room:setPlayerMark(player.next, "xibing__shangxian", 1)
-    if not player:isNude() then
-        local card = room:askToDiscard(player, {
+    local to = target
+    room:setPlayerMark(to.next, "xibing__shangxian", 1)
+    if not to:isNude() then
+        local card = room:askToDiscard(to, {
           skill_name = xibing.name,
           prompt = "#xibing_discard",
           cancelable = false,

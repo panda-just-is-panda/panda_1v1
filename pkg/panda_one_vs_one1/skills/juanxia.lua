@@ -42,22 +42,7 @@ juanxia:addEffect(fk.EventPhaseStart, {
                 include_equip = false,
             })
         if #cards == 0 and #listall > 0 then
-            local name = p.general
-            local selected = room:askToChooseGeneral(p,{
-                generals = listall,
-                n = 1,
-                rule = "klee_1v1_askForGeneralsChosen",
-                extra_data = {
-                    --prompt = "#kleeb__zhenbian_b",
-                    cantchoose = {},
-                }
-            })
-            if type(selected) == "table" then
-                selected = selected[1]
-            end
-            U.removeGeneral(p,selected)
-            U.addGeneral(p,name,nil,"dead")
-            room:changeHero(p,selected)
+            U.AskToChangeGeneral(p,juanxia.name,listall,listall)
           end
       end
     end
