@@ -7,7 +7,7 @@ local xibing = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__xibing"] = "息兵",
-  [":pang__xibing"] = "锁定技，你登场后首次有角色使用【杀】时，该角色弃置两张牌，然后另一名角色的手牌上限+2直到你或其退场。",
+  [":pang__xibing"] = "锁定技，你登场后首名使用【杀】的角色的手牌上限-2，未使用过【杀】的角色的手牌上限+2。",
   ["#xibing_discard"] = "息兵：你需弃置两张牌",
 
   ["$pang__xibing1"] = "千里运粮，非用兵之利。",
@@ -18,8 +18,8 @@ local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
 
 xibing:addEffect("maxcards", {
   correct_func = function(self, player)
-    if (player:hasSkill(xibing.name) or player.next:hasSkill(xibing.name)) and 
-    player:getMark("xibing__shangxian") == 1 then
+    if (player:hasSkill(xibing.name) or player.next:hasSkill(xibing.name))
+    and player:getMark("xibing__shangxian") == 0 then
         return 2
     end
   end,
@@ -30,34 +30,18 @@ xibing:addEffect(fk.CardUsing, {
   can_trigger = function(self, event, target, player, data)
     return target and data.card and data.card.trueName == "slash" 
     and player:hasSkill(xibing.name) 
-    and player:usedSkillTimes(xibing.name, Player.HistoryGame) == 0
-    and player.next:getMark("xibing__shangxian") == 0 and player:getMark("xibing__shangxian") == 0
+    and target:getMark("xibing__shangxian") == 0
   end,
   on_use = function(self, event, target, player, data)
     local room = player.room
     local to = target
-    room:setPlayerMark(to.next, "xibing__shangxian", 1)
-    if not to:isNude() then
-        local card = room:askToDiscard(to, {
-          skill_name = xibing.name,
-          prompt = "#xibing_discard",
-          cancelable = false,
-          min_num = 2,
-          max_num = 2,
-          include_equip = true,
-        })
+    room:setPlayerMark(to, "xibing__shangxian", 1)
+    if to.next:getMark("xibing__shangxian") == 0 then
+      room:addPlayerMark(to, MarkEnum.MinusMaxCards, 2)
     end
   end,
 })
 
-xibing:addEffect(U.Farewell, {
-  can_refresh = function (self, event, target, player, data)
-    return (target == player or target:getMark("xibing__shangxian") == 1) and player:hasSkill(xibing.name,true,true)
-  end,
-  on_refresh = function (self, event, target, player, data)
-    player.room:setPlayerMark(target, "xibing__shangxian", 0)
-    player.room:setPlayerMark(target.next, "xibing__shangxian", 0)
-  end,
-})
+
 
 return xibing
