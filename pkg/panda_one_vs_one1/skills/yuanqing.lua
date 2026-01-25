@@ -15,8 +15,7 @@ yuanqing:addEffect(fk.DrawNCards, {
   anim_type = "drawcard",
   can_trigger = function(self, event, target, player, data)
     return target == player and player:hasSkill(yuanqing.name) and
-    (player:getMark("yuanqing_equip") + player:getMark("yuanqing_basic") + player:getMark("yuanqing_Trick") < 2
-    or player:getMark("yuanqing_club") + player:getMark("yuanqing_spade") + player:getMark("yuanqing_heart") + player:getMark("yuanqing_diamond") < 2)
+    player:getMark("yuanqing_true") == 1
   end,
     on_cost = function (self, event, target, player, data)
     return player.room:askToSkillInvoke(player,{
@@ -52,6 +51,21 @@ yuanqing:addEffect(fk.CardUsing, {
     elseif data.card.suit == Card.Diamond then
       room:setPlayerMark(player, "yuanqing_diamond", 1)
     end
+    if (player:getMark("yuanqing_equip") + player:getMark("yuanqing_basic") + player:getMark("yuanqing_Trick") > 1
+    or player:getMark("yuanqing_club") + player:getMark("yuanqing_spade") + player:getMark("yuanqing_heart") + player:getMark("yuanqing_diamond") > 1) then
+      room:setPlayerMark(player, "yuanqing_true", 0)
+    end
+  end,
+})
+
+yuanqing:addEffect(U.Debut, {
+  can_trigger = function (self, event, target, player, data)
+    return target == player and player:hasSkill(xibing.name)
+  end,
+  on_cost = Util.TrueFunc,
+  on_use = function (self, event, target, player, data)
+    local room = player.room
+    room:setPlayerMark(player, "yuanqing_true", 1)
   end,
 })
 
