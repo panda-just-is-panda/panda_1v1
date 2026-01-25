@@ -30,7 +30,7 @@ xibing:addEffect(fk.CardUsing, {
   can_trigger = function(self, event, target, player, data)
     return target and data.card and data.card.trueName == "slash" 
     and player:hasSkill(xibing.name) 
-    and target:getMark("xibing__shangxian") == 0
+    and target:getMark("xibing__shangxian") == 1
   end,
   on_use = function(self, event, target, player, data)
     local room = player.room
