@@ -61,11 +61,10 @@ yuanqing:addEffect(fk.CardUsing, {
 })
 
 yuanqing:addEffect(U.Debut, {
-  can_trigger = function (self, event, target, player, data)
+  can_refresh = function (self, event, target, player, data)
     return target == player and player:hasSkill(yuanqing.name)
   end,
-  on_cost = Util.TrueFunc,
-  on_use = function (self, event, target, player, data)
+  on_refresh = function (self, event, target, player, data)
     local room = player.room
     room:setPlayerMark(player, "yuanqing_true", 1)
   end,
