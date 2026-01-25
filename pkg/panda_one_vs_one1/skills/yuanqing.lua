@@ -62,7 +62,7 @@ yuanqing:addEffect(fk.CardUsing, {
 
 yuanqing:addEffect(U.Debut, {
   can_trigger = function (self, event, target, player, data)
-    return target == player and player:hasSkill(xibing.name)
+    return target == player and player:hasSkill(yuanqing.name)
   end,
   on_cost = Util.TrueFunc,
   on_use = function (self, event, target, player, data)
