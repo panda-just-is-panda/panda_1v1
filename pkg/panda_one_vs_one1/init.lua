@@ -61,6 +61,7 @@ Fk:loadTranslationTable{
 local huayun = General:new(extension, "pang__huayun", "wei", 3, 3, General.Male)
 huayun:addSkill("pang__yuanqing")
 huayun:addSkill("pang__xibing")
+huayun.endnote = "<font color=\"#E0DB2F\">注：通过变更上场的武将不触发登场，所以如果此武将通过变更上场会直接变成白板！</font>"
 Fk:loadTranslationTable{
   ["pang__huayun"] = "华歆",
   ["#pang__huayun"] = "清素拂浊",
