@@ -11,6 +11,8 @@ Fk:loadTranslationTable{
   ["$pang__yuanqing2"] = "礼法有度，良德才略。",
 }
 
+local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
+
 yuanqing:addEffect(fk.DrawNCards, {
   anim_type = "drawcard",
   can_trigger = function(self, event, target, player, data)
