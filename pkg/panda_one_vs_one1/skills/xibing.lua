@@ -36,7 +36,7 @@ xibing:addEffect(fk.CardUsing, {
     local room = player.room
     local to = target
     room:setPlayerMark(to, "xibing__shangxian", 0)
-    if player.next:getMark("xibing__shangxian") == 1 then
+    if to.next:getMark("xibing__shangxian") == 1 then
       room:addPlayerMark(to, MarkEnum.MinusMaxCards, 2)
     end
   end,
