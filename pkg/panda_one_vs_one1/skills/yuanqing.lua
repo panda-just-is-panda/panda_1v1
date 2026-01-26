@@ -53,8 +53,8 @@ yuanqing:addEffect(fk.CardUsing, {
     elseif data.card.suit == Card.Diamond then
       room:setPlayerMark(player, "yuanqing_diamond", 1)
     end
-    if (player:getMark("yuanqing_equip") + player:getMark("yuanqing_basic") + player:getMark("yuanqing_Trick") > 1
-    or player:getMark("yuanqing_club") + player:getMark("yuanqing_spade") + player:getMark("yuanqing_heart") + player:getMark("yuanqing_diamond") > 1) then
+    if player:getMark("yuanqing_equip") + player:getMark("yuanqing_basic") + player:getMark("yuanqing_Trick") > 1
+    and player:getMark("yuanqing_club") + player:getMark("yuanqing_spade") + player:getMark("yuanqing_heart") + player:getMark("yuanqing_diamond") > 1 then
       room:setPlayerMark(player, "yuanqing_true", 0)
     end
   end,
