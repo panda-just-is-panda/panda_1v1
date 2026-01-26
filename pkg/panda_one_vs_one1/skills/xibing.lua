@@ -7,7 +7,7 @@ local xibing = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__xibing"] = "息兵",
-  [":pang__xibing"] = "锁定技，你登场后首名使用【杀】的角色的手牌上限-2，未使用过【杀】的角色的手牌上限+2。",
+  [":pang__xibing"] = "锁定技，你登场后首名使用【杀】的角色的手牌上限-2；若你未使用过【杀】，你的手牌上限+2。",
   ["#xibing_discard"] = "息兵：你需弃置两张牌",
 
   ["$pang__xibing1"] = "千里运粮，非用兵之利。",
@@ -18,7 +18,7 @@ local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
 
 xibing:addEffect("maxcards", {
   correct_func = function(self, player)
-    if (player:hasSkill(xibing.name) or player.next:hasSkill(xibing.name))
+    if player:hasSkill(xibing.name)
     and player:getMark("xibing__shangxian") == 1 then
         return 2
     end
