@@ -19,8 +19,7 @@ local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
 xibing:addEffect("maxcards", {
   correct_func = function(self, player)
     if player:hasSkill(xibing.name)
-    and player:getMark("xibing__shangxian") == 1
-    and player.next:getMark("xibing__shangxian") == 1 then
+    and player:getMark("xibing__shangxian") == 1 then
         return 2
     end
   end,
@@ -31,13 +30,12 @@ xibing:addEffect(fk.CardUsing, {
   can_trigger = function(self, event, target, player, data)
     return target and data.card and data.card.trueName == "slash" 
     and player:hasSkill(xibing.name) 
-    and target:getMark("xibing__shangxian") == 1 and target.next:getMark("xibing__shangxian")
+    and player:getMark("xibing__shangxian") == 1
   end,
   on_use = function(self, event, target, player, data)
     local room = player.room
     local to = target
-    room:setPlayerMark(to, "xibing__shangxian", 0)
-    if to.next:getMark("xibing__shangxian") == 1 then
+    room:setPlayerMark(player, "xibing__shangxian", 0)
       room:addPlayerMark(to, MarkEnum.MinusMaxCards, 2)
       if not to:isNude() then
         local card = room:askToDiscard(to, {
@@ -49,7 +47,6 @@ xibing:addEffect(fk.CardUsing, {
           include_equip = true,
         })
       end
-    end
   end,
 })
 
@@ -61,7 +58,6 @@ xibing:addEffect(U.Debut, {
   on_use = function (self, event, target, player, data)
     local room = player.room
     room:setPlayerMark(player, "xibing__shangxian", 1)
-    room:setPlayerMark(player.next, "xibing__shangxian", 1)
   end,
 })
 
