@@ -30,11 +30,13 @@ lieren:addEffect(fk.EventPhaseStart, {
     end)
     local use = room:askToUseRealCard(player, {
                     pattern = tostring(Exppattern{ id = cards }),
+                    expand_pile = cards,
                     skill_name = lieren.name,
                     prompt = "#pang__lieren",
                     extra_data = {
                         bypass_times = true,
                         extraUse = true,
+                        expand_pile = cards,
                     }
                 })
     if use then
