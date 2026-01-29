@@ -15,7 +15,6 @@ Fk:loadTranslationTable{
 
 lieren:addEffect(fk.EventPhaseStart, {
   anim_type = "control",
-  mute = true,
   can_trigger = function(self, event, target, player, data)
     local cards = table.filter(player.room.discard_pile, function (id)
         local card = Fk:getCardById(id)
@@ -52,14 +51,6 @@ lieren:addEffect(fk.EventPhaseStart, {
   end,
 })
 
-lieren:addEffect(fk.CardUsing, {
-  can_refresh = function(self, event, target, player, data)
-    return target == player and data.card
-    and table.contains(data.card.skillNames, lieren.name)
-  end,
-  on_refresh = function(self, event, target, player, data)
-    player:broadcastSkillInvoke(lieren.name, math.random(1, 2))
-  end,
-})
+
 
 return lieren
