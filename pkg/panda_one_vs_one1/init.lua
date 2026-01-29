@@ -94,15 +94,16 @@ Fk:loadTranslationTable{
   ["~pang__shenpei"] = "吾君在北，但求面北而亡！",
 }
 
-local gaoshun = General:new(extension, "pang__gaoshun", "qun", 4, 4, General.Male)
-gaoshun:addSkill("pang__xianzhen")
+local zhurong = General:new(extension, "pang__zhurong", "qun", 4, 4, General.Female)
+zhurong:addSkill("pang__lieren")
+zhurong:addSkill("pang__manyi")
 Fk:loadTranslationTable{
-  ["pang__gaoshun"] = "高顺",
-  ["#pang__gaoshun"] = "攻无不克",
-  ["designer:pang__gaoshun"] = "胖即是胖",
-  ["illustrator:pang__gaoshun"] = "鄧Sir",
+  ["pang__zhurong"] = "祝融",
+  ["#pang__zhurong"] = "野性的女王",
+  ["designer:pang__zhurong"] = "胖即是胖",
+  ["illustrator:pang__zhurong"] = "官方",
 
-  ["~pang__gaoshun"] = "生死有命……",
+  ["~pang__zhurong"] = "大王，这诸葛亮，果然厉害……",
 }
 
 
