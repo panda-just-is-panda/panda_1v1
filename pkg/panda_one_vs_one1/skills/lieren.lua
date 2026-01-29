@@ -15,12 +15,13 @@ Fk:loadTranslationTable{
 
 lieren:addEffect(fk.EventPhaseStart, {
   anim_type = "control",
+  mute = true,
   can_trigger = function(self, event, target, player, data)
     local cards = table.filter(player.room.discard_pile, function (id)
         local card = Fk:getCardById(id)
         return card.name == "fire__slash"
     end)
-    return #cards > 0 and player:hasSkill(lieren.name) and target.phase == Player.Start
+    return #cards > 0 and target == player and player:hasSkill(lieren.name) and target.phase == Player.Start
   end,
   on_cost = function (self, event, target, player, data)
     local room = player.room
@@ -40,7 +41,8 @@ lieren:addEffect(fk.EventPhaseStart, {
                     }
                 })
     if use then
-        event:setCostData(self, {card = use})
+        player:broadcastSkillInvoke(lieren.name, math.random(1, 2))
+        event:setCostData(self, {card = use.card})
         return true
     end
   end,
