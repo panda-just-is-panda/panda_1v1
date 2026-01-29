@@ -54,7 +54,7 @@ lieren:addEffect(fk.EventPhaseStart, {
 
 lieren:addEffect(fk.CardUsing, {
   can_refresh = function(self, event, target, player, data)
-    return target == player and data.card and player:hasSkill(lieren.name) 
+    return target == player and data.card
     and table.contains(data.card.skillNames, lieren.name)
   end,
   on_refresh = function(self, event, target, player, data)
