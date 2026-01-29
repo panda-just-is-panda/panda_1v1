@@ -41,7 +41,6 @@ lieren:addEffect(fk.EventPhaseStart, {
                     }
                 })
     if use then
-        player:broadcastSkillInvoke(lieren.name, math.random(1, 2))
         event:setCostData(self, {card = use.card})
         return true
     end
@@ -50,6 +49,16 @@ lieren:addEffect(fk.EventPhaseStart, {
     local room = player.room
     local get = event:getCostData(self).card
     room:obtainCard(player.next, get, false, fk.ReasonJustMove, player, lieren.name)
+  end,
+})
+
+lieren:addEffect(fk.CardUsing, {
+  can_refresh = function(self, event, target, player, data)
+    return target == player and data.card and player:hasSkill(lieren.name) 
+    and table.contains(data.card.skillNames, lieren.name)
+  end,
+  on_refresh = function(self, event, target, player, data)
+    player:broadcastSkillInvoke(lieren.name, math.random(1, 2))
   end,
 })
 
