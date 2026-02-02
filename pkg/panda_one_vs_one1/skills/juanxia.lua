@@ -4,7 +4,7 @@ local juanxia = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__juanxia"] = "狷狭",
-  [":pang__juanxia"] = "准备阶段，你可以摸一张牌，然后蜀势力角色依次选择弃置一张手牌或变更武将。",
+  [":pang__juanxia"] = "准备阶段，你可以摸一张牌，然后蜀势力角色依次选择弃置一张手牌或变更武将并将被变更的武将置入流放区。",
 
   ["#pang__juanxia"] = "狷狭：你可以摸一张牌，然后令蜀势力角色各弃置手牌或变更武将",
   ["juanxia_discard"] = "狷狭：你需弃置一张手牌，否则变更武将",
@@ -42,7 +42,9 @@ juanxia:addEffect(fk.EventPhaseStart, {
                 include_equip = false,
             })
         if #cards == 0 and #listall > 0 then
+          local name = p.general
             U.AskToChangeGeneral(p,juanxia.name,listall)
+            U.addGeneral(p,name,{state = "dead"})
           end
       end
     end
