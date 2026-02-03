@@ -18,7 +18,8 @@ lieren:addEffect("active", {
   card_num = 0,
   target_num = 0,
   can_use = function(self, player)
-    return not player:isKongcheng() and player:usedSkillTimes(lieren.name, Player.HistoryPhase) == 0
+    return not player:isKongcheng() and not player.next:isKongcheng()
+    and player:usedSkillTimes(lieren.name, Player.HistoryPhase) == 0
   end,
   card_filter = Util.FalseFunc,
   target_filter = Util.FalseFunc,
