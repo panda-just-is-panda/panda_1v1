@@ -31,7 +31,7 @@ lieren:addEffect("active", {
     elseif pindian.results[target].winner == target and not target.dead then
       room:askToUseVirtualCard(target, {name = "slash", skill_name = lieren.name, cancelable = false, skip = false})
     end
-    if pindian.results[target].fromCard.trueName == "slash" and not player.dead then
+    if pindian.fromCard.trueName == "slash" and not player.dead then
       room:askToUseVirtualCard(player, {name = "slash", skill_name = lieren.name, cancelable = false, skip = false})
     end
     if pindian.results[target].toCard.trueName == "slash" and not target.dead then
