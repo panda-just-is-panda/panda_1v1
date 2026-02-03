@@ -4,52 +4,43 @@ local lieren = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__lieren"] = "烈刃",
-  [":pang__lieren"] = "准备阶段，你可以使用弃牌堆内的一张火【杀】，然后令对手获得之。",
-  ["#pang__lieren"] = "烈刃：你可以使用弃牌堆内一张火【杀】，然后对手获得之",
+  [":pang__lieren"] = "出牌阶段限一次，你可以和对手拼点，然后赢的角色和拼点牌为【杀】的角色依次视为使用一张【杀】。",
+  ["#pang__lieren"] = "烈刃：你可以和对手拼点，然后赢的角色和拼点牌为【杀】的角色依次视为使用一张【杀】",
 
   ["$pang__lieren1"] = "哼！可知本夫人厉害？",
   ["$pang__lieren2"] = "我的飞刀，谁敢小瞧？",
 }
 
-
-
-lieren:addEffect(fk.EventPhaseStart, {
-  anim_type = "control",
-  can_trigger = function(self, event, target, player, data)
-    local cards = table.filter(player.room.discard_pile, function (id)
-        local card = Fk:getCardById(id)
-        return card.name == "fire__slash"
-    end)
-    return #cards > 0 and target == player and player:hasSkill(lieren.name) and target.phase == Player.Start
+lieren:addEffect("active", {
+  anim_type = "offensive",
+  prompt = "#pang__lieren",
+  max_phase_use_time = 1,
+  card_num = 0,
+  target_num = 0,
+  can_use = function(self, player)
+    return not player:isKongcheng() and player:usedSkillTimes(lieren.name, Player.HistoryPhase) == 0
   end,
-  on_cost = function (self, event, target, player, data)
-    local room = player.room
-    local cards = table.filter(player.room.discard_pile, function (id)
-        local card = Fk:getCardById(id)
-        return card.name == "fire__slash"
-    end)
-    local use = room:askToUseRealCard(player, {
-                    pattern = tostring(Exppattern{ id = cards }),
-                    expand_pile = cards,
-                    skill_name = lieren.name,
-                    prompt = "#pang__lieren",
-                    extra_data = {
-                        bypass_times = true,
-                        extraUse = true,
-                        expand_pile = cards,
-                    }
-                })
-    if use then
-        event:setCostData(self, {card = use.card})
-        return true
+  card_filter = Util.FalseFunc,
+  target_filter = Util.FalseFunc,
+  on_use = function(self, room, effect)
+    local player = effect.from
+    local target = player.next
+    local pindian = player:pindian({target}, lieren.name)
+    if pindian.results[target].winner == player and not player.dead then
+      room:askToUseVirtualCard(player, {name = "slash", skill_name = lieren.name, cancelable = false, skip = false})
+    elseif pindian.results[target].winner == target and not target.dead then
+      room:askToUseVirtualCard(target, {name = "slash", skill_name = lieren.name, cancelable = false, skip = false})
+    end
+    if pindian.results[target].fromCard.trueName == "slash" and not player.dead then
+      room:askToUseVirtualCard(player, {name = "slash", skill_name = lieren.name, cancelable = false, skip = false})
+    end
+    if pindian.results[target].toCard.trueName == "slash" and not target.dead then
+      room:askToUseVirtualCard(target, {name = "slash", skill_name = lieren.name, cancelable = false, skip = false})
     end
   end,
-  on_use = function(self, event, target, player, data)
-    local room = player.room
-    local get = event:getCostData(self).card
-    room:obtainCard(player.next, get, false, fk.ReasonJustMove, player, lieren.name)
-  end,
 })
+
+
 
 
 
