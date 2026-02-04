@@ -83,7 +83,7 @@ Fk:loadTranslationTable{
 }
 
 local wangyun = General:new(extension, "pang__wangyun", "qun", 3, 3, General.Male)
-wangyun:addSkill("pang__lianji")
+wangyun:addSkill("pang__lianji&")
 wangyun:addSkill("pang__jingong")
 Fk:loadTranslationTable{
   ["pang__wangyun"] = "王允",
