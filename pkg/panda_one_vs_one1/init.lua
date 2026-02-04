@@ -61,7 +61,7 @@ Fk:loadTranslationTable{
 local huayun = General:new(extension, "pang__huayun", "wei", 3, 3, General.Male)
 huayun:addSkill("pang__yuanqing")
 huayun:addSkill("pang__xibing")
-huayun.endnote = "<font color=\"#E0DB2F\">通过变更上场的武将不触发登场，所以如果此武将通过变更上场会直接变成白板！</font>"
+huayun.endnote = "<font color=\"#E0DB2F\">通过变更上场的武将不触发登场，所以如果此武将通过变更上场会直接变成白板</font>"
 Fk:loadTranslationTable{
   ["pang__huayun"] = "华歆",
   ["#pang__huayun"] = "清素拂浊",
@@ -85,6 +85,7 @@ Fk:loadTranslationTable{
 local wangyun = General:new(extension, "pang__wangyun", "qun", 3, 3, General.Male)
 wangyun:addSkill("pang__lianji&")
 wangyun:addSkill("pang__jingong")
+wangyun.endnote = "本意是直接失去技能，但因为备场技会不断更新导致被失去的技能会复活，只好改成这个样子（悲）"
 Fk:loadTranslationTable{
   ["pang__wangyun"] = "王允",
   ["#pang__wangyun"] = "恃功自傲",
