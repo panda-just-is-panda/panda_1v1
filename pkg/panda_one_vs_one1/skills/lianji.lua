@@ -36,7 +36,7 @@ lianji:addEffect("active", {
 
 lianji:addEffect(fk.TurnEnd, { --
   can_refresh = function(self, event, target, player, data)
-    return player:hasSkill(lianji.name) and player:usedSkillTimes(lianji.name, Player.HistoryPhase) > 0
+    return player:hasSkill(lianji.name) and player:usedSkillTimes(lianji.name, Player.HistoryTurn) > 0
   end,
   on_refresh = function(self, event, target, player, data)
     local room = player.room
