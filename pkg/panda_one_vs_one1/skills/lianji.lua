@@ -22,7 +22,7 @@ lianji:addEffect("active", {
   target_num = 0,
   can_use = function(self, player)
     return player:usedSkillTimes(lianji.name, Player.HistoryPhase) < 3 
-    and Fk:currentRoom():getBanner(U.getGeneralsBannerName(p))
+    and Fk:currentRoom():getBanner(U.getGeneralsBannerName(player))
     and #U.getGenerals(player) > 0
   end,
   card_filter = Util.FalseFunc,
