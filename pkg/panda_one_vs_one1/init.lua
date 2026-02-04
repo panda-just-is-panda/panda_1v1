@@ -82,16 +82,16 @@ Fk:loadTranslationTable{
   ["~pang__zangba"] = "断刃沉江，负主重托……",
 }
 
-local shenpei = General:new(extension, "pang__shenpei", "qun", 3, 3, General.Male)
-shenpei:addSkill("pang__gangshou")
-shenpei:addSkill("pang__liezhi")
+local wangyun = General:new(extension, "pang__wangyun", "qun", 3, 3, General.Male)
+wangyun:addSkill("pang__lianji")
+wangyun:addSkill("pang__jingong")
 Fk:loadTranslationTable{
-  ["pang__shenpei"] = "审配",
-  ["#pang__shenpei"] = "正南义北",
-  ["designer:pang__shenpei"] = "胖即是胖",
-  ["illustrator:pang__shenpei"] = "官方",
+  ["pang__wangyun"] = "王允",
+  ["#pang__wangyun"] = "恃功自傲",
+  ["designer:pang__wangyun"] = "胖即是胖",
+  ["illustrator:pang__wangyun"] = "官方",
 
-  ["~pang__shenpei"] = "吾君在北，但求面北而亡！",
+  ["~pang__wangyun"] = "逆贼何必多言，今日有死而已！",
 }
 
 local zhurong = General:new(extension, "pang__zhurong", "qun", 4, 4, General.Female)
