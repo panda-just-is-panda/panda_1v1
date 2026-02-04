@@ -85,7 +85,6 @@ Fk:loadTranslationTable{
 local wangyun = General:new(extension, "pang__wangyun", "qun", 3, 3, General.Male)
 wangyun:addSkill("pang__lianji&")
 wangyun:addSkill("pang__jingong")
-wangyun.endnote = "本意是直接失去技能，但因为备场技会不断更新导致被失去的技能会复活，只好改成这个样子（悲）"
 Fk:loadTranslationTable{
   ["pang__wangyun"] = "王允",
   ["#pang__wangyun"] = "恃功自傲",
