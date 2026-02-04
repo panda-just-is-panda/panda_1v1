@@ -40,16 +40,11 @@ lianji:addEffect(fk.TurnEnd, { --
   end,
   on_refresh = function(self, event, target, player, data)
     local room = player.room
-    room:handleAddLoseSkills(player, "-pang__lianji&", nil, false, true)
+    U.banSupportSkill(player, lianji.name, "ban")
     end,
 })
 
-lianji:addAcquireEffect(function (self, player)
-  local room = player.room
-  if player:usedSkillTimes(lianji.name, Player.HistoryGame) > 0 then
-    room:handleAddLoseSkills(player, "-pang__lianji&", nil, false, true)
-  end
-end)
+
 
 
 return lianji
