@@ -23,7 +23,7 @@ jingong:addEffect(fk.EventPhaseStart, {
   end,
   on_cost = function (self, event, target, player, data)
     return player.room:askToSkillInvoke(player,{
-      prompt = "#pang__jingong1" and player:usedSkillTimes(jingong.name, Player.HistoryGame) < player:getMark("pang_jingong") or "#pang__jingong2",
+      prompt = player:usedSkillTimes(jingong.name, Player.HistoryGame) < player:getMark("pang_jingong") and "#pang__jingong1" or "#pang__jingong2",
       skill_name = jingong.name,
     })
   end,
