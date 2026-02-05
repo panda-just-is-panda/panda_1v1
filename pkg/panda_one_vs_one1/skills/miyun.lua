@@ -45,7 +45,7 @@ miyun:addEffect(fk.RoundEnd,{
         if table.find(player:getCardIds("h"), function (id)
         return Fk:getCardById(id):getMark("@@pang__miyun") > 0
       end) and player.room:askToSkillInvoke(player,{
-            prompt = "#pang__miyun-leave".. player.id,
+            prompt = "#pang__miyun-leave:".. player.id,
             skill_name = miyun.name,
         }) then
             player.room:setPlayerMark(player,"@pang__miyun_count", 0)
@@ -55,7 +55,7 @@ miyun:addEffect(fk.RoundEnd,{
   end,
   on_use = function (self, event, target, player, data)
     local room = player.room
-    U.addPlayercount(player,2,-1)
+    U.addPlayercount(player,-1,0)
     U.PlayerDebut(player,miyun.name,false)
   end,
 })

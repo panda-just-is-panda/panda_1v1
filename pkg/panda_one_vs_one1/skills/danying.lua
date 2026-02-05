@@ -18,7 +18,7 @@ Fk:loadTranslationTable{
 
 danying:addEffect("viewas", {
   pattern = "slash,jink",
-  prompt = "#danying",
+  prompt = "#pang__danying",
   interaction = function(self, player)
     local all_names = {"slash", "jink"}
     local names = player:getViewAsCardNames(danying.name, all_names)
