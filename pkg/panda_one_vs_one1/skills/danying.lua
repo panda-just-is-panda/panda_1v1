@@ -31,6 +31,7 @@ danying:addEffect("viewas", {
     max_num = 1,
     pattern = "",
   },
+  handly_pile = true,
   view_as = function(self, player, cards)
     if self.interaction.data == nil then return end
     if #cards ~= 1 then return end
