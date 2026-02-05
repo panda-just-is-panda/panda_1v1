@@ -40,7 +40,7 @@ miyun:addEffect(fk.RoundEnd,{
     return player:hasSkill(miyun.name,true)
   end,
   on_cost = function (self, event, target, player, data)
-    player.room:addPlayerMark(player,"@pang__miyun_count", 1)
+    if player:getMark("@pang__miyun_count") < 6 then player.room:addPlayerMark(player,"@pang__miyun_count", 1) end
     if player:getMark("@pang__miyun_count") > 5 and player:hasSkill(miyun.name) then
         if table.find(player:getCardIds("h"), function (id)
         return Fk:getCardById(id):getMark("@@pang__miyun") > 0

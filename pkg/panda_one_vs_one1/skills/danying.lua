@@ -29,7 +29,7 @@ danying:addEffect("viewas", {
   filter_pattern = {
     min_num = 1,
     max_num = 1,
-    pattern = "",
+    pattern = "he",
   },
   handly_pile = true,
   view_as = function(self, player, cards)
