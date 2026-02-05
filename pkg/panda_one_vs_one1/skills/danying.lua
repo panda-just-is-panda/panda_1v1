@@ -45,6 +45,7 @@ danying:addEffect("viewas", {
     else
         player.room:setPlayerMark(player,"@@pang_danding_slash",1)
     end
+    player.room:invalidateSkill(player, danying.name)
   end,
   enabled_at_play = function(self, player)
     return true
@@ -54,28 +55,17 @@ danying:addEffect("viewas", {
   end,
 })
 
-danying:addEffect("invalidity", {
-    is_delay_effect = true,
-  invalidity_func = function(self, from, skill)
-    return
-      (from:getMark("@@pang_danding_slash") > 0 or from:getMark("@@pang_danding_jink") > 0)
-      and skill:isPlayerSkill(from, true)
-      and skill.name == "pang__danying"
-  end
-})
 
 danying:addEffect(fk.CardUsing, {
-    mute = true,
-  is_delay_effect = true,
-  can_trigger = function(self, event, target, player, data)
+  can_refresh = function(self, event, target, player, data)
     return target and data.card and player:hasSkill(danying.name) 
     and (data.card.trueName == "slash" and player:getMark("@@pang_danding_slash") > 0 
     or player:getMark("@@pang_danding_jink") > 0 and data.card.trueName == "jink")
   end,
-  on_cost = Util.TrueFunc,
-  on_use = function(self, event, target, player, data)
+  on_refresh = function(self, event, target, player, data)
     local room = player.room
     local to = target
+    room:validateSkill(player, danying.name)
     room:setPlayerMark(player,"@@pang_danding_jink",0)
     room:setPlayerMark(player,"@@pang_danding_slash",0)
     if player.room:askToSkillInvoke(to,{
