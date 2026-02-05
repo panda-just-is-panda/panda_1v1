@@ -4,7 +4,7 @@ local danying = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__danying"] = "胆迎",
-  [":pang__danying"] = "你可以将一张牌作为【杀】或【闪】使用，然后下次有角色使用另一牌名的牌时，其可以对你造成2点伤害。",
+  [":pang__danying"] = "你可以视为使用【杀】或【闪】并令此技能失效直到有角色使用另一牌名的牌，然后该角色可以对你造成2点伤害。",
 
   ["#pang__danying"] = "胆迎：你可以视为使用【杀】或【闪】",
   ["#pang__danying_damage"] = "胆迎：你可以对 %src 造成2点伤害",
@@ -27,17 +27,15 @@ danying:addEffect("viewas", {
     end
   end,
   filter_pattern = {
-    min_num = 1,
-    max_num = 1,
-    pattern = ".",
+    min_num = 0,
+    max_num = 0,
+    pattern = "",
+    subcards = {}
   },
-  handly_pile = true,
   view_as = function(self, player, cards)
     if self.interaction.data == nil then return end
-    if #cards ~= 1 then return end
     local card = Fk:cloneCard(self.interaction.data)
     card.skillName = danying.name
-    card:addSubcard(cards[1])
     return card
   end,
   before_use = function(self, player, use)
@@ -56,7 +54,17 @@ danying:addEffect("viewas", {
   end,
 })
 
+danying:addEffect("invalidity", {
+  invalidity_func = function(self, from, skill)
+    return
+      (from:getMark("@@pang_danding_slash") > 0 or from:getMark("@@pang_danding_jink") > 0)
+      and skill:isPlayerSkill(from, true)
+      and skill.name == "pang__danying"
+  end
+})
+
 danying:addEffect(fk.CardUsing, {
+  is_delay_effect = true,
   can_refresh = function(self, event, target, player, data)
     return target and data.card and player:hasSkill(danying.name) 
     and (data.card.trueName == "slash" and player:getMark("@@pang_danding_slash") > 0 
