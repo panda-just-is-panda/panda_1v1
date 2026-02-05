@@ -55,6 +55,7 @@ danying:addEffect("viewas", {
 })
 
 danying:addEffect("invalidity", {
+    is_delay_effect = true,
   invalidity_func = function(self, from, skill)
     return
       (from:getMark("@@pang_danding_slash") > 0 or from:getMark("@@pang_danding_jink") > 0)
@@ -64,13 +65,15 @@ danying:addEffect("invalidity", {
 })
 
 danying:addEffect(fk.CardUsing, {
+    mute = true,
   is_delay_effect = true,
-  can_refresh = function(self, event, target, player, data)
+  can_trigger = function(self, event, target, player, data)
     return target and data.card and player:hasSkill(danying.name) 
     and (data.card.trueName == "slash" and player:getMark("@@pang_danding_slash") > 0 
     or player:getMark("@@pang_danding_jink") > 0 and data.card.trueName == "jink")
   end,
-  on_refresh = function(self, event, target, player, data)
+  on_cost = Util.TrueFunc,
+  on_use = function(self, event, target, player, data)
     local room = player.room
     local to = target
     room:setPlayerMark(player,"@@pang_danding_jink",0)
