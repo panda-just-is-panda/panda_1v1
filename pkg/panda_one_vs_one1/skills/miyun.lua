@@ -31,7 +31,8 @@ miyun:addEffect(U.AfterDebut,{
   end,
   on_use = function (self, event, target, player, data)
     local room = player.room
-    player:drawCards(1, miyun.name, nil, "@@pang__miyun")
+    local card = player:drawCards(1, miyun.name, nil, "@@pang__miyun")
+    player:showCards(card)
   end,
 })
 
