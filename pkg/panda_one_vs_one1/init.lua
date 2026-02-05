@@ -50,12 +50,12 @@ local zhoushan = General:new(extension, "pang__zhoushan", "wu", 4, 4, General.Ma
 zhoushan:addSkill("pang__miyun")
 zhoushan:addSkill("pang__danying")
 Fk:loadTranslationTable{
-  ["pang__panzhangmazhong"] = "周善",
-  ["#pang__panzhangmazhong"] = "荆吴刑天",
-  ["designer:pang__panzhangmazhong"] = "胖即是胖",
-  ["illustrator:pang__panzhangmazhong"] = "游漫美绘",
+  ["pang__zhoushan"] = "周善",
+  ["#pang__zhoushan"] = "荆吴刑天",
+  ["designer:pang__zhoushan"] = "胖即是胖",
+  ["illustrator:pang__zhoushan"] = "游漫美绘",
 
-  ["~pang__panzhangmazhong"] = "夫人救我！夫人救我！",
+  ["~pang__zhoushan"] = "夫人救我！夫人救我！",
 }
 
 local huayun = General:new(extension, "pang__huayun", "wei", 3, 3, General.Male)

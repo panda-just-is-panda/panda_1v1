@@ -8,6 +8,9 @@ Fk:loadTranslationTable{
 
   ["#pang__danying"] = "胆迎：你可以视为使用【杀】或【闪】",
   ["#pang__danying_damage"] = "胆迎：你可以对 %src 造成2点伤害",
+  ["@@pang_danding_jink"] = "胆迎 闪",
+  ["@@pang_danding_slash"] = "胆迎 杀",
+
 
   ["$pang__danying1"] = "早就想会会你常山赵子龙了。",
   ["$pang__danying2"] = "赵子龙是吧？兜鍪给你打掉。",
@@ -36,11 +39,11 @@ danying:addEffect("viewas", {
     return card
   end,
   before_use = function(self, player, use)
-    local name = Fk:cloneCard(self.interaction.data)
+    local name = self.interaction.data
     if name == "slash" then
-        player.room:setPlayerMark(player,"pang_danding_jink",1)
+        player.room:setPlayerMark(player,"@@pang_danding_jink",1)
     else
-        player.room:setPlayerMark(player,"pang_danding_slash",1)
+        player.room:setPlayerMark(player,"@@pang_danding_slash",1)
     end
   end,
   enabled_at_play = function(self, player)
@@ -54,14 +57,14 @@ danying:addEffect("viewas", {
 danying:addEffect(fk.CardUsing, {
   can_refresh = function(self, event, target, player, data)
     return target and data.card and player:hasSkill(danying.name) 
-    and (data.card.trueName == "slash" and player:getMark("pang_danding_slash") > 0 
-    or player:getMark("pang_danding_jink") > 0 and data.card.trueName == "jink")
+    and (data.card.trueName == "slash" and player:getMark("@@pang_danding_slash") > 0 
+    or player:getMark("@@pang_danding_jink") > 0 and data.card.trueName == "jink")
   end,
   on_refresh = function(self, event, target, player, data)
     local room = player.room
     local to = target
-    room:setPlayerMark(player,"pang_danding_jink",0)
-    room:setPlayerMark(player,"pang_danding_slash",0)
+    room:setPlayerMark(player,"@@pang_danding_jink",0)
+    room:setPlayerMark(player,"@@pang_danding_slash",0)
     if player.room:askToSkillInvoke(to,{
       prompt = "#pang__danying_damage:".. player.id,
       skill_name = danying.name,

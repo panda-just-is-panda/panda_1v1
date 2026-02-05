@@ -55,7 +55,7 @@ miyun:addEffect(fk.RoundEnd,{
   end,
   on_use = function (self, event, target, player, data)
     local room = player.room
-    U.addPlayercount(player,1,-1)
+    U.addPlayercount(player,2,-1)
     U.PlayerDebut(player,miyun.name,false)
   end,
 })
