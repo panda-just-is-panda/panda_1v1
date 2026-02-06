@@ -44,6 +44,7 @@ juanxia:addEffect(fk.EventPhaseStart, {
         if #cards == 0 and #listall > 0 then
           local name = p.general
             U.AskToChangeGeneral(p,juanxia.name,listall)
+            U.removeGeneral(p,name)
             U.addGeneral(p,name,{state = "dead"})
           end
       end

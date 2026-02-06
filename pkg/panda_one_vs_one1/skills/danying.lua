@@ -58,7 +58,7 @@ danying:addEffect("viewas", {
 
 danying:addEffect(fk.CardUsing, {
   can_refresh = function(self, event, target, player, data)
-    return target and data.card and player:hasSkill(danying.name) 
+    return target and data.card
     and (data.card.trueName == "slash" and player:getMark("@@pang_danding_slash") > 0 
     or player:getMark("@@pang_danding_jink") > 0 and data.card.trueName == "jink")
   end,
