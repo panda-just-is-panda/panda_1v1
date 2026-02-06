@@ -10,8 +10,8 @@ Fk:loadTranslationTable{
   ["#pang__miyun-leave"] = "密运：你可以令登场数-1并退场",
   ["@@pang__miyun"] = "密运",
   ["@pang__miyun_count"] = "密运",
-  ["@pang__miyun_success"] = "密运 成功",
-  ["@pang__miyun_fail"] = "密运失败",
+  ["@@pang__miyun_success"] = "密运 成功",
+  ["@@pang__miyun_fail"] = "密运失败",
 
 
   ["$pang__miyun1"] = "不要大张旗鼓，要神不知鬼不觉。",
@@ -41,8 +41,8 @@ miyun:addEffect(U.AfterDebut,{
 miyun:addEffect(fk.RoundEnd,{
   can_trigger = function (self, event, target, player, data)
     return player:hasSkill(miyun.name,true) 
-    and player:getMark("@pang__miyun_success") == 0 
-    and player:getMark("@pang__miyun_fail") == 0
+    and player:getMark("@@pang__miyun_success") == 0 
+    and player:getMark("@@pang__miyun_fail") == 0
   end,
   on_cost = function (self, event, target, player, data)
     player.room:addPlayerMark(player,"@pang__miyun_count", 1)
@@ -51,7 +51,7 @@ miyun:addEffect(fk.RoundEnd,{
         if table.find(player:getCardIds("h"), function (id)
             return Fk:getCardById(id):getMark("@@pang__miyun") > 0
         end) then
-            player.room:setPlayerMark(player,"@pang__miyun_success", 1)
+            player.room:setPlayerMark(player,"@@pang__miyun_success", 1)
             if player.room:askToSkillInvoke(player,{
                 prompt = "#pang__miyun-leave:".. player.id,
                 skill_name = miyun.name,
@@ -59,7 +59,7 @@ miyun:addEffect(fk.RoundEnd,{
                 return true
             end
         else
-            player.room:setPlayerMark(player,"@pang__miyun_fail", 1)
+            player.room:setPlayerMark(player,"@@pang__miyun_fail", 1)
         end
     end
   end,
