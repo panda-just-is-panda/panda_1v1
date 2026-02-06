@@ -48,7 +48,7 @@ miyun:addEffect(fk.RoundEnd,{
     player.room:addPlayerMark(player,"@pang__miyun_count", 1)
     if player:getMark("@pang__miyun_count") > 5 and player:hasSkill(miyun.name) then
         player.room:setPlayerMark(player,"@pang__miyun_count", 0)
-        if table.find(player:getCardIds("h"), function (id)
+        if table.find(player:getCardIds("he"), function (id)
             return Fk:getCardById(id):getMark("@@pang__miyun") > 0
         end) then
             player.room:setPlayerMark(player,"@@pang__miyun_success", 1)
@@ -65,6 +65,12 @@ miyun:addEffect(fk.RoundEnd,{
   end,
   on_use = function (self, event, target, player, data)
     local room = player.room
+    local card = table.filter(player:getCardIds("he"), function (id)
+        return Fk:getCardById(id):getMark("@@pang__miyun") > 0
+    end)
+    if #card > 0 then
+        player:showCards(card)
+    end
     U.addPlayercount(player,-1,0)
     U.PlayerDebut(player,miyun.name,false)
   end,
