@@ -4,7 +4,7 @@ local miyun = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__miyun"] = "密运",
-  [":pang__miyun"] = "当你登场后，你可以摸一张牌并展示之；四轮后，你可以展示此牌并令登场数-1，然后你退场。",
+  [":pang__miyun"] = "当你登场后，你可以摸一张牌并展示之；五轮后，你可以展示此牌并令登场数-1，然后你退场。",
 
   ["#pang__miyun"] = "密运：你可以摸一张牌并展示之",
   ["#pang__miyun-leave"] = "密运：你可以令登场数-1并退场",
@@ -46,7 +46,7 @@ miyun:addEffect(fk.RoundEnd,{
   end,
   on_cost = function (self, event, target, player, data)
     player.room:addPlayerMark(player,"@pang__miyun_count", 1)
-    if player:getMark("@pang__miyun_count") > 3 and player:hasSkill(miyun.name) then
+    if player:getMark("@pang__miyun_count") > 4 and player:hasSkill(miyun.name) then
         player.room:setPlayerMark(player,"@pang__miyun_count", 0)
         if table.find(player:getCardIds("he"), function (id)
             return Fk:getCardById(id):getMark("@@pang__miyun") > 0
