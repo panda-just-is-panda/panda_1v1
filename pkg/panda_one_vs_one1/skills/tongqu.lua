@@ -35,13 +35,13 @@ tongqu:addEffect("active", {
 
 tongqu:addEffect(fk.DrawNCards, {
   anim_type = "drawcard",
-  can_trigger = function(self, event, target, player, data)
+  can_refresh = function(self, event, target, player, data)
     return target == player and player:hasSkill(tongqu.name) and
     player:getMark("@tongqu_count") > 0
   end,
-    on_cost = Util.FalseFunc,
-  on_use = function(self, event, target, player, data)
-    data.n = data.n + player:getMark("@tongqu_count")
+  on_refresh = function(self, event, target, player, data)
+    local X = player:getMark("@tongqu_count")
+    data.n = data.n + X
   end,
 })
 
