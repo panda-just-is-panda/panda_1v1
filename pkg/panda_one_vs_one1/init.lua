@@ -58,17 +58,16 @@ Fk:loadTranslationTable{
   ["~pang__zhoushan"] = "夫人救我！夫人救我！",
 }
 
-local huayun = General:new(extension, "pang__huayun", "wei", 3, 3, General.Male)
-huayun:addSkill("pang__yuanqing")
-huayun:addSkill("pang__xibing")
-huayun.endnote = "<font color=\"#E0DB2F\">通过变更上场的武将不触发登场，所以如果此武将通过变更上场会直接变成白板</font>"
+local jiakui = General:new(extension, "pang__jiakui", "wei", 3, 3, General.Male)
+jiakui:addSkill("pang__tongqu")
+jiakui:addSkill("pang__wanlan")
 Fk:loadTranslationTable{
-  ["pang__huayun"] = "华歆",
-  ["#pang__huayun"] = "清素拂浊",
-  ["designer:pang__huayun"] = "胖即是胖",
-  ["illustrator:pang__huayun"] = "秋呆呆",
+  ["pang__jiakui"] = "贾逵",
+  ["#pang__jiakui"] = "肃齐万里",
+  ["designer:pang__jiakui"] = "胖即是胖",
+  ["illustrator:pang__jiakui"] = "monkey",
 
-  ["~pang__huayun"] = "大举发兵，劳民伤国。",
+  ["~pang__jiakui"] = "不斩孙权，九泉之下羞见先帝啊。",
 }
 
 local zangba = General:new(extension, "pang__zangba", "wei", 4, 4, General.Male)
