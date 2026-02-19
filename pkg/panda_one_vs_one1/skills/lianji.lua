@@ -51,14 +51,9 @@ lianji:addEffect(fk.TurnEnd, { --
   on_refresh = function(self, event, target, player, data)
     local room = player.room
     local name = player:getTableMark("lianji-turn")[1]
-    local listall = U.getGenerals(player)
-    local not_available = table.filter(listall,function (element, index, array)
-      return Fk.generals[element].name ~= name
-    end)
     room:handleAddLoseSkills(player, "-pang__lianji&", nil, false, true)
-    if #listall > #not_available then
-      U.AskToChangeGeneral(player,lianji.name,listall,not_available)
-    end
+    U.removeGeneral(player,name)
+    player.general = name
     end,
 })
 
