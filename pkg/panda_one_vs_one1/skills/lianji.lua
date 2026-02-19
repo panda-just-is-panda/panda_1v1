@@ -56,7 +56,7 @@ lianji:addEffect(fk.TurnEnd, { --
       return Fk.generals[element] ~= name
     end)
     room:handleAddLoseSkills(player, "-pang__lianji&", nil, false, true)
-    if #listall > not_available then
+    if #listall > #not_available then
       U.AskToChangeGeneral(player,lianji.name,listall,not_available)
     end
     end,
