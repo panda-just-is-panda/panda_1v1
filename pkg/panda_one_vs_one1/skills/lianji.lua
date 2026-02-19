@@ -5,7 +5,7 @@ local lianji = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__lianji&"] = "连计",
-  [":pang__lianji&"] = "备场技，出牌阶段限三次，你可以变更武将；你发动过此技能的回合结束时，你失去此技能。",
+  [":pang__lianji&"] = "备场技，出牌阶段限三次，你可以变更武将；你发动过此技能的回合结束时，你失去此技能，然后变更至回合开始时的武将。",
   ["#pang__lianji"] = "连计：你可以变更武将",
 
   ["$pang__lianji&1"] = "计行周密，定无疏失。",
@@ -34,6 +34,16 @@ lianji:addEffect("active", {
   end,
 })
 
+lianji:addEffect(fk.TurnStart, { --
+  can_refresh = function(self, event, target, player, data)
+    return player:hasSkill(lianji.name)
+  end,
+  on_refresh = function(self, event, target, player, data)
+    local room = player.room
+    room:setPlayerMark(player, "lianji-turn", {player.general})
+    end,
+})
+
 lianji:addEffect(fk.TurnEnd, { --
   can_refresh = function(self, event, target, player, data)
     return player:hasSkill(lianji.name) and player:usedSkillTimes(lianji.name, Player.HistoryTurn) > 0
@@ -41,6 +51,7 @@ lianji:addEffect(fk.TurnEnd, { --
   on_refresh = function(self, event, target, player, data)
     local room = player.room
     room:handleAddLoseSkills(player, "-pang__lianji&", nil, false, true)
+    U.AskToChangeGeneral(player,lianji.name,player:getTableMark("lianji-turn")[1])
     end,
 })
 
