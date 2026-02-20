@@ -106,8 +106,8 @@ Fk:loadTranslationTable{
 }
 
 local wangyuanji = General:new(extension, "pang__wangyuanji", "jin", 3, 3, General.Female)
-wangyuanji:addSkill("pang__jianshi")
-wangyuanji:addSkill("pang__changqu")
+wangyuanji:addSkill("pang__qianchong")
+wangyuanji:addSkill("pang__shangjian")
 Fk:loadTranslationTable{
   ["pang__wangyuanji"] = "王元姬",
   ["#pang__wangyuanji"] = "清雅抑华",
