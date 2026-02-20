@@ -6,7 +6,7 @@ local changqu = fk.CreateSkill {
 Fk:loadTranslationTable{
   ["pang__changqu"] = "长驱",
   [":pang__changqu"] = "锁定技，一名角色首次受到你造成的伤害时，其需选择一项：此伤害+1；交给你两张牌并退场，然后最大登场数+1。",
-  ["#pang__changqu"] = "长驱：交给%dest两张牌，否则此伤害+1",
+  ["#changqu-give"] = "长驱：交给%dest两张牌，否则此伤害+1",
 
 
   ["$pang__changqu1"] = "白首全金瓯，著风流于春秋。",
