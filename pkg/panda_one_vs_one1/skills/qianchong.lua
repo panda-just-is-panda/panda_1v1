@@ -6,7 +6,7 @@ local qianchong = fk.CreateSkill {
 qianchong:addEffect(fk.CardUsing, {
     mute = true,
   can_trigger = function(self, event, target, player, data)
-    return data.card and player:hasSkill(qianchong.name) and data.card.color == Card.Black
+    return data.card and player:hasSkill(qianchong.name) and data.card.color == Card.Black and
     (data.card.trueName == "slash" and player:getSwitchSkillState(qianchong.name, true) ~= fk.SwitchYang
     or data.card.type == Card.TypeTrick and player:getSwitchSkillState(qianchong.name, true) == fk.SwitchYang)
   end,
