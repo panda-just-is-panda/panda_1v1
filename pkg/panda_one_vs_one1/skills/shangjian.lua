@@ -64,7 +64,7 @@ shangjian:addEffect(fk.RoundEnd,{
         prompt = "#pang__shangjian_get",
       })
       room:moveCardTo(player_get, Card.PlayerHand, player, fk.ReasonJustMove, shangjian.name, nil, true, player)
-    table.removeOne(shangjian_all, player_get[1])
+    table.removeOne(shangjian_all, player_get)
     if #shangjian_all > 0 and room:askToSkillInvoke(player.next, {
       skill_name = shangjian.name,
       prompt = "#pang__shangjian",
