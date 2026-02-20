@@ -10,6 +10,7 @@ Fk:loadTranslationTable{
   ["#jianshi_recast2"] = "舰势：你可以依次重铸至多两张牌（第2张）",
   ["@@jianshi_slash-phase"] = "舰势",
   ["#jianshi_use1"] = "舰势：你可以使用至多两张【杀】（第1张）",
+  ["#jianshi_use1.2"] = "舰势：你可以使用至多一张【杀】",
   ["#jianshi_use2"] = "舰势：你可以使用至多两张【杀】（第2张）",
 
 
@@ -60,20 +61,28 @@ jianshi:addEffect(fk.EventPhaseStart, {
         local use = room:askToUseCard(player, {
             skill_name = jianshi.name,
             pattern = "slash",
-            prompt = "#jianshi_use1",
+            prompt = #player:getCardIds("e") > 1 and "#jianshi_use1" or "#jianshi_use1.2",
             extra_data = {
                 bypass_times = true,
             }
         })
-        if use and #player:getCardIds("e") > 0 then
-            local use = room:askToUseCard(player, {
+        if use then
+          use.extraUse = true
+          room:useCard(use)
+          if #player:getCardIds("e") > 1 then
+            local use2 = room:askToUseCard(player, {
                 skill_name = jianshi.name,
                 pattern = "slash",
                 prompt = "#jianshi_use2",
                 extra_data = {
                     bypass_times = true,
                 }
-            })
+              })
+            if use2 then
+              use2.extraUse = true
+              room:useCard(use2)
+            end
+          end
         end
     end
   end,
