@@ -23,7 +23,7 @@ qianchong:addEffect(fk.CardUsing, {
     else
         player:broadcastSkillInvoke(qianchong.name, 1)
     end
-    data:removeAllTargets()
+    data.toCard = nil
   end,
 })
 
@@ -35,7 +35,7 @@ Fk:loadTranslationTable {["pang__qianchong"] = "谦冲",
 [":pang__qianchong_yin"] = "转换技，当一名角色使用①黑色【杀】"..
 "<font color=\"#E0DB2F\">②黑色锦囊牌</font>时，你可以取消之。",
 
-["#pang__qianchong"] = "谦冲：你可以取消此牌",
+["#pang__qianchong"] = "谦冲：你可以令此牌无效",
 
 
 ["$pang__qianchong1"] = "谦谨行事，方能多吉少恙。",
