@@ -105,6 +105,18 @@ Fk:loadTranslationTable{
   ["~pang__zhurong"] = "大王，这诸葛亮，果然厉害……",
 }
 
+local wangyuanji = General:new(extension, "pang__wangyuanji", "jin", 3, 3, General.Female)
+wangyuanji:addSkill("pang__jianshi")
+wangyuanji:addSkill("pang__changqu")
+Fk:loadTranslationTable{
+  ["pang__wangyuanji"] = "王元姬",
+  ["#pang__wangyuanji"] = "清雅抑华",
+  ["designer:pang__wangyuanji"] = "胖即是胖",
+  ["illustrator:pang__wangyuanji"] = "官方",
+
+  ["~pang__wangyuanji"] = "世事沉浮，非是一人可逆啊。",
+}
+
 local wangjun = General:new(extension, "pang__wangjun", "jin", 4, 4, General.Male)
 wangjun:addSkill("pang__jianshi")
 wangjun:addSkill("pang__changqu")
