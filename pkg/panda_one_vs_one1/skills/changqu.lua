@@ -35,6 +35,7 @@ changqu:addEffect(fk.DamageCaused, {
     })
     if #cards > 1 and data.to ~= player then
         room:moveCardTo(cards, Player.Hand, player, fk.ReasonGive, changqu.name, nil, false, to)
+        data:preventDamage()
         U.addPlayercount(to,0,1)
         U.PlayerDebut(to,changqu.name,false)
     else
