@@ -18,12 +18,12 @@ local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
 changqu:addEffect(fk.DamageCaused, {
   anim_type = "offensive",
   can_trigger = function(self, event, target, player, data)
-    return player:hasSkill(changqu.name) and target == player 
-    and player.next:getMark("changqu_damage") == 0
+    return player:hasSkill(changqu.name) and target == player
+    and data.to:getMark("changqu_damage") == 0
   end,
   on_use = function(self, event, target, player, data)
     local room = player.room
-    local to = player.next
+    local to = data.to
     room:setPlayerMark(to, "changqu_damage", 1)
     local cards = room:askToCards(to, {
       skill_name = changqu.name,
@@ -33,7 +33,7 @@ changqu:addEffect(fk.DamageCaused, {
       prompt = "#changqu-give::"..player.id,
       cancelable = true,
     })
-    if #cards > 1 then
+    if #cards > 1 and data.to ~= player then
         room:moveCardTo(cards, Player.Hand, player, fk.ReasonGive, changqu.name, nil, false, to)
         U.addPlayercount(to,0,1)
         U.PlayerDebut(to,changqu.name,false)
