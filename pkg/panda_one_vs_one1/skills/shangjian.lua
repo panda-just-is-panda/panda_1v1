@@ -58,12 +58,11 @@ shangjian:addEffect(fk.RoundEnd,{
     local room = player.room
     local shangjian_all = event:getCostData(self).extra_data[1]
     local player_get = room:askToChooseCards(player, {
-          cards = shangjian_all,
+          pattern = tostring(Exppattern{ id = shangjian_all }),
           min = 1,
           max = 1,
           skill_name = shangjian.name,
           prompt = "#pang__shangjian_get",
-          all_cards = shangjian_all,
         })
     local moveInfos = {}
     table.insert(moveInfos, {
@@ -80,12 +79,11 @@ shangjian:addEffect(fk.RoundEnd,{
       prompt = "#pang__shangjian",
     }) then
         local to_get = room:askToChooseCards(player.next, {
-          cards = shangjian_all,
+          pattern = tostring(Exppattern{ id = shangjian_all }),
           min = 1,
           max = 1,
           skill_name = shangjian.name,
           prompt = "#pang__shangjian_get",
-          all_cards = shangjian_all,
         })
         local moveInfos = {}
         table.insert(moveInfos, {

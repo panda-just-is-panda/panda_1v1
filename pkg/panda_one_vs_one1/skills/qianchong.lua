@@ -18,7 +18,7 @@ qianchong:addEffect(fk.CardUsing, {
   end,
   on_use = function(self, event, target, player, data)
     local room = player.room
-    if player:getSwitchSkillState(qianchong.name, true) == fk.SwitchYang then
+    if player:getSwitchSkillState(qianchong.name, true) ~= fk.SwitchYang then
         player:broadcastSkillInvoke(qianchong.name, 2)
     else
         player:broadcastSkillInvoke(qianchong.name, 1)
