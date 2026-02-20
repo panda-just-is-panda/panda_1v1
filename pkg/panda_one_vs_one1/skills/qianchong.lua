@@ -23,6 +23,7 @@ qianchong:addEffect(fk.CardUsing, {
     else
         player:broadcastSkillInvoke(qianchong.name, 1)
     end
+    data:removeAllTargets()
     data.toCard = nil
   end,
 })
