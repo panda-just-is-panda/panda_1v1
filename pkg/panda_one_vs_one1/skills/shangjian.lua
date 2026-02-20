@@ -57,49 +57,26 @@ shangjian:addEffect(fk.RoundEnd,{
   on_use = function (self, event, target, player, data)
     local room = player.room
     local shangjian_all = event:getCostData(self).extra_data[1]
-    local player_get = room:askToChooseCards(player, {
-          pattern = tostring(Exppattern{ id = shangjian_all }),
-          expand_pile = shangjian_all,
-          min = 1,
-          max = 1,
-          skill_name = shangjian.name,
-          prompt = "#pang__shangjian_get",
-          cancelable = false,
-        })
-    local moveInfos = {}
-    table.insert(moveInfos, {
-      ids = player_get,
-      to = player,
-      toArea = Card.PlayerHand,
-      moveReason = fk.ReasonJustMove,
-      proposer = player,
-      skillName = shangjian.name,
-    })
+    local player_get = room:askToChooseCard(player, {
+        target = player,
+        flag = { card_data = {{ shangjian.name, shangjian_all }} },
+        skill_name = shangjian.name,
+        prompt = "#pang__shangjian_get",
+      })
+      room:moveCardTo(player_get, Card.PlayerHand, player, fk.ReasonJustMove, shangjian.name, nil, true, player)
     table.removeOne(shangjian_all, player_get[1])
     if #shangjian_all > 0 and room:askToSkillInvoke(player.next, {
       skill_name = shangjian.name,
       prompt = "#pang__shangjian",
     }) then
-        local to_get = room:askToChooseCards(player.next, {
-          pattern = tostring(Exppattern{ id = shangjian_all }),
-          expand_pile = shangjian_all,
-          min = 1,
-          max = 1,
-          skill_name = shangjian.name,
-          prompt = "#pang__shangjian_get",
-          cancelable = false,
-        })
-        local moveInfos = {}
-        table.insert(moveInfos, {
-            ids = to_get,
-            to = player.next,
-            toArea = Card.PlayerHand,
-            moveReason = fk.ReasonJustMove,
-            proposer = player,
-            skillName = shangjian.name,
-        })
+        local to_get = room:askToChooseCard(player.next, {
+        target = player.next,
+        flag = { card_data = {{ shangjian.name, shangjian_all }} },
+        skill_name = shangjian.name,
+        prompt = "#pang__shangjian_get",
+      })
+        room:moveCardTo(to_get, Card.PlayerHand, player.next, fk.ReasonJustMove, shangjian.name, nil, true, player.next)
     end
-    room:moveCards(table.unpack(moveInfos))
   end,
 })
 
