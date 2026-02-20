@@ -105,6 +105,18 @@ Fk:loadTranslationTable{
   ["~pang__zhurong"] = "大王，这诸葛亮，果然厉害……",
 }
 
+local wangjun = General:new(extension, "pang__wangjun", "jin", 4, 4, General.Male)
+wangjun:addSkill("pang__jianshi")
+wangjun:addSkill("pang__changqu")
+Fk:loadTranslationTable{
+  ["pang__wangjun"] = "王濬",
+  ["#pang__wangjun"] = "遏浪飞艨",
+  ["designer:pang__wangjun"] = "胖即是胖",
+  ["illustrator:pang__wangjun"] = "官方",
+
+  ["~pang__wangjun"] = "未蹈曹刘之辙，险遭士载之厄。",
+}
+
 
 
 return extension
