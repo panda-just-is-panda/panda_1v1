@@ -13,8 +13,8 @@ qianchong:addEffect(fk.CardUsing, {
       end
     end
     return target == player.next and data.card and player:hasSkill(qianchong.name) and
-    (data.card.trueName == "slash" and player:getMark("qianchong_slash") == 0
-    or data.card.type == Card.TypeTrick and player:getMark("qianchong_trick") == 0 and not player.next:isNude())
+    (data.card.trueName == "slash" and player:getMark("qianchong_slashbuff-round") == 1
+    or data.card.type == Card.TypeTrick and player:getMark("qianchong_trickbuff-round") == 1 and not player.next:isNude())
   end,
   on_cost = function (self, event, target, player, data)
     return player.room:askToSkillInvoke(player,{
@@ -45,8 +45,27 @@ qianchong:addEffect(fk.CardUsing, {
   end,
 })
 
+qianchong:addEffect(fk.RoundStart,{
+  can_refresh = function (self, event, target, player, data)
+    return player:hasSkill(qianchong.name,true) 
+    and (player:getMark("qianchong_slash") == 0 
+    or player:getMark("qianchong_trick") == 0)
+  end,
+  on_refresh = function (self, event, target, player, data)
+    local room = player.room
+    if player:getMark("qianchong_slash") == 0 then
+      room:setPlayerMark(player, "qianchong_slashbuff-round", 1)
+    end
+    if player:getMark("qianchong_trick") == 0 then
+      room:setPlayerMark(player, "qianchong_trickbuff-round", 1)
+    end
+    room:setPlayerMark(player, "qianchong_slash", 0)
+    room:setPlayerMark(player, "qianchong_trick", 0)
+  end,
+})
+
 Fk:loadTranslationTable {["pang__qianchong"] = "谦冲",
-[":pang__qianchong"] = "若你未使用过：【杀】，对手使用【杀】时，你可以弃置其一张牌；锦囊牌，对手使用锦囊牌时，你可以摸一张牌。",
+[":pang__qianchong"] = "若你上轮未使用过：【杀】，对手使用【杀】时你可以弃置其一张牌；锦囊牌，对手使用锦囊牌时你可以摸一张牌。",
 
 
 ["#pang__qianchong_slash"] = "谦冲：你可以弃置对手一张牌",
