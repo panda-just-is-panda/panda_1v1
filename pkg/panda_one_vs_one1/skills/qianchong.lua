@@ -63,14 +63,14 @@ qianchong:addEffect(fk.RoundStart,{
 })
 
 Fk:loadTranslationTable {["pang__qianchong"] = "谦冲",
-[":pang__qianchong"] = "若你上轮未使用过：【杀】，对手使用【杀】时你可以弃置其一张牌；锦囊牌，对手使用锦囊牌时你可以摸一张牌。",
+[":pang__qianchong"] = "若你上轮未使用过：【杀】，对手使用【杀】时，你可弃置其一张牌；锦囊牌，对手使用锦囊牌时，你可摸一张牌。",
 
 
 ["#pang__qianchong_slash"] = "谦冲：你可以弃置对手一张牌",
 ["#pang__qianchong_trick"] = "谦冲：你可以摸一张牌",
 ["#pang__qianchong_select"] = "谦冲：弃置对手一张牌",
-["@qianchong_slashbuff-round"] = "谦冲：杀",
-["@qianchong_trickbuff-round"] = "谦冲：锦囊",
+["@@qianchong_slashbuff-round"] = "谦冲：杀",
+["@@qianchong_trickbuff-round"] = "谦冲：锦囊",
 
 
 ["$pang__qianchong1"] = "谦谨行事，方能多吉少恙。",
