@@ -1,27 +1,46 @@
 local qianchong = fk.CreateSkill {
   name = "pang__qianchong",
-  tags = {Skill.Switch},
 }
 
 qianchong:addEffect(fk.CardUsing, {
     mute = true,
   can_trigger = function(self, event, target, player, data)
-    return data.card and player:hasSkill(qianchong.name) and data.card.color == Card.Black and
-    (data.card.trueName == "slash" and player:getSwitchSkillState(qianchong.name, true) ~= fk.SwitchYang
-    or data.card.type == Card.TypeTrick and player:getSwitchSkillState(qianchong.name, true) == fk.SwitchYang)
+    if target == player and data.card then
+      if data.card.trueName == "slash" then
+        player.room:setPlayerMark(player, "qianchong_slash", 1)
+      elseif data.card.type == Card.TypeTrick then
+        player.room:setPlayerMark(player, "qianchong_trick", 1)
+      end
+    end
+    return target == player.next and data.card and player:hasSkill(qianchong.name) and
+    (data.card.trueName == "slash" and player:getMark("qianchong_slash") == 0
+    or data.card.type == Card.TypeTrick and player:getMark("qianchong_trick") == 0 and player.next:isNude())
   end,
   on_cost = function (self, event, target, player, data)
     return player.room:askToSkillInvoke(player,{
-    prompt = "#pang__qianchong",
+    prompt = data.card.trueName == "slash" and "#pang__qianchong_slash" or "#pang__qianchong_trick",
     skill_name = qianchong.name,
     })
   end,
   on_use = function(self, event, target, player, data)
     local room = player.room
-    if player:getSwitchSkillState(qianchong.name, true) ~= fk.SwitchYang then
-        player:broadcastSkillInvoke(qianchong.name, 2)
+    if data.card.type == Card.TypeTrick then
+      player:drawCards(1, qianchong.name)
+      player:broadcastSkillInvoke(qianchong.name, 2)
     else
-        player:broadcastSkillInvoke(qianchong.name, 1)
+      player:broadcastSkillInvoke(qianchong.name, 1)
+      local discarding = room:askToChooseCards(player, {
+          target = player.next,
+          min = 1,
+          max = 1,
+          flag = "he",
+          skill_name = qianchong.name,
+          prompt = "#pang__qianchong_select",
+        })
+      if #discarding > 0 then
+          local cards = discarding
+          room:throwCard(cards, qianchong.name, player.next, player) 
+      end
     end
     data:removeAllTargets()
     data.toCard = nil
@@ -29,14 +48,12 @@ qianchong:addEffect(fk.CardUsing, {
 })
 
 Fk:loadTranslationTable {["pang__qianchong"] = "谦冲",
-[":pang__qianchong"] = "转换技，当一名角色使用①黑色【杀】②黑色锦囊牌时，你可以令此牌无效。",
+[":pang__qianchong"] = "若你未使用过：【杀】，对手使用【杀】时，你可以弃置其一张牌；锦囊牌，对手使用锦囊牌时，你可以摸一张牌。",
 
-[":pang__qianchong_yang"] = "转换技，当一名角色使用<font color=\"#E0DB2F\">①黑色【杀】</font>" ..
-"②黑色锦囊牌时，你可以取消之。",
-[":pang__qianchong_yin"] = "转换技，当一名角色使用①黑色【杀】"..
-"<font color=\"#E0DB2F\">②黑色锦囊牌</font>时，你可以取消之。",
 
-["#pang__qianchong"] = "谦冲：你可以令此牌无效",
+["#pang__qianchong_slash"] = "谦冲：你可以弃置对手一张牌",
+["#pang__qianchong_trick"] = "谦冲：你可以摸一张牌",
+["#pang__qianchong_select"] = "谦冲：弃置对手一张牌",
 
 
 ["$pang__qianchong1"] = "谦谨行事，方能多吉少恙。",
