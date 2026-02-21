@@ -42,8 +42,6 @@ qianchong:addEffect(fk.CardUsing, {
           room:throwCard(cards, qianchong.name, player.next, player) 
       end
     end
-    data:removeAllTargets()
-    data.toCard = nil
   end,
 })
 
