@@ -40,7 +40,10 @@ qimou:addEffect("active", {
     end)
     if #names > 0 then
         room:askToUseVirtualCard(player, {
-            name = names, skill_name = qimou.name, cancelable = false, skip = false,
+            name = names, skill_name = qimou.name, cancelable = false, skip = false,extra_data = {
+              bypass_times = false,
+              extraUse = false,
+            }
         })
     end
     if player:getMark("qimou_damage") > 0 then
