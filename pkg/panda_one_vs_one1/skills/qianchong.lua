@@ -14,7 +14,7 @@ qianchong:addEffect(fk.CardUsing, {
     end
     return target == player.next and data.card and player:hasSkill(qianchong.name) and
     (data.card.trueName == "slash" and player:getMark("qianchong_slash") == 0
-    or data.card.type == Card.TypeTrick and player:getMark("qianchong_trick") == 0 and player.next:isNude())
+    or data.card.type == Card.TypeTrick and player:getMark("qianchong_trick") == 0 and not player.next:isNude())
   end,
   on_cost = function (self, event, target, player, data)
     return player.room:askToSkillInvoke(player,{

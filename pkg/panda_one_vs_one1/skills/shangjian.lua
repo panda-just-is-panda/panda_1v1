@@ -6,8 +6,8 @@ Fk:loadTranslationTable{
   ["pang__shangjian"] = "尚俭",
   [":pang__shangjian"] = "每回合结束时，你可以获得本回合因弃置进入弃牌堆的一张牌，然后对手也可以如此做。",
 
-  ["#pang__shangjian"] = "尚俭：你可以获得本轮因弃置进入弃牌堆的一张牌",
-  ["#pang__shangjian_get"] = "尚俭：获得本轮因弃置进入弃牌堆的一张牌",
+  ["#pang__shangjian"] = "尚俭：你可以获得本回合因弃置进入弃牌堆的一张牌",
+  ["#pang__shangjian_get"] = "尚俭：获得本回合因弃置进入弃牌堆的一张牌",
 
 
 
