@@ -47,7 +47,7 @@ qianchong:addEffect(fk.CardUsing, {
 
 qianchong:addEffect(fk.RoundStart,{
   can_refresh = function (self, event, target, player, data)
-    return player:hasSkill(qianchong.name,true) 
+    return player:hasSkill(qianchong.name,true) and player.room:getBanner("RoundCount") > 1
   end,
   on_refresh = function (self, event, target, player, data)
     local room = player.room
