@@ -31,7 +31,8 @@ jianshi:addEffect(fk.EventPhaseStart, {
         skill_name = jianshi.name,
         prompt = "#jianshi_card1",
         cancelable = true,
-        num = 1,
+        min_num = 1,
+        max_num = 1,
         include_equip = true,
       })
     elseif X == 2 then
@@ -39,7 +40,8 @@ jianshi:addEffect(fk.EventPhaseStart, {
         skill_name = jianshi.name,
         prompt = "#jianshi_card2",
         cancelable = true,
-        num = 2,
+        min_num = 2,
+        max_num = 2,
         include_equip = true,
       })
     end
