@@ -4,14 +4,11 @@ local jianshi = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__jianshi"] = "舰势",
-  [":pang__jianshi"] = "准备阶段，你可以依次重铸至多两张牌，然后你可以依次使用至多X张【杀】（X为你装备区内的牌数）。",
+  [":pang__jianshi"] = "准备阶段，你可以弃置两张牌并视为使用一张【杀】；你装备区内每有一张牌，需要弃置的牌数-1。",
 
-  ["#jianshi_recast1"] = "舰势：你可以依次重铸至多两张牌（第1张）",
-  ["#jianshi_recast2"] = "舰势：你可以依次重铸至多两张牌（第2张）",
-  ["@@jianshi_slash-phase"] = "舰势",
-  ["#jianshi_use1"] = "舰势：你可以使用至多两张【杀】（第1张）",
-  ["#jianshi_use1.2"] = "舰势：你可以使用至多一张【杀】",
-  ["#jianshi_use2"] = "舰势：你可以使用至多两张【杀】（第2张）",
+  ["#jianshi_card0"] = "舰势：你可以视为使用一张【杀】",
+  ["#jianshi_card1"] = "舰势：你可以弃置一张牌，视为使用一张【杀】",
+  ["#jianshi_card2"] = "舰势：你可以弃置两张牌，视为使用一张【杀】",
 
 
   ["$pang__jianshi1"] =  "修橹筑楼舫，伺时补金瓯。",
@@ -27,64 +24,33 @@ jianshi:addEffect(fk.EventPhaseStart, {
       player.phase == Player.Start
   end,
   on_cost = function (self, event, target, player, data)
-    local id = player.room:askToCards(player, {
-          skill_name = jianshi.name,
-          prompt = "#jianshi_recast1",
-          cancelable = true,
-          min_num = 1,
-          max_num = 1,
-          include_equip = true,
+    local X = 2 - #player:getCardIds("e")
+    local cards
+    if X > 0 then
+      cards = player.room:askToDiscard(player, {
+        skill_name = jianshi.name,
+        prompt = X == 2 and "#jianshi_card2" or "#jianshi_card1",
+        cancelable = true,
+        num = X == 2 and 2 or 1,
+        include_equip = true,
         })
-    if #id > 0 then
-        event:setCostData(self, {cards = {id}})
+    end
+    if X > 0 and #cards == X then
+      return true
+    elseif X == 0 then
+      if player.room:askToSkillInvoke(player, {
+        skill_name = jianshi.name,
+        prompt = "#jianshi_card0",
+      }) then
         return true
+      end
     end
   end,
   on_use = function(self, event, target, player, data)
     local room = player.room
-    local card1 = event:getCostData(self).cards[1]
-    room:recastCard(card1, player, jianshi.name,nil)
-    player:broadcastSkillInvoke(jianshi.name, 1)
-    local card2 = player.room:askToCards(player, {
-          skill_name = jianshi.name,
-          prompt = "#jianshi_recast2",
-          cancelable = true,
-          min_num = 1,
-          max_num = 1,
-          include_equip = true,
+    room:askToUseVirtualCard(player, {
+      name = "slash", skill_name = jianshi.name, cancelable = false, skip = false
     })
-    if #card2 > 0 then
-        room:recastCard(card2, player, jianshi.name)
-    end
-    if #player:getCardIds("e") > 0 then
-        player:broadcastSkillInvoke(jianshi.name, 2)
-        local use = room:askToUseCard(player, {
-            skill_name = jianshi.name,
-            pattern = "slash",
-            prompt = #player:getCardIds("e") > 1 and "#jianshi_use1" or "#jianshi_use1.2",
-            extra_data = {
-                bypass_times = true,
-            }
-        })
-        if use then
-          use.extraUse = true
-          room:useCard(use)
-          if #player:getCardIds("e") > 1 then
-            local use2 = room:askToUseCard(player, {
-                skill_name = jianshi.name,
-                pattern = "slash",
-                prompt = "#jianshi_use2",
-                extra_data = {
-                    bypass_times = true,
-                }
-              })
-            if use2 then
-              use2.extraUse = true
-              room:useCard(use2)
-            end
-          end
-        end
-    end
   end,
 })
 
