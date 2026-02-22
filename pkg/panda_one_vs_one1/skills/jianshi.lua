@@ -26,14 +26,22 @@ jianshi:addEffect(fk.EventPhaseStart, {
   on_cost = function (self, event, target, player, data)
     local X = 2 - #player:getCardIds("e")
     local cards
-    if X > 0 then
+    if X == 1 then
       cards = player.room:askToDiscard(player, {
         skill_name = jianshi.name,
-        prompt = X == 2 and "#jianshi_card2" or "#jianshi_card1",
+        prompt = "#jianshi_card1",
         cancelable = true,
-        num = X == 2 and 2 or 1,
+        num = 1,
         include_equip = true,
-        })
+      })
+    elseif X == 2 then
+      cards = player.room:askToDiscard(player, {
+        skill_name = jianshi.name,
+        prompt = "#jianshi_card2",
+        cancelable = true,
+        num = 2,
+        include_equip = true,
+      })
     end
     if X > 0 and #cards == X then
       return true
