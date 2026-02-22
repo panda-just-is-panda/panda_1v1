@@ -11,14 +11,13 @@ Fk:loadTranslationTable{
   ["#jianshi_card2"] = "舰势：你可以弃置两张牌，视为使用一张【杀】",
 
 
-  ["$pang__jianshi1"] =  "修橹筑楼舫，伺时补金瓯。",
-  ["$pang__jianshi2"] = "连舫披金甲，王气自可收。",
+  ["$pang__jianshi1"] = "布横江之铁索，徒自缚耳。",
+  ["$pang__jianshi2"] = "艨艟击浪，可下千里江陵。",
 }
 
 local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
 
 jianshi:addEffect(fk.EventPhaseStart, {
-  mute = true,
   can_trigger = function(self, event, target, player, data)
     return target == player and player:hasSkill(jianshi.name) and
       player.phase == Player.Start
@@ -58,9 +57,8 @@ jianshi:addEffect(fk.EventPhaseStart, {
   end,
   on_use = function(self, event, target, player, data)
     local room = player.room
-    room:askToUseVirtualCard(player, {
-      name = "slash", skill_name = jianshi.name, cancelable = false, skip = false
-    })
+    local slash = Fk:cloneCard("slash")
+    room:useVirtualCard("slash", slash, player, player.next, jianshi.name, true)
   end,
 })
 
