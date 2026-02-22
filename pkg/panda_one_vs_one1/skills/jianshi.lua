@@ -4,7 +4,7 @@ local jianshi = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__jianshi"] = "舰势",
-  [":pang__jianshi"] = "准备阶段，你可以弃置两张牌并视为使用一张【杀】；你装备区内每有一张牌，需要弃置的牌数-1。",
+  [":pang__jianshi"] = "准备阶段，你可以弃置两张牌并视为使用一张【杀】；你的装备区内每有一张牌，需要弃置的牌数-1。",
 
   ["#jianshi_card0"] = "舰势：你可以视为使用一张【杀】",
   ["#jianshi_card1"] = "舰势：你可以弃置一张牌，视为使用一张【杀】",
