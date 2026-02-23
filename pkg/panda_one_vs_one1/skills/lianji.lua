@@ -64,7 +64,7 @@ lianji:addEffect(fk.TurnEnd, { --
 
 lianji:addAcquireEffect(function (self, player)
   local room = player.room
-  if room.current ~= player and player:usedSkillTimes(lianji.name, Player.HistoryGame) > 0 then
+  if player:usedSkillTimes(lianji.name, Player.HistoryGame) > 0 then
     room:handleAddLoseSkills(player, "-pang__lianji&", nil, false, true)
   end
 end)
