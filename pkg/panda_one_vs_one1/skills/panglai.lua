@@ -11,7 +11,7 @@ Fk:loadTranslationTable{
 
 local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
 
-panglai:addEffect(U.Debut, {
+panglai:addEffect(U.AfterDebut, {
   can_trigger = function (self, event, target, player, data)
     return target == player and player:hasSkill(panglai.name)
   end,

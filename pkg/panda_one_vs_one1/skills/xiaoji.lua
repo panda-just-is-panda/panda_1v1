@@ -14,7 +14,7 @@ Fk:loadTranslationTable{
 
 local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
 
-xiaoji:addEffect(U.Debut, {
+xiaoji:addEffect(U.AfterDebut, {
   can_trigger = function (self, event, target, player, data)
     return target == player and player:hasSkill(xiaoji.name)
   end,

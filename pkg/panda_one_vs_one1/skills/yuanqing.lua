@@ -60,7 +60,7 @@ yuanqing:addEffect(fk.CardUsing, {
   end,
 })
 
-yuanqing:addEffect(U.Debut, {
+yuanqing:addEffect(U.AfterDebut, {
   can_refresh = function (self, event, target, player, data)
     return target == player and player:hasSkill(yuanqing.name)
   end,

@@ -13,7 +13,7 @@ Fk:loadTranslationTable{
 
 local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
 
-skel:addEffect(U.Debut, {
+skel:addEffect(U.AfterDebut, {
   can_trigger = function (self, event, target, player, data)
     return target == player and player:hasSkill(skel.name) and #Fk:cloneCard("savage_assault"):getDefaultTarget(player) > 0
   end,

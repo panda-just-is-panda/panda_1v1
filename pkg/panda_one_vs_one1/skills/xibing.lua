@@ -50,7 +50,7 @@ xibing:addEffect(fk.CardUsing, {
   end,
 })
 
-xibing:addEffect(U.Debut, {
+xibing:addEffect(U.AfterDebut, {
   can_trigger = function (self, event, target, player, data)
     return target == player and player:hasSkill(xibing.name)
   end,
