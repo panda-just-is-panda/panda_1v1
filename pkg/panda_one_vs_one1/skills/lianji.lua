@@ -5,7 +5,7 @@ local lianji = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__lianji&"] = "连计",
-  [":pang__lianji&"] = "备场技，出牌阶段限两次，你可以变更武将；回合结束时，若你发动过此技能，你失去此技能并变更至你回合开始时的武将。",
+  [":pang__lianji&"] = "备场技，出牌阶段限两次，你可以弃置一张牌并变更武将；回合结束时，若你发动过此技能，你失去此技能并变更至你回合开始时的武将。",
   ["#pang__lianji"] = "连计：你可以变更武将",
 
   ["$pang__lianji&1"] = "计行周密，定无疏失。",
@@ -18,14 +18,16 @@ lianji:addEffect("active", {
   anim_type = "control",
   prompt = "#pang__lianji",
   max_phase_use_time = 2,
-  card_num = 0,
+  card_num = 1,
   target_num = 0,
   can_use = function(self, player)
     return player:usedSkillTimes(lianji.name, Player.HistoryPhase) < 2 
     and Fk:currentRoom():getBanner(U.getGeneralsBannerName(player))
     and #U.getGenerals(player) > 0
   end,
-  card_filter = Util.FalseFunc,
+  card_filter = function(self, player, to_select, selected)
+    return #selected < 1 and not player:prohibitDiscard(to_select)
+  end,
   target_filter = Util.FalseFunc,
   on_use = function(self, room, effect)
     local player = effect.from
