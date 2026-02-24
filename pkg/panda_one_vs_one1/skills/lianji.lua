@@ -31,6 +31,7 @@ lianji:addEffect("active", {
   target_filter = Util.FalseFunc,
   on_use = function(self, room, effect)
     local player = effect.from
+    room:throwCard(effect.cards, lianji.name, player, player)
     local listall = U.getGenerals(player)
     U.AskToChangeGeneral(player,lianji.name,listall)
   end,
