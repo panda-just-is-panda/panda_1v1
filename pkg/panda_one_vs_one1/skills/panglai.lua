@@ -20,6 +20,8 @@ panglai:addEffect(U.Debut, {
     player:chat("爱胖，太好")
     local pang__general = {"pang__yangyi", "pang__weiyan", "pang__sunshangxiang", "pang__zhoushan", "pang__jiakui",
     "pang__zangba", "pang__wangyun", "pang__zhurong", "pang__wangyuanji", "pang__wangjun"}
+    local general_name = {"yangyi", "weiyan", "sunshangxiang", "zhoushan", "jiakui",
+    "zangba", "wangyun", "zhurong", "wangyuanji", "wangjun"}
     for _, general in ipairs(pang__general) do
       local list1 = U.getGenerals(player)
       local list2 = U.getGenerals(player.next)
@@ -44,7 +46,7 @@ panglai:addEffect(U.Debut, {
     local listall = U.getGenerals(player)
     local not_available = table.filter(listall,function (element, index, array)
       local n = 0
-      for _, general in ipairs(pang__general) do
+      for _, general in ipairs(general_name) do
         if Fk.generals[element].name ~= general then
           n = 1
         end
