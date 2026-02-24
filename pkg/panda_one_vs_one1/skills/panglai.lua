@@ -38,7 +38,7 @@ panglai:addEffect(U.Debut, {
         return Fk.generals[element].name == general
       end)
       if #matching1 == 0 and #matching2 == 0 and #matching3 == 0 and #matching4 == 0 then
-        U.addGeneral(player,general)
+        U.addGeneral(player,general, {state = "alive"})
       end
     end
     local listall = U.getGenerals(player)
