@@ -4,7 +4,7 @@ local panglai = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__panglai"] = "胖来",
-  [":pang__panglai"] = "当胖登场时，将所有胖胖扩的武将加入你的备选武将，然后你变更成为一个胖胖扩武将。",
+  [":pang__panglai"] = "当胖登场时，将所有胖胖扩的武将加入你的备选武将，然后你变更武将。",
   ["#pang__panglai"] = "胖来：变更为一个胖胖武将",
 
 }
@@ -20,8 +20,6 @@ panglai:addEffect(U.Debut, {
     player:chat("爱胖，太好")
     local pang__general = {"pang__yangyi", "pang__weiyan", "pang__sunshangxiang", "pang__zhoushan", "pang__jiakui",
     "pang__zangba", "pang__wangyun", "pang__zhurong", "pang__wangyuanji", "pang__wangjun"}
-    local general_name = {"yangyi", "weiyan", "sunshangxiang", "zhoushan", "jiakui",
-    "zangba", "wangyun", "zhurong", "wangyuanji", "wangjun"}
     for _, general in ipairs(pang__general) do
       local list1 = U.getGenerals(player)
       local list2 = U.getGenerals(player.next)
@@ -44,20 +42,8 @@ panglai:addEffect(U.Debut, {
       end
     end
     local listall = U.getGenerals(player)
-    local not_available = table.filter(listall,function (element, index, array)
-      local n = 0
-      for _, general in ipairs(general_name) do
-        if Fk.generals[element].name ~= general then
-          n = 1
-        end
-      end
-      if n == 0 then
-        return true
-      end
-    end)
-    if #listall > #not_available then
-      U.AskToChangeGeneral(player,panglai.name,listall,not_available)
-    end
+    local not_available = {}
+    U.AskToChangeGeneral(player,panglai.name,listall,not_available)
   end,
 })
 
