@@ -17,7 +17,22 @@ panglai:addEffect(U.Debut, {
   end,
   on_cost = Util.TrueFunc,
   on_use = function (self, event, target, player, data)
+    local room = player.room
     player:chat("爱胖，太好")
+    room:animDelay(2)
+    if player:usedSkillTimes(panglai.name, Player.HistoryGame) == 1 then
+      player:chat("胖本体好像是白板")
+      room:animDelay(2)
+      player:chat("还是玩点别的吧～")
+    elseif player:usedSkillTimes(panglai.name, Player.HistoryGame) == 2 then
+      player:chat("何故还在选白板胖")
+      room:animDelay(2)
+      player:chat("速速换将")
+    elseif player:usedSkillTimes(panglai.name, Player.HistoryGame) == 3 then
+      player:chat("居然对胖如此之爱")
+      room:animDelay(2)
+      player:chat("太泪目")
+    end
     local pang__general = {"pang__yangyi", "pang__weiyan", "pang__sunshangxiang", "pang__zhoushan", "pang__jiakui",
     "pang__zangba", "pang__wangyun", "pang__zhurong", "pang__wangyuanji", "pang__wangjun"}
     for _, general in ipairs(pang__general) do
