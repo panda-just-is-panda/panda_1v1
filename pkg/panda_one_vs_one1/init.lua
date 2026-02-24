@@ -129,6 +129,16 @@ Fk:loadTranslationTable{
   ["~pang__wangjun"] = "未蹈曹刘之辙，险遭士载之厄。",
 }
 
+local panda = General:new(extension, "pang__pangpanda", "god", 4, 4, General.Male)
+panda:addSkill("pang__panglai")
+Fk:loadTranslationTable{
+  ["pang__pangpanda"] = "胖胖",
+  ["#pang__pangpanda"] = "太胖太胖",
+  ["designer:pang__pangpanda"] = "胖即是胖",
+  ["illustrator:pang__pangpanda"] = "和花",
+
+}
+
 
 
 return extension
