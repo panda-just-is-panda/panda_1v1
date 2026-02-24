@@ -40,6 +40,7 @@ panglai:addEffect(U.Debut, {
       local list2 = U.getGenerals(player.next)
       local list3 = U.getGenerals(player,"dead")
       local list4 = U.getGenerals(player.next,"dead")
+      local list5 = {player.general, player.next.general}
       local matching1 = table.filter(list1,function (element, index, array)
         return Fk.generals[element].name == general
       end)
@@ -52,7 +53,10 @@ panglai:addEffect(U.Debut, {
       local matching4 = table.filter(list4,function (element, index, array)
         return Fk.generals[element].name == general
       end)
-      if #matching1 == 0 and #matching2 == 0 and #matching3 == 0 and #matching4 == 0 then
+      local matching5 = table.filter(list5,function (element, index, array)
+        return Fk.generals[element].name == general
+      end)
+      if #matching1 == 0 and #matching2 == 0 and #matching3 == 0 and #matching4 == 0 and #matching5 == 0 then
         U.addGeneral(player,general, {state = "alive"})
       end
     end
