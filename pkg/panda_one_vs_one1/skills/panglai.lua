@@ -34,7 +34,7 @@ panglai:addEffect(U.AfterDebut, {
       player:chat("太泪目")
     end
     local pang__general = {"pang__yangyi", "pang__weiyan", "pang__sunshangxiang", "pang__zhoushan", "pang__jiakui",
-    "pang__zangba", "pang__wangyun", "pang__zhurong", "pang__wangyuanji", "pang__wangjun"}
+    "pang__zangba", "pang__wangyun", "pang__zhurong", "pang__wangjun"}
     for _, general in ipairs(pang__general) do
       local list1 = U.getGenerals(player)
       local list2 = U.getGenerals(player.next)
