@@ -15,16 +15,12 @@ Fk:loadTranslationTable{
 }
 
 yicheng:addEffect("active", {
-  anim_type = "offensive",
-  prompt = function(self, player)
-    return "#pang__yicheng:"..#player:getCardIds("h")
-  end,
+  anim_type = "control",
   max_phase_use_time = 1,
   card_num = 0,
   target_num = 0,
   can_use = function(self, player)
-    return not player:isKongcheng() and not player.next:isKongcheng()
-    and player:usedSkillTimes(yicheng.name, Player.HistoryPhase) == 0
+    return player:usedSkillTimes(yicheng.name, Player.HistoryPhase) == 0
   end,
   card_filter = Util.FalseFunc,
   target_filter = Util.FalseFunc,
