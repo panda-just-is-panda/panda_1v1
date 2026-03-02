@@ -20,7 +20,7 @@ chouzi:addEffect(fk.EventPhaseChanging, {
   audio_index = 1,
   can_trigger = function(self, event, target, player, data)
     return target == player and player:hasSkill(chouzi.name) and data.phase == Player.Play and not data.skipped
-    and player:getMark("@chouzi_used") < 3
+    and player:getMark("@chouzi_used") < 3 and player:usedSkillTimes(chouzi.name, Player.HistoryGame) < 3
   end,
   on_cost = function (self, event, target, player, data)
     return player.room:askToSkillInvoke(player,{

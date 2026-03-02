@@ -21,7 +21,6 @@ Fk:loadTranslationTable{
 
   ["~pang__mizhu"] = "劣弟背主，我之罪也。",
 }
-mizhu.hidden = true
 
 local xusheng = General:new(extension, "pang__xusheng", "wu", 4, 4, General.Male)
 xusheng:addSkill("pang__yicheng")
