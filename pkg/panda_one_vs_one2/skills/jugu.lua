@@ -4,7 +4,7 @@ local jugu = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__jugu"] = "巨贾",
-  [":pang__jugu"] = "当你登场后，你摸X张牌（X为“资援”剩余发动次数），这些牌不计入手牌上限且可以作为【无中生有】使用。",
+  [":pang__jugu"] = "当你登场后，你摸X张牌（X为“筹资”剩余发动次数），这些牌不计入手牌上限且可以作为【无中生有】使用。",
   ["#pang__jugu"] = "巨贾：你可以将一张因“巨贾”获得的牌作为【无中生有】使用",
   ["@@jugu-inhand"] = "巨贾",
 
