@@ -18,11 +18,11 @@ jugu:addEffect(U.AfterDebut,{
     mute = true,
   can_trigger = function (self, event, target, player, data)
     return player:hasSkill(jugu.name) and target == player
-      and not data.begingame and player:usedSkillTimes("pang__chouzi", Player.HistoryGame) < 3
+      and not data.begingame and player:usedSkillTimes("pang__chouzi&", Player.HistoryGame) < 3
   end,
   on_cost = Util.TrueFunc,
   on_use = function (self, event, target, player, data)
-    local number = 3 - player:usedSkillTimes("pang__chouzi", Player.HistoryGame)
+    local number = 3 - player:usedSkillTimes("pang__chouzi&", Player.HistoryGame)
     player:drawCards(number, jugu.name, nil, "@@jugu-inhand")
     player:broadcastSkillInvoke(jugu.name, 1)
   end,
