@@ -7,6 +7,7 @@ Fk:loadTranslationTable{
   ["pang__chouzi&"] = "筹资",
   [":pang__chouzi&"] = "备场技，每局限三次，你可以跳过出牌阶段，然后亮出牌堆顶的三张牌并获得其中一张。",
   ["#chouzi_get"] = "筹资：选择其中一张牌获得",
+  ["@chouzi_used"] = "筹资",
   ["#pang__chouzi"] = "筹资：你可以跳过出牌阶段，亮出牌堆顶三张牌并获得其中一张",
 
   ["$pang__chouzi&1"] = "区区薄礼，万望使君笑纳。",
@@ -19,7 +20,7 @@ chouzi:addEffect(fk.EventPhaseChanging, {
   audio_index = 1,
   can_trigger = function(self, event, target, player, data)
     return target == player and player:hasSkill(chouzi.name) and data.phase == Player.Play and not data.skipped
-    and player:getMark("chouzi_used") < 3
+    and player:getMark("@chouzi_used") < 3
   end,
   on_cost = function (self, event, target, player, data)
     return player.room:askToSkillInvoke(player,{
@@ -40,7 +41,7 @@ chouzi:addEffect(fk.EventPhaseChanging, {
       })
     room:obtainCard(player, card, false, fk.ReasonJustMove, player, chouzi.name)
     room:cleanProcessingArea(cards)
-    room:addPlayerMark(player, "chouzi_used", 1)
+    room:addPlayerMark(player, "@chouzi_used", 1)
   end,
 })
 
