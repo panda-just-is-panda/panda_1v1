@@ -11,7 +11,7 @@ Fk:loadTranslationTable{
 }
 
 local mizhu = General:new(extension, "pang__mizhu", "shu", 3, 3, General.Male)
-mizhu:addSkill("pang__chouzi")
+mizhu:addSkill("pang__chouzi&")
 mizhu:addSkill("pang__jugu")
 Fk:loadTranslationTable{
   ["pang__mizhu"] = "糜竺",
