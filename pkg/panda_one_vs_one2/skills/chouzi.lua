@@ -45,6 +45,20 @@ chouzi:addEffect(fk.EventPhaseChanging, {
   end,
 })
 
+local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
+
+chouzi:addEffect(U.AfterDebut,{
+    mute = true,
+  can_refresh = function (self, event, target, player, data)
+    return player:hasSkill(chouzi.name) and target == player
+      and player:usedSkillTimes(chouzi.name, Player.HistoryGame) > 0
+  end,
+  on_refresh = function (self, event, target, player, data)
+    local room = player.room
+    room:setPlayerMark(player, "@chouzi_used", player:usedSkillTimes(chouzi.name, Player.HistoryGame))
+  end,
+})
+
 chouzi:addAcquireEffect(function (self, player)
   local room = player.room
   if player:usedSkillTimes(chouzi.name, Player.HistoryGame) > 0 then
