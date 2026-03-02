@@ -5,7 +5,7 @@ local chouzi = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__chouzi&"] = "筹资",
-  [":pang__chouzi&"] = "备场技，每局限三次，你可以跳过出牌阶段，然后亮出牌堆顶的三张牌并获得其中一张。",
+  [":pang__chouzi&"] = "备场技，每局限三次，你可以跳过出牌阶段，然后亮出牌堆顶的五张牌并获得其中一张。",
   ["#chouzi_get"] = "筹资：选择其中一张牌获得",
   ["@chouzi_used"] = "筹资",
   ["#pang__chouzi"] = "筹资：你可以跳过出牌阶段，亮出牌堆顶三张牌并获得其中一张",
@@ -31,7 +31,7 @@ chouzi:addEffect(fk.EventPhaseChanging, {
   on_use = function (self, event, target, player, data)
     local room = player.room
     data.skipped = true
-    local cards = room:getNCards(3)
+    local cards = room:getNCards(5)
     room:turnOverCardsFromDrawPile(player, cards, chouzi.name, false)
     local card = room:askToChooseCard(player, {
         target = player,
