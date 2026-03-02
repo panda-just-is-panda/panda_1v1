@@ -45,4 +45,16 @@ chouzi:addEffect(fk.EventPhaseChanging, {
   end,
 })
 
+chouzi:addAcquireEffect(function (self, player)
+  local room = player.room
+  if player:usedSkillTimes(chouzi.name, Player.HistoryGame) > 0 then
+    room:setPlayerMark(player, "@chouzi_used", player:usedSkillTimes(chouzi.name, Player.HistoryGame))
+  end
+end)
+
+chouzi:addLoseEffect(function (self, player, is_death)
+  local room = player.room
+  room:setPlayerMark(player,"@chouzi_used",0)
+end)
+
 return chouzi
