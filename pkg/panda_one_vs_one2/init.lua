@@ -33,4 +33,16 @@ Fk:loadTranslationTable{
   ["~pang__xusheng"] = "可怜一身胆略，皆随一抔黄土。",
 }
 
+local zhangmancheng = General:new(extension, "pang__zhangmancheng", "qun", 4, 4, General.Male)
+zhangmancheng:addSkill("pang__zhongji")
+zhangmancheng:addSkill("pang__lvecheng")
+Fk:loadTranslationTable{
+  ["pang__zhangmancheng"] = "张曼成",
+  ["#pang__zhangmancheng"] = "蚁萃宛洛",
+  ["designer:pang__zhangmancheng"] = "胖即是胖",
+  ["illustrator:pang__zhangmancheng"] = "官方",
+
+  ["~pang__zhangmancheng"] = "逡巡不前，坐以待毙。",
+}
+
 return extension
