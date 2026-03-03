@@ -9,7 +9,7 @@ Fk:loadTranslationTable{
   ["#pang__zhongji"] = "螽集：你可以改为从弃牌堆中获得两张【杀】和两张【闪】。",
 
   ["$pang__zhongji1"] = "羸汉暴政不息，黄巾永世不绝。",
-  ["$pang__zhongji2"] = "宛洛膏如秋实，怎可不生螟虫？",
+  ["$pang__zhongji2"] = "朱紫视吾为蝼蚁，其可知蝼蚁之怒乎？",
 }
 
 zhongji:addEffect(fk.DrawNCards, {
