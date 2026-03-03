@@ -30,9 +30,9 @@ jilun:addEffect(U.AfterDebut,{
       skill_name = jilun.name,
     })
     if choice == "jilun_maxcard" then
-        room:setPlayerMark(player.next,"jilun_add_maxcard",1)
+        room:setPlayerMark(player,"jilun_add_maxcard",1)
     else
-        room:setPlayerMark(player.next,"jilun_add_slash",1)
+        room:setPlayerMark(player,"jilun_add_slash",1)
     end
   end,
 })

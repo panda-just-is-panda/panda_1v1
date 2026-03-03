@@ -36,7 +36,7 @@ jichou:addEffect(fk.Damaged, {
     local room = player.room
     if player:getMark("@@jichou_damage") == 0 then
         player:drawCards(3, jichou.name)
-        room:setPlayerMark(player.next,"@@jichou_damage",1)
+        room:setPlayerMark(player,"@@jichou_damage",1)
     else
         local card = room:askToDiscard(player, {
           skill_name = jichou.name,
@@ -69,7 +69,7 @@ jichou:addEffect(fk.EventPhaseStart, {
     local room = player.room
     if player:getMark("@@jichou_start") == 0 then
         player:drawCards(3, jichou.name)
-        room:setPlayerMark(player.next,"@@jichou_start",1)
+        room:setPlayerMark(player,"@@jichou_start",1)
     else
         local card = room:askToDiscard(player, {
           skill_name = jichou.name,
