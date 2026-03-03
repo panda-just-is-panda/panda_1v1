@@ -9,6 +9,8 @@ Fk:loadTranslationTable{
   ["#pang__jilun2"] = "机论：你可以改为手牌上限+1",
   ["jilun_maxcard"] = "增加手牌上限",
   ["jilun_slash"] = "增加出杀次数",
+  ["@@jilun_add_maxcard"] = "手牌上限+1",
+  ["@@jilun_add_slash"] = "出杀次数+1",
 
   ["$pang__jilun1"] = "时移不移，违天之祥也。",
   ["$pang__jilun2"] = "民望不因，违人之咎也。",
@@ -30,9 +32,9 @@ jilun:addEffect(U.AfterDebut,{
       skill_name = jilun.name,
     })
     if choice == "jilun_maxcard" then
-        room:setPlayerMark(player,"jilun_add_maxcard",1)
+        room:setPlayerMark(player,"@@jilun_add_maxcard",1)
     else
-        room:setPlayerMark(player,"jilun_add_slash",1)
+        room:setPlayerMark(player,"@@jilun_add_slash",1)
     end
   end,
 })
@@ -41,22 +43,22 @@ jilun:addEffect(fk.Damage, {
   anim_type = "control",
   can_trigger = function(self, event, target, player, data)
     return target == player and player:hasSkill(jilun.name) 
-    and (player:getMark("jilun_add_slash") == 1 or player:getMark("jilun_add_maxcard") == 1)
+    and (player:getMark("@@jilun_add_slash") == 1 or player:getMark("@@jilun_add_maxcard") == 1)
   end,
   on_cost = function (self, event, target, player, data)
     return player.room:askToSkillInvoke(player,{
-        prompt = player:getMark("jilun_add_maxcard") == 1 and "#pang__jilun1" or "#pang__jilun2",
+        prompt = player:getMark("@@jilun_add_maxcard") == 1 and "#pang__jilun1" or "#pang__jilun2",
         skill_name = jilun.name,
     })
   end,
   on_use = function (self, event, target, player, data)
     local room = player.room
-    if player:getMark("jilun_add_maxcard") == 1 then
-        room:setPlayerMark(player,"jilun_add_maxcard",0)
-        room:setPlayerMark(player,"jilun_add_slash",1)
+    if player:getMark("@@jilun_add_maxcard") == 1 then
+        room:setPlayerMark(player,"@@jilun_add_maxcard",0)
+        room:setPlayerMark(player,"@@jilun_add_slash",1)
     else
-        room:setPlayerMark(player,"jilun_add_maxcard",1)
-        room:setPlayerMark(player,"jilun_add_slash",0)
+        room:setPlayerMark(player,"@@jilun_add_maxcard",1)
+        room:setPlayerMark(player,"@@jilun_add_slash",0)
     end
   end,
 })
@@ -64,7 +66,7 @@ jilun:addEffect(fk.Damage, {
 jilun:addEffect("maxcards", {
   correct_func = function(self, player)
     if player:hasSkill(jilun.name)
-    and player:getMark("jilun_add_maxcard") == 1 then
+    and player:getMark("@@jilun_add_maxcard") == 1 then
         return 1
     end
   end,
@@ -72,7 +74,7 @@ jilun:addEffect("maxcards", {
 
 jilun:addEffect("targetmod", {
   residue_func = function(self, player, skill, scope)
-    if skill.trueName == "slash_skill" and player:getMark("jilun_add_slash") == 1 
+    if skill.trueName == "slash_skill" and player:getMark("@@jilun_add_slash") == 1 
     and scope == Player.HistoryPhase then
       return 1
     end
@@ -81,8 +83,8 @@ jilun:addEffect("targetmod", {
 
 jilun:addLoseEffect(function (self, player, is_death)
   local room = player.room
-  room:setPlayerMark(player,"jilun_add_maxcard",0)
-  room:setPlayerMark(player,"jilun_add_slash",0)
+  room:setPlayerMark(player,"@@jilun_add_maxcard",0)
+  room:setPlayerMark(player,"@@jilun_add_slash",0)
 end)
 
 return jilun
