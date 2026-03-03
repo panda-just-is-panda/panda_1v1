@@ -33,6 +33,18 @@ Fk:loadTranslationTable{
   ["~pang__xusheng"] = "可怜一身胆略，皆随一抔黄土。",
 }
 
+local jiangji = General:new(extension, "pang__jiangji", "wei", 3, 3, General.Male)
+jiangji:addSkill("pang__jichou")
+jiangji:addSkill("pang__jilun")
+Fk:loadTranslationTable{
+  ["pang__jiangji"] = "蒋济",
+  ["#pang__jiangji"] = "盛魏昌杰",
+  ["designer:pang__jiangji"] = "胖即是胖",
+  ["illustrator:pang__jiangji"] = "官方",
+
+  ["~pang__jiangji"] = "洛水之誓，言犹在耳……咳咳咳……",
+}
+
 local zhangmancheng = General:new(extension, "pang__zhangmancheng", "qun", 4, 4, General.Male)
 zhangmancheng:addSkill("pang__zhongji")
 zhangmancheng:addSkill("pang__lvecheng")
