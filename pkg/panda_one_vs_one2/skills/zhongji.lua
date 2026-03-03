@@ -26,8 +26,8 @@ zhongji:addEffect(fk.DrawNCards, {
   end,
   on_use = function(self, event, target, player, data)
     data.n = 0
-    local cards1 = player.room:getCardsFromPileByRule("slash", 1, "discardPile")
-    local cards2 = player.room:getCardsFromPileByRule("jink", 1, "discardPile")
+    local cards1 = player.room:getCardsFromPileByRule("slash", 2, "discardPile")
+    local cards2 = player.room:getCardsFromPileByRule("jink", 2, "discardPile")
     if #cards1 > 0 then
         player.room:obtainCard(player, cards1[1], true, fk.ReasonJustMove, player, zhongji.name)
         if #cards1 > 1 then

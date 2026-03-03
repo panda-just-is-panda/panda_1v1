@@ -79,4 +79,20 @@ lvecheng:addLoseEffect(function (self, player, is_death)
   room:setPlayerMark(player.next,"@@lvecheng_draw",0)
 end)
 
+local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
+
+lvecheng:addEffect(U.AfterDebut, {
+  can_refresh = function (self, event, target, player, data)
+    return player:hasSkill(lvecheng.name) and target == player.next
+  end,
+  on_refresh = function (self, event, target, player, data)
+    local room = player.room
+    if player:getMark("@@lvecheng_times") == 1 then
+      room:setPlayerMark(player.next,"@@lvecheng_draw",1)
+    else
+      room:setPlayerMark(player.next,"@@lvecheng_times",1)
+    end
+  end,
+})
+
 return lvecheng
