@@ -44,6 +44,7 @@ Fk:loadTranslationTable{
 
   ["~pang__jiangji"] = "洛水之誓，言犹在耳……咳咳咳……",
 }
+jiangji.hidden = true
 
 local zhangmancheng = General:new(extension, "pang__zhangmancheng", "qun", 4, 4, General.Male)
 zhangmancheng:addSkill("pang__zhongji")
@@ -56,6 +57,6 @@ Fk:loadTranslationTable{
 
   ["~pang__zhangmancheng"] = "逡巡不前，坐以待毙。",
 }
-zhangmancheng.hidden = true
+
 
 return extension
