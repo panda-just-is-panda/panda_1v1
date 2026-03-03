@@ -44,5 +44,6 @@ Fk:loadTranslationTable{
 
   ["~pang__zhangmancheng"] = "逡巡不前，坐以待毙。",
 }
+zhangmancheng.hidden = true
 
 return extension
