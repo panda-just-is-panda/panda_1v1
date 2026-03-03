@@ -6,7 +6,7 @@ extension.game_modes_whitelist = {
 }
 
 Fk:loadTranslationTable{
-  ["panda_one_vs_one1"] = "胖扩",
+  ["panda_one_vs_one1"] = "胖胖扩",
   ["pang"] = "胖",
 }
 
