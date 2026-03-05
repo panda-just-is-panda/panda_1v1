@@ -37,6 +37,7 @@ jichou:addEffect(fk.Damaged, {
     if player:getMark("@@jichou_damage") == 0 then
         player:drawCards(3, jichou.name)
         room:setPlayerMark(player,"@@jichou_damage",1)
+        room:setPlayerMark(player,"pang__jichou_damage",1)
     else
         local card = room:askToDiscard(player, {
           skill_name = jichou.name,
@@ -70,6 +71,7 @@ jichou:addEffect(fk.EventPhaseStart, {
     if player:getMark("@@jichou_start") == 0 then
         player:drawCards(3, jichou.name)
         room:setPlayerMark(player,"@@jichou_start",1)
+        room:setPlayerMark(player,"pang__jichou_start",1)
     else
         local card = room:askToDiscard(player, {
           skill_name = jichou.name,
@@ -88,5 +90,47 @@ jichou:addLoseEffect(function (self, player, is_death)
   room:setPlayerMark(player,"@@jichou_damage",0)
   room:setPlayerMark(player,"@@jichou_start",0)
 end)
+
+jichou:addAcquireEffect(function (self, player)
+  local room = player.room
+  if player:getMark("pang__jichou_start") == 1 then
+    room:setPlayerMark(player,"@@jichou_start",1)
+  end
+  if player:getMark("pang__jichou_damage") == 1 then
+    room:setPlayerMark(player,"@@jichou_damage",1)
+  end
+end)
+
+local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
+
+jichou:addEffect(U.Farewell, {
+  priority = 0,
+  can_refresh = function (self, event, target, player, data)
+    return target == player and player:usedSkillTimes("pang__jichou", Player.HistoryGame) > 0
+  end,
+  on_refresh = function (self, event, target, player, data)
+    data.extra_data = data.extra_data or {}
+    if player:getMark("pang__jichou_start") == 1 then
+      data.extra_data.pang__jichou_start = 1
+    end
+    if player:getMark("pang__jichou_damage") == 1 then
+      data.extra_data.pang__jichou_damage = 1
+    end
+  end,
+})
+
+jichou:addEffect(U.BeforeV11DrawInitial,{
+  can_refresh = function (self, event, target, player, data)
+    return target == player and data.debutinfo and data.debutinfo.extra_data and player:usedSkillTimes("pang__jichou", Player.HistoryGame) > 0
+  end,
+  on_refresh = function (self, event, target, player, data)
+    if data.debutinfo.extra_data.pang__jichou_damage == 1 then
+      player.room:setPlayerMark(player,"pang__jichou_damage",1)
+    end
+    if data.debutinfo.extra_data.pang__jichou_start == 1 then
+      player.room:setPlayerMark(player,"pang__jichou_start",1)
+    end
+  end,
+})
 
 return jichou
