@@ -22,7 +22,6 @@ Fk:loadTranslationTable{
 eyao:addEffect(fk.RoundStart,{
   can_trigger = function (self, event, target, player, data)
     return player:hasSkill(eyao.name) 
-    and not player:isKongcheng()
   end,
   on_cost = function (self, event, target, player, data)
     return player.room:askToSkillInvoke(player,{
