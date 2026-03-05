@@ -9,7 +9,7 @@ Fk:loadTranslationTable{
   ["#eyao_show"] = "扼要：你可以展示任意张手牌",
   ["@@pang__eyao-round"] = "扼要",
   ["@pang__eyao_count-round"] = "扼要",
-  ["#eyao_use"] = "扼要：你可以观看牌堆顶的%dest张牌并使用其中一张或一张本轮展示的手牌",
+  ["#eyao_use"] = "扼要：你可以观看牌堆顶的%arg张牌并使用其中一张或一张本轮展示的手牌",
   ["#eyao_touse"] = "扼要：你可以使用一张牌",
 
 
@@ -60,7 +60,7 @@ eyao:addEffect(fk.CardUseFinished, {
     on_cost = function (self, event, target, player, data)
     local X = player:getMark("@pang__eyao_count-round")
     return player.room:askToSkillInvoke(player,{
-      prompt = "#eyao_use::"..X,
+      prompt = "#eyao_use:::"..X,
       skill_name = eyao.name,
     })
   end,
