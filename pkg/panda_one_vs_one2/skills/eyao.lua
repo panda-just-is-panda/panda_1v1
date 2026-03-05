@@ -4,12 +4,12 @@ local eyao = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__eyao"] = "扼要",
-  [":pang__eyao"] = "每轮开始时，你可以展示任意张手牌；当对手本轮使用第X张牌后，你观看牌堆顶的X张牌并可以使用其中一张牌或一张因此展示的牌（X为你展示的牌数）。",
+  [":pang__eyao"] = "每轮开始时，你可以声明一个不大于4的正整数；当对手本轮使用第X张牌后，你可以对其造成1点伤害（X为你选择的数字），然后其本轮使用牌时摸一张牌。",
 
-  ["#eyao_show"] = "扼要：你可以展示任意张手牌",
-  ["@@pang__eyao-round"] = "扼要",
+  ["#eyao_show"] = "扼要：你可以选择一个不大于4的正整数",
+  [ "#eyao_choice"] = "扼要：选择一个数字",
   ["@pang__eyao_count-round"] = "扼要",
-  ["#eyao_use"] = "扼要：你可以观看牌堆顶的%arg张牌并使用其中一张或一张本轮展示的手牌",
+  ["#eyao_use"] = "扼要：你可以对 %src 造成1点伤害",
   ["#eyao_touse"] = "扼要：你可以使用一张牌",
 
 
@@ -25,26 +25,20 @@ eyao:addEffect(fk.RoundStart,{
     and not player:isKongcheng()
   end,
   on_cost = function (self, event, target, player, data)
-    local cards = player.room:askToCards(player, {
-      skill_name = eyao.name,
-      min_num = 1,
-      max_num = player:getHandcardNum(),
+    return player.room:askToSkillInvoke(player,{
       prompt = "#eyao_show",
+      skill_name = eyao.name,
     })
-    if #cards > 0 then
-        player:showCards(cards)
-      event:setCostData(self, {cards = cards})
-      return true
-    end  
   end,
   on_use = function (self, event, target, player, data)
     local room = player.room
-    local X = #event:getCostData(self).cards
-    room:setPlayerMark(player,"@pang__eyao_count-round", X)
-    for _, id in ipairs(event:getCostData(self).cards) do
-      room:setCardMark(Fk:getCardById(id), "@@pang__eyao-round", 1)
-    end
-    player:filterHandcards()
+    local choices = {1,2,3,4}
+    local choice = room:askToChoice(player, {
+      choices = choices,
+      skill_name = eyao.name,
+      prompt = "#eyao_choice",
+    })
+    room:setPlayerMark(player,"@pang__eyao_count-round", choice)
   end,
 })
 
@@ -58,36 +52,31 @@ eyao:addEffect(fk.CardUseFinished, {
         return player:hasSkill(eyao.name) and target == player.next and used_num == X
     end,
     on_cost = function (self, event, target, player, data)
-    local X = player:getMark("@pang__eyao_count-round")
     return player.room:askToSkillInvoke(player,{
-      prompt = "#eyao_use:::"..X,
+      prompt = "#eyao_use:"..player.next.id,
       skill_name = eyao.name,
     })
   end,
     on_use = function(self, event, target, player, data)
         local room = player.room
-        local X = player:getMark("@pang__eyao_count-round")
-        local cards = room:getNCards(X)
-        for _, id in ipairs(player:getCardIds("h")) do
-            if Fk:getCardById(id):getMark("@@pang__eyao-round") > 0 then
-                table.insertIfNeed(cards, id)
-            end
-        end
-        local use = room:askToUseRealCard(player, {
-            pattern = tostring(Exppattern{ id = cards }),
-            skill_name = eyao.name,
-            prompt = "#eyao_touse",
-            extra_data = {
-                bypass_times = true,
-                extraUse = true,
-                expand_pile = cards,
-            },
-            skip = true
-        })
-        if use then
-            use.extraUse = true
-            room:useCard(use)
-        end
+        room:damage{
+            from = player,
+            to = player.next,
+            damage = 1,
+            skillName = eyao.name,
+        }
+        room:setPlayerMark(player,"@pang__eyao_count-round", 0)
+        room:setPlayerMark(player.next,"pang__eyao_use-round", 1)
+    end,
+})
+
+eyao:addEffect(fk.CardUsing, {
+    anim_type = "drawcard",
+    can_refresh = function(self, event, target, player, data)
+        return target == player.next and player:getMark("pang__eyao_use-round") > 0
+    end,
+    on_refresh = function(self, event, target, player, data)
+        player:drawCards(1, eyao.name)
     end,
 })
 

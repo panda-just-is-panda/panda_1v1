@@ -22,7 +22,16 @@ Fk:loadTranslationTable{
   ["~pang__mizhu"] = "劣弟背主，我之罪也。",
 }
 
+local sunhuan = General:new(extension, "pang__sunhuan", "wu", 4, 4, General.Male)
+sunhuan:addSkill("pang__eyao")
+Fk:loadTranslationTable{
+  ["pang__sunhuan"] = "孙桓",
+  ["#pang__sunhuan"] = "扼龙决险",
+  ["designer:pang__sunhuan"] = "胖即是胖",
+  ["illustrator:pang__sunhuan"] = "官方",
 
+  ["~pang__sunhuan"] = "此建功立业之时，奈何。",
+}
 
 local jiangji = General:new(extension, "pang__jiangji", "wei", 3, 3, General.Male)
 jiangji:addSkill("pang__jichou")
