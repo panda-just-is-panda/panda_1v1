@@ -9,7 +9,7 @@ Fk:loadTranslationTable{
   ["#eyao_show"] = "扼要：你可以选择一个不大于4的正整数",
   [ "#eyao_choice"] = "扼要：选择一个数字",
   ["@pang__eyao_count-round"] = "扼要",
-  ["#eyao_use"] = "扼要：你可以对 %src 造成1点伤害",
+  ["#eyao_use"] = "扼要：你可以对 %src 造成1点伤害，然后其本轮使用牌时摸一张牌",
   ["#eyao_touse"] = "扼要：你可以使用一张牌",
 
 
