@@ -32,12 +32,21 @@ eyao:addEffect(fk.RoundStart,{
   end,
   on_use = function (self, event, target, player, data)
     local room = player.room
-    local choices = {1,2,3,4}
+    local choices = {"1","2","3","4"}
     local choice = room:askToChoice(player, {
       choices = choices,
       skill_name = eyao.name,
       prompt = "#eyao_choice",
     })
+    if choice == "1" then
+        choice = 1
+    elseif choice == "2" then
+        choice = 2
+    elseif choice == "3" then
+        choice = 3
+    elseif choice == "4" then
+        choice = 4
+    end
     room:setPlayerMark(player,"@pang__eyao_count-round", choice)
   end,
 })
