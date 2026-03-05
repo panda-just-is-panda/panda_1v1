@@ -82,7 +82,7 @@ eyao:addEffect(fk.CardUseFinished, {
 eyao:addEffect(fk.CardUsing, {
     anim_type = "drawcard",
     can_refresh = function(self, event, target, player, data)
-        return target == player.next and player:getMark("pang__eyao_use-round") > 0
+        return target == player and player:getMark("pang__eyao_use-round") > 0
     end,
     on_refresh = function(self, event, target, player, data)
         player:drawCards(1, eyao.name)
