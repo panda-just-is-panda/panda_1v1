@@ -32,6 +32,7 @@ Fk:loadTranslationTable{
 
   ["~pang__sunhuan"] = "此建功立业之时，奈何。",
 }
+sunhuan.hidden = true
 
 local jiangji = General:new(extension, "pang__jiangji", "wei", 3, 3, General.Male)
 jiangji:addSkill("pang__jichou")
