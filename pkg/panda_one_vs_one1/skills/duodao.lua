@@ -4,7 +4,7 @@ local duodao = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__duodao"] = "夺刀",
-  [":pang__duodao"] = "当你登场后，你可以获得对手一张牌；若为武器牌，其不能响应你使用的【杀】直到你或其退场。",
+  [":pang__duodao"] = "一名角色登场后，你可以获得对手一张牌；若为武器牌，其不能响应你使用的【杀】直到你或其退场。",
   ["#pang__duodao"] = "夺刀：你可以获得对手一张牌，若为武器牌则其不能响应你使用的【杀】",
   ["#pang__duodao_select"] = "选择其中任意张牌",
   ["@@pang__duodao"] = "被夺刀",
@@ -17,7 +17,7 @@ local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
 
 duodao:addEffect(U.AfterDebut,{
   can_trigger = function (self, event, target, player, data)
-    return player:hasSkill(duodao.name) and target == player
+    return player:hasSkill(duodao.name)
       and not data.begingame and not player.next:isNude()
   end,
   on_cost = function (self, event, target, player, data)
