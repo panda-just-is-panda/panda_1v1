@@ -46,16 +46,16 @@ Fk:loadTranslationTable{
   ["~pang__sunshangxiang"] = "哎呀，这次弓箭射歪了。",
 }
 
-local zhoushan = General:new(extension, "pang__zhoushan", "wu", 4, 4, General.Male)
-zhoushan:addSkill("pang__miyun")
-zhoushan:addSkill("pang__danying")
+local panzhangmazhong = General:new(extension, "pang__panzhangmazhong", "wu", 4, 4, General.Male)
+panzhangmazhong:addSkill("pang__anjian&")
+panzhangmazhong:addSkill("pang__duodao")
 Fk:loadTranslationTable{
-  ["pang__zhoushan"] = "周善",
-  ["#pang__zhoushan"] = "荆吴刑天",
-  ["designer:pang__zhoushan"] = "胖即是胖",
-  ["illustrator:pang__zhoushan"] = "游漫美绘",
+  ["pang__panzhangmazhong"] = "潘璋马忠",
+  ["#pang__panzhangmazhong"] = "擒龙伏虎",
+  ["designer:pang__panzhangmazhong"] = "胖即是胖",
+  ["illustrator:pang__panzhangmazhong"] = "官方",
 
-  ["~pang__zhoushan"] = "夫人救我！夫人救我！",
+  ["~pang__panzhangmazhong"] = "埋伏得这么好，怎会……",
 }
 
 local jiakui = General:new(extension, "pang__jiakui", "wei", 3, 3, General.Male)
