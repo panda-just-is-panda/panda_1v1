@@ -30,42 +30,47 @@ tiansuan:addEffect("active", {
       who = player,
       reason = tiansuan.name,
       pattern = {
-        [".|.|^diamond"] = "good",
-        [".|.|black"] = "bad"
+        ["."] = "good",
+        ["else"] = "bad"
       },
     }
+    for _, suit in ipairs({ "diamond", "club", "spade" }) do
+      judge1.pattern[".|.|" .. suit] = suit
+    end
     local judge2 = {
       who = player,
       reason = tiansuan.name,
-      pattern = ".|.|^nosuit",
+      pattern = {
+        ["."] = "good",
+        ["else"] = "bad"
+      },
     }
-    player:broadcastSkillInvoke(tiansuan.name, 1)
+    for _, suit in ipairs({ "diamond", "club", "spade" }) do
+      judge1.pattern[".|.|" .. suit] = suit
+    end
+    player:broadcastSkillInvoke(tiansuan.name, 2)
     room:judge(judge1)
     local suit1
     local suit2
     if not player.dead and judge1.results then
         if table.contains(judge1.results, "diamond") then
-            player:broadcastSkillInvoke(tiansuan.name, 2)
             suit1 = "diamond"
         elseif table.contains(judge1.results, "club") or table.contains(judge1.results, "spade") then
-            player:broadcastSkillInvoke(tiansuan.name, 2)
             suit1 = "black"
         end
     end
     room:judge(judge2)
     if not player.dead and judge1.results then
         if table.contains(judge2.results, "diamond") then
-            player:broadcastSkillInvoke(tiansuan.name, 2)
             suit2 = "diamond"
         elseif table.contains(judge2.results, "club") or table.contains(judge2.results, "spade") then
-            player:broadcastSkillInvoke(tiansuan.name, 2)
             suit2 = "black"
         end
     end
     if suit1 and suit2 then
         if suit1 == "diamond" and suit2 == "diamond" then
             player:drawCards(2, tiansuan.name)
-            player:broadcastSkillInvoke(tiansuan.name, 2)
+            player:broadcastSkillInvoke(tiansuan.name, 1)
         elseif suit1 == "black" and suit2 == "black" then
             local card = room:askToChooseCard(player, {
                 target = target,
