@@ -4,7 +4,7 @@ local tiansuan = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__tiansuan"] = "天算",
-  [":pang__tiansuan"] = "出牌阶段限一次，你可以依次进行两次判定，然后若判定结果均为：方块，你摸两张牌；黑色，你弃置对手一张牌。",
+  [":pang__tiansuan"] = "出牌阶段限一次，你可以依次进行两次判定，然后若判定结果均为：红色，你摸一张牌；黑色，你弃置对手一张牌。",
   ["#pang__tiansuan"] = "天算：你可以进行两次判定，根据判定结果触发对应效果",
 
   ["$pang__tiansuan1"] = "雷霆雨露，皆为君恩。",
@@ -30,10 +30,11 @@ tiansuan:addEffect("active", {
       who = player,
       reason = tiansuan.name,
       pattern = {
-        [".|.|spade,club,diamond"] = "good",
+        [".|.|spade,club,diamond,heart"] = "good",
         [".|.|spade"] = "spade",
         [".|.|club"] = "club",
         [".|.|diamond"] = "diamond",
+        [".|.|heart"] = "heart",
         ["else"] = "bad"
       },
     }
@@ -41,10 +42,11 @@ tiansuan:addEffect("active", {
       who = player,
       reason = tiansuan.name,
       pattern = {
-        [".|.|spade,club,diamond"] = "good",
+        [".|.|spade,club,diamond,heart"] = "good",
         [".|.|spade"] = "spade",
         [".|.|club"] = "club",
         [".|.|diamond"] = "diamond",
+        [".|.|heart"] = "heart",
         ["else"] = "bad"
       },
     }
@@ -53,25 +55,26 @@ tiansuan:addEffect("active", {
     local suit1
     local suit2
     if not player.dead and judge1.results then
-        if table.contains(judge1.results, "diamond") then
-            suit1 = "diamond"
+        if table.contains(judge1.results, "diamond") or table.contains(judge1.results, "heart") then
+            suit1 = "red"
         elseif table.contains(judge1.results, "club") or table.contains(judge1.results, "spade") then
             suit1 = "black"
         end
     end
     room:judge(judge2)
     if not player.dead and judge2.results then
-        if table.contains(judge2.results, "diamond") then
-            suit2 = "diamond"
+        if table.contains(judge2.results, "diamond") or table.contains(judge2.results, "heart") then
+            suit2 = "red"
         elseif table.contains(judge2.results, "club") or table.contains(judge2.results, "spade") then
             suit2 = "black"
         end
     end
     if suit1 and suit2 then
-        if suit1 == "diamond" and suit2 == "diamond" then
-            player:drawCards(2, tiansuan.name)
+        if suit1 == "red" and suit2 == "red" then
+            player:drawCards(1, tiansuan.name)
             player:broadcastSkillInvoke(tiansuan.name, 1)
         elseif suit1 == "black" and suit2 == "black" then
+            player:drawCards(1, tiansuan.name)
             local card = room:askToChooseCard(player, {
                 target = target,
                 skill_name = tiansuan.name,
