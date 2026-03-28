@@ -11,6 +11,19 @@ Fk:loadTranslationTable{
 }
 
 
+local zhouqun = General:new(extension, "pang__zhouqun", "wu", 3, 3, General.Male)
+zhouqun:addSkill("pang__tiansuan")
+zhouqun:addSkill("pang__chenshuo")
+Fk:loadTranslationTable{
+  ["pang__zhouqun"] = "周群",
+  ["#pang__zhouqun"] = "占天明徵",
+  ["designer:pang__zhouqun"] = "胖即是胖",
+  ["illustrator:pang__zhouqun"] = "官方",
+
+  ["~pang__sunhuan"] = "知万物而不知己命，大谬也。",
+}
+zhouqun.hidden = true
+
 local sunhuan = General:new(extension, "pang__sunhuan", "wu", 4, 4, General.Male)
 sunhuan:addSkill("pang__eyao")
 Fk:loadTranslationTable{
