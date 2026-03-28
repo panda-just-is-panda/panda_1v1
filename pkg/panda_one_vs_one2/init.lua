@@ -10,17 +10,6 @@ Fk:loadTranslationTable{
   ["pang"] = "胖",
 }
 
-local mizhu = General:new(extension, "pang__mizhu", "shu", 3, 3, General.Male)
-mizhu:addSkill("pang__chouzi&")
-mizhu:addSkill("pang__jugu")
-Fk:loadTranslationTable{
-  ["pang__mizhu"] = "糜竺",
-  ["#pang__mizhu"] = "挥金追义",
-  ["designer:pang__mizhu"] = "胖即是胖",
-  ["illustrator:pang__mizhu"] = "官方",
-
-  ["~pang__mizhu"] = "劣弟背主，我之罪也。",
-}
 
 local sunhuan = General:new(extension, "pang__sunhuan", "wu", 4, 4, General.Male)
 sunhuan:addSkill("pang__eyao")

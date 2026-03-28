@@ -4,7 +4,7 @@ local jugu = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__jugu"] = "巨贾",
-  [":pang__jugu"] = "当你登场后，你摸X张牌（X为“筹资”剩余发动次数），这些牌不计入手牌上限且可以作为【无中生有】使用。",
+  [":pang__jugu"] = "你的初始手牌不计入手牌上限且可以作为【无中生有】使用。",
   ["#pang__jugu"] = "巨贾：你可以将一张因“巨贾”获得的牌作为【无中生有】使用",
   ["@@jugu-inhand"] = "巨贾",
 
@@ -14,16 +14,18 @@ Fk:loadTranslationTable{
 
 local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
 
-jugu:addEffect(U.AfterDebut,{
-    mute = true,
+jugu:addEffect(U.AfterV11DrawInitial,{
+  mute = true,
   can_trigger = function (self, event, target, player, data)
-    return player:hasSkill(jugu.name) and target == player
-      and not data.begingame and player:usedSkillTimes("pang__chouzi&", Player.HistoryGame) < 3
+    return player:hasSkill(jugu.name) and target == player and #data.cards > 0
   end,
   on_cost = Util.TrueFunc,
   on_use = function (self, event, target, player, data)
-    local number = 3 - player:usedSkillTimes("pang__chouzi&", Player.HistoryGame)
-    player:drawCards(number, jugu.name, nil, "@@jugu-inhand")
+    local room = player.room
+    local cards = data.cards
+    for _, id in ipairs(cards) do
+      room:setCardMark(Fk:getCardById(id), "@@jugu-inhand", 1)
+    end
     player:broadcastSkillInvoke(jugu.name, 1)
   end,
 })
