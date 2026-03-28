@@ -74,7 +74,7 @@ tiansuan:addEffect("active", {
             player:drawCards(1, tiansuan.name)
             player:broadcastSkillInvoke(tiansuan.name, 1)
         elseif suit1 == "black" and suit2 == "black" then
-            player:drawCards(1, tiansuan.name)
+            player:broadcastSkillInvoke(tiansuan.name, 1)
             local card = room:askToChooseCard(player, {
                 target = target,
                 skill_name = tiansuan.name,
