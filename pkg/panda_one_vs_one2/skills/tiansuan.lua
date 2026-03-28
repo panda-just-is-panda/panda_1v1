@@ -41,19 +41,28 @@ tiansuan:addEffect("active", {
     }
     player:broadcastSkillInvoke(tiansuan.name, 1)
     room:judge(judge1)
+    local suit1
+    local suit2
+    if not player.dead and judge1.results then
+        if table.contains(judge1.results, "diamond") then
+            suit1 = "diamond"
+        elseif table.contains(judge1.results, "club") or table.contains(judge1.results, "spade") then
+            suit1 = "black"
+        end
+    end
     room:judge(judge2)
-    if not player.dead and judge1.results and judge2.results then
-        if table.contains(judge1.results, "diamond") and table.contains(judge2.results, "diamond") then
+    if not player.dead and judge1.results then
+        if table.contains(judge2.results, "diamond") then
+            suit2 = "diamond"
+        elseif table.contains(judge2.results, "club") or table.contains(judge2.results, "spade") then
+            suit2 = "black"
+        end
+    end
+    if suit1 and suit2 then
+        if suit1 == "diamond" and suit2 == "diamond" then
             player:drawCards(2, tiansuan.name)
             player:broadcastSkillInvoke(tiansuan.name, 2)
-        elseif table.contains(judge1.results, "club") and table.contains(judge2.results, "club") and not target:isNude() then
-            local card = room:askToChooseCard(player, {
-                target = target,
-                skill_name = tiansuan.name,
-                flag = "he",
-            })
-            room:throwCard(card, tiansuan.name, target, player)
-        elseif table.contains(judge1.results, "spade") and table.contains(judge2.results, "spade") and not target:isNude() then
+        elseif suit1 == "black" and suit2 == "black" then
             local card = room:askToChooseCard(player, {
                 target = target,
                 skill_name = tiansuan.name,

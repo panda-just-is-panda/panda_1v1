@@ -31,7 +31,7 @@ chenshuo:addEffect(fk.AskForRetrial, {
             skill_name = chenshuo.name,
             include_equip = true,
             pattern = ".|.|.|.|.|basic",
-            prompt = "#pang__chenshuo-ask1"..target.id..":"..data.reason,
+            prompt = "#pang__chenshuo-ask1::"..target.id..":"..data.reason,
             cancelable = true,
         })
     elseif data.card.type == Card.TypeTrick then
@@ -41,7 +41,7 @@ chenshuo:addEffect(fk.AskForRetrial, {
             skill_name = chenshuo.name,
             include_equip = true,
             pattern = ".|.|.|.|.|trick",
-            prompt = "#pang__chenshuo-ask2"..target.id..":"..data.reason,
+            prompt = "#pang__chenshuo-ask2::"..target.id..":"..data.reason,
             cancelable = true,
         })
     elseif data.card.type == Card.TypeEquip then
@@ -51,7 +51,7 @@ chenshuo:addEffect(fk.AskForRetrial, {
             skill_name = chenshuo.name,
             include_equip = true,
             pattern = ".|.|.|.|.|equip",
-            prompt = "#pang__chenshuo-ask3"..target.id..":"..data.reason,
+            prompt = "#pang__chenshuo-ask3::"..target.id..":"..data.reason,
             cancelable = true,
         })
     end
