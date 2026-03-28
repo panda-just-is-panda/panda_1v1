@@ -22,7 +22,6 @@ Fk:loadTranslationTable{
 
   ["~pang__zhouqun"] = "知万物而不知己命，大谬也。",
 }
-zhouqun.hidden = true
 
 local sunhuan = General:new(extension, "pang__sunhuan", "wu", 4, 4, General.Male)
 sunhuan:addSkill("pang__eyao")
