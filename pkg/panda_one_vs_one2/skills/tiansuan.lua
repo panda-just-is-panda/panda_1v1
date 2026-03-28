@@ -26,7 +26,18 @@ tiansuan:addEffect("active", {
   on_use = function(self, room, effect)
     local player = effect.from
     local target = player.next
-    local judge = {
+    local judge1 = {
+      who = player,
+      reason = tiansuan.name,
+      pattern = {
+        [".|.|spade,club,diamond"] = "good",
+        [".|.|spade"] = "spade",
+        [".|.|club"] = "club",
+        [".|.|diamond"] = "diamond",
+        ["else"] = "bad"
+      },
+    }
+    local judge2 = {
       who = player,
       reason = tiansuan.name,
       pattern = {
@@ -38,21 +49,21 @@ tiansuan:addEffect("active", {
       },
     }
     player:broadcastSkillInvoke(tiansuan.name, 2)
-    room:judge(judge)
+    room:judge(judge1)
     local suit1
     local suit2
-    if not player.dead and judge.results then
-        if table.contains(judge.results, "diamond") then
+    if not player.dead and judge1.results then
+        if table.contains(judge1.results, "diamond") then
             suit1 = "diamond"
-        elseif table.contains(judge.results, "club") or table.contains(judge.results, "spade") then
+        elseif table.contains(judge1.results, "club") or table.contains(judge1.results, "spade") then
             suit1 = "black"
         end
     end
-    room:judge(judge)
-    if not player.dead and judge.results then
-        if table.contains(judge.results, "diamond") then
+    room:judge(judge2)
+    if not player.dead and judge2.results then
+        if table.contains(judge2.results, "diamond") then
             suit2 = "diamond"
-        elseif table.contains(judge.results, "club") or table.contains(judge.results, "spade") then
+        elseif table.contains(judge2.results, "club") or table.contains(judge2.results, "spade") then
             suit2 = "black"
         end
     end
