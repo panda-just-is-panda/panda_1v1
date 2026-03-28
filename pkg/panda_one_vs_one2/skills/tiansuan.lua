@@ -45,16 +45,20 @@ tiansuan:addEffect("active", {
     local suit2
     if not player.dead and judge1.results then
         if table.contains(judge1.results, "diamond") then
+            player:broadcastSkillInvoke(tiansuan.name, 2)
             suit1 = "diamond"
         elseif table.contains(judge1.results, "club") or table.contains(judge1.results, "spade") then
+            player:broadcastSkillInvoke(tiansuan.name, 2)
             suit1 = "black"
         end
     end
     room:judge(judge2)
     if not player.dead and judge1.results then
         if table.contains(judge2.results, "diamond") then
+            player:broadcastSkillInvoke(tiansuan.name, 2)
             suit2 = "diamond"
         elseif table.contains(judge2.results, "club") or table.contains(judge2.results, "spade") then
+            player:broadcastSkillInvoke(tiansuan.name, 2)
             suit2 = "black"
         end
     end
