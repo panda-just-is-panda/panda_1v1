@@ -18,7 +18,6 @@ Fk:loadTranslationTable{
 }
 
 jianglve:addEffect(fk.EventPhaseStart, {
-  mute = true,
   anim_type = "control",
   can_trigger = function(self, event, target, player, data)
     return target == player and player:hasSkill(jianglve.name)
