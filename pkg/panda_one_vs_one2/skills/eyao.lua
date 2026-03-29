@@ -21,7 +21,7 @@ eyao:addEffect(fk.CardUseFinished, {
   anim_type = "offensive",
   can_trigger = function(self, event, target, player, data)
     local room = player.room
-    if target == player then
+    if player:hasSkill(eyao.name) and target == player then
       room:addPlayerMark(player,"@pang__eyao_count", 1) 
     end
     return player:hasSkill(eyao.name) and target == player and player:getMark("@pang__eyao_count") >= 4
