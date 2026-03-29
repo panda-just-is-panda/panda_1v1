@@ -4,7 +4,7 @@ local tongqu = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__tongqu"] = "通渠",
-  [":pang__tongqu"] = "每局限两次，出牌阶段，你可以弃置三张牌，然后你的摸牌阶段摸牌数+1。",
+  [":pang__tongqu"] = "出牌阶段，你可以弃置三张牌，然后你的摸牌阶段摸牌数+1（至多为5）。",
   ["#pang__tongqu"] = "通渠：你可以弃置三张牌，然后你的摸牌阶段摸牌数+1",
   ["@tongqu_count"] = "通渠",
 
@@ -16,11 +16,11 @@ Fk:loadTranslationTable{
 tongqu:addEffect("active", {
   anim_type = "control",
   prompt = "#pang__tongqu",
-  max_phase_use_time = 2,
+  max_phase_use_time = 3,
   card_num = 3,
   target_num = 0,
   can_use = function(self, player)
-    return player:usedSkillTimes(tongqu.name, Player.HistoryGame) < 2
+    return player:usedSkillTimes(tongqu.name, Player.HistoryGame) < 3
   end,
   card_filter = function(self, player, to_select, selected)
     return #selected < 3 and not player:prohibitDiscard(to_select)
