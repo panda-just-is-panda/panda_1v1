@@ -7,8 +7,8 @@ Fk:loadTranslationTable{
   ["pang__jianglve"] = "将略",
   [":pang__jianglve"] = "摸牌阶段开始时，若你没有“略”，你可以摸六张牌并将六张手牌扣置于武将牌上，称为“略”，否则此阶段改为你获得两张“略”。",
 
-  ["#pang__jianglve"] = "将略：你可以摸六张牌并将六张牌扣置于武将牌上，称为“略”",
-  ["#pang__jianglve_making_lve"] = "将略：将六张牌扣置于武将牌上，称为“略”",
+  ["#pang__jianglve"] = "将略：你可以摸六张牌并将六张手牌扣置于武将牌上，称为“略”",
+  ["#pang__jianglve_making_lve"] = "将略：将六张手牌扣置于武将牌上，称为“略”",
   ["#pang__jianglve_using"] = "将略：获得两张“略”",
   ["$pang__wangping_lve"] = "略",
 
