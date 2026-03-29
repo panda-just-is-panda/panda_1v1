@@ -4,13 +4,10 @@ local eyao = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__eyao"] = "扼要",
-  [":pang__eyao"] = "每轮开始时，你可以声明一个不大于6的正整数；当对手本轮使用第X张牌后，你可以对其造成1点伤害（X为你选择的数字），然后其本轮使用牌时摸一张牌。",
+  [":pang__eyao"] = "你每使用四张牌后，你可以视为使用一张【杀】；若此时不为你的回合，此【杀】伤害+1。",
 
-  ["#eyao_show"] = "扼要：你可以选择一个不大于6的正整数",
-  [ "#eyao_choice"] = "扼要：选择一个数字",
-  ["@pang__eyao_count-round"] = "扼要",
-  ["#eyao_use"] = "扼要：你可以对 %src 造成1点伤害，然后其本轮使用牌时摸一张牌",
-  ["#eyao_touse"] = "扼要：你可以使用一张牌",
+  ["#eyao_use"] = "扼要：你可以视为使用一张【杀】",
+  ["@pang__eyao_count"] = "扼要",
 
 
   ["$pang__eyao1"] = "善战者后动，一击而毙敌。",
@@ -19,77 +16,40 @@ Fk:loadTranslationTable{
 
 
 
-eyao:addEffect(fk.RoundStart,{
-  can_trigger = function (self, event, target, player, data)
-    return player:hasSkill(eyao.name) 
-  end,
-  on_cost = function (self, event, target, player, data)
-    return player.room:askToSkillInvoke(player,{
-      prompt = "#eyao_show",
-      skill_name = eyao.name,
-    })
-  end,
-  on_use = function (self, event, target, player, data)
-    local room = player.room
-    local choices = {"1","2","3","4","5","6"}
-    local choice = room:askToChoice(player, {
-      choices = choices,
-      skill_name = eyao.name,
-      prompt = "#eyao_choice",
-    })
-    if choice == "1" then
-        choice = 1
-    elseif choice == "2" then
-        choice = 2
-    elseif choice == "3" then
-        choice = 3
-    elseif choice == "4" then
-        choice = 4
-    elseif choice == "5" then
-        choice = 5
-    elseif choice == "6" then
-        choice = 6
-    end
-    room:setPlayerMark(player,"@pang__eyao_count-round", choice)
-  end,
-})
 
 eyao:addEffect(fk.CardUseFinished, {
-    anim_type = "offensive",
-    can_trigger = function(self, event, target, player, data)
-        local X = player:getMark("@pang__eyao_count-round")
-        local used_num = #player.room.logic:getEventsOfScope(GameEvent.UseCard, 999, function(e)
-        return e.data.from == player.next
-      end, Player.HistoryRound)
-        return player:hasSkill(eyao.name) and target == player.next and used_num == X
-    end,
-    on_cost = function (self, event, target, player, data)
+  anim_type = "offensive",
+  can_trigger = function(self, event, target, player, data)
+    local room = player.room
+    if target == player then
+      room:addPlayerMark(player,"@pang__eyao_count", 1) 
+    end
+    return player:hasSkill(eyao.name) and target == player and player:getMark("@pang__eyao_count") >= 4
+  end,
+  on_cost = function (self, event, target, player, data)
+    player.room:setPlayerMark(player,"@pang__eyao_count", 0)
     return player.room:askToSkillInvoke(player,{
-      prompt = "#eyao_use:"..player.next.id,
+      prompt = "#eyao_use",
       skill_name = eyao.name,
     })
   end,
-    on_use = function(self, event, target, player, data)
-        local room = player.room
-        room:damage{
-            from = player,
-            to = player.next,
-            damage = 1,
-            skillName = eyao.name,
-        }
-        room:setPlayerMark(player,"@pang__eyao_count-round", 0)
-        room:setPlayerMark(player.next,"pang__eyao_use-round", 1)
-    end,
+  on_use = function(self, event, target, player, data)
+    local room = player.room
+    room:askToUseVirtualCard(player, {name = "slash", skill_name = eyao.name, cancelable = false, skip = false})
+  end,
 })
 
-eyao:addEffect(fk.CardUsing, {
-    anim_type = "drawcard",
-    can_refresh = function(self, event, target, player, data)
-        return target == player and player:getMark("pang__eyao_use-round") > 0
-    end,
-    on_refresh = function(self, event, target, player, data)
-        player:drawCards(1, eyao.name)
-    end,
+eyao:addEffect(fk.DamageCaused, {
+  anim_type = "offensive",
+  can_refresh = function(self, event, target, player, data)
+    return data.from == player and player:hasSkill(eyao.name) 
+    and data.card and data.card.trueName == "slash"
+    and player.room.current ~= player
+    and table.contains(data.card.skillNames, eyao.name)
+  end,
+  on_refresh = function(self, event, target, player, data)
+    data:changeDamage(1)
+  end,
 })
 
 return eyao
