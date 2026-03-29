@@ -4,7 +4,7 @@ local eyao = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__eyao"] = "扼要",
-  [":pang__eyao"] = "你每使用四张牌后，你可以视为使用一张【杀】；若此时不为你的回合，此【杀】伤害+1。",
+  [":pang__eyao"] = "你每使用五张牌后，你可以视为使用一张【杀】；若此时不为你的回合，此【杀】伤害+1。",
 
   ["#eyao_use"] = "扼要：你可以视为使用一张【杀】",
   ["@pang__eyao_count"] = "扼要",
@@ -24,7 +24,7 @@ eyao:addEffect(fk.CardUseFinished, {
     if player:hasSkill(eyao.name) and target == player then
       room:addPlayerMark(player,"@pang__eyao_count", 1) 
     end
-    return player:hasSkill(eyao.name) and target == player and player:getMark("@pang__eyao_count") >= 4
+    return player:hasSkill(eyao.name) and target == player and player:getMark("@pang__eyao_count") >= 5
   end,
   on_cost = function (self, event, target, player, data)
     player.room:setPlayerMark(player,"@pang__eyao_count", 0)
