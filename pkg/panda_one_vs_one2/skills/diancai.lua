@@ -4,9 +4,9 @@ local diancai = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__diancai"] = "典财",
-  [":pang__diancai"] = "弃牌阶段开始时，你可以摸X张牌（X为你手牌数的一半向上取整）。",
+  [":pang__diancai"] = "弃牌阶段开始时，你可以摸X张牌（X为你手牌数的一半向上取整），然后弃置等量张牌。",
 
-  ["#pang__diancai"] = "典财：你可以摸%arg张牌",
+  ["#pang__diancai"] = "典财：你可以摸%arg张牌，然后弃置%arg张牌",
   ["#pang__diancai_discard"] = "典财：弃置%arg张牌",
 
 
@@ -33,7 +33,7 @@ diancai:addEffect(fk.EventPhaseStart, {
     local room = player.room
     local X = (player:getHandcardNum() + 1) // 2
     player:drawCards(X, diancai.name)
-    local nerf = 0
+    local nerf = 1
     if nerf == 1 then
     local card = room:askToDiscard(player, {
         skill_name = diancai.name,
