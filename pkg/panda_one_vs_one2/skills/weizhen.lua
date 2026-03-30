@@ -35,6 +35,7 @@ weizhen:addEffect("viewas", {
   end,
   before_use = function(self, player, use)
     player:broadcastSkillInvoke(weizhen.name, 2)
+    use.extraUse = true
   end,
   enabled_at_play = function(self, player)
     return U.getPlayercount(player)[1] ~= U.getPlayercount(player.next)[1]
