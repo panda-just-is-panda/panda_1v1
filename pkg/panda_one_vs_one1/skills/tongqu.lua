@@ -41,15 +41,18 @@ tongqu:addEffect("viewas", {
       local card_id = Fk:getCardById(id)
       return card_id and card_id:getMark("@@pang__tongqu-inhand-turn") == 0
     end)
-    return {
-      max_num = 999,
-      min_num = 1,
-      pattern = ".",
-      subcards = cards
-    }
+    if #cards > 0 then
+      return {
+        max_num = #cards,
+        min_num = #cards,
+        pattern = ".|.|.|hand",
+        subcards = cards
+      }
+    end
   end,
   card_filter = Util.FalseFunc,
   view_as = function(self, player, cards)
+    if #cards < 1 then return end
     local c = Fk:cloneCard("ex_nihilo")
     c.skillName = tongqu.name
     c:addSubcard(cards)
