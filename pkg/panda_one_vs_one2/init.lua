@@ -34,6 +34,17 @@ Fk:loadTranslationTable{
   ["~pang__wangping"] = "无当飞军，也有困于深林之时。",
 }
 
+local lvfan = General:new(extension, "pang__lvfan", "wu", 3, 3, General.Male)
+lvfan:addSkill("pang__diaodu")
+lvfan:addSkill("pang__diancai")
+Fk:loadTranslationTable{
+  ["pang__lvfan"] = "吕范",
+  ["#pang__lvfan"] = "持筹廉悍",
+  ["designer:pang__lvfan"] = "胖即是胖",
+  ["illustrator:pang__lvfan"] = "官方",
+
+  ["~pang__lvfan"] = "闻主公欲授大司马之职，容臣不能……谢恩了。",
+}
 local sunhuan = General:new(extension, "pang__sunhuan", "wu", 4, 4, General.Male)
 sunhuan:addSkill("pang__eyao")
 Fk:loadTranslationTable{
