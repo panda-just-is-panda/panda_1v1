@@ -42,9 +42,9 @@ tongqu:addEffect("viewas", {
       return card_id and card_id:getMark("@@pang__tongqu-inhand-turn") == 0
     end)
     return {
-      max_num = #cards,
-      min_num = #cards,
-      pattern = ".|.|.|hand",
+      max_num = 999,
+      min_num = 1,
+      pattern = ".",
       subcards = cards
     }
   end,
