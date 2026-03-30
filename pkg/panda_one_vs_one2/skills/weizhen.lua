@@ -34,7 +34,7 @@ weizhen:addEffect("viewas", {
     return c
   end,
   before_use = function(self, player, use)
-    if player:usedSkillTimes(weizhen.name, Player.HistoryTurn) == 0 then
+    if player:usedSkillTimes(weizhen.name, Player.HistoryTurn) == 1 then
       player:broadcastSkillInvoke(weizhen.name, 2)
     end
     use.extraUse = true
