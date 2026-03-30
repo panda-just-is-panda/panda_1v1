@@ -18,11 +18,11 @@ local U = require "packages.klee_fk_B.pkg.gamemode.klee_1v1_util"
 
 diaodu:addEffect(U.AfterDebut,{
   can_trigger = function (self, event, target, player, data)
-    if player:hasSkill(diaodu.name) and player:usedSkillTimes(diaodu.name, Player.HistoryGame) == 0 then
+    if player:hasSkill(diaodu.name) then
         player.room:setBanner(diaodu.name..player.role, 0)
     end
-    return player:hasSkill(diaodu.name)
-      and not data.begingame
+    return (player:hasSkill(diaodu.name) or player:usedSkillTimes(diaodu.name, Player.HistoryGame) > 0)
+      and not data.begingame and not player.room:getBanner(diaodu.name..player.role) == 7
   end,
   on_cost = Util.TrueFunc,
   on_use = function (self, event, target, player, data)
