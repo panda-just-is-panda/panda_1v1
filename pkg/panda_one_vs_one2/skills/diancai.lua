@@ -6,7 +6,7 @@ Fk:loadTranslationTable{
   ["pang__diancai"] = "典财",
   [":pang__diancai"] = "弃牌阶段开始时，你可以摸X张牌（X为你手牌数的一半向上取整）。",
 
-  ["#pang__diancai"] = "典财：你可以摸%arg张牌，然后弃置%arg张牌",
+  ["#pang__diancai"] = "典财：你可以摸%arg张牌",
   ["#pang__diancai_discard"] = "典财：弃置%arg张牌",
 
 
