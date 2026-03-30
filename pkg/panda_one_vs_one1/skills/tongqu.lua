@@ -4,60 +4,64 @@ local tongqu = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__tongqu"] = "通渠",
-  [":pang__tongqu"] = "出牌阶段，你可以弃置三张牌，然后你的摸牌阶段摸牌数+1（至多为5）。",
-  ["#pang__tongqu"] = "通渠：你可以弃置三张牌，然后你的摸牌阶段摸牌数+1",
-  ["@tongqu_count"] = "通渠",
+  [":pang__tongqu"] = "你可以将所有非本回合获得的手牌作为【无中生有】使用。",
+  ["#pang__tongqu"] = "通渠：你可以将所有非本回合获得的手牌作为【无中生有】使用。",
+
+  ["@@pang__tongqu-inhand-turn"] = "通渠",
 
   ["$pang__tongqu1"] = "兴凿修渠，依水屯军！",
   ["$pang__tongqu2"] = "开渠疏道，以备军实！",
 }
 
-
-tongqu:addEffect("active", {
-  anim_type = "control",
-  prompt = "#pang__tongqu",
-  max_phase_use_time = 3,
-  card_num = 3,
-  target_num = 0,
-  can_use = function(self, player)
-    return player:getMark("@tongqu_count") < 3
-  end,
-  card_filter = function(self, player, to_select, selected)
-    return #selected < 3 and not player:prohibitDiscard(to_select)
-  end,
-  target_filter = Util.FalseFunc,
-  on_use = function(self, room, effect)
-    local player = effect.from
-    room:throwCard(effect.cards, tongqu.name, player, player)
-    room:addPlayerMark(player,"@tongqu_count", 1)
-    room:addPlayerMark(player,"tongqu_hidden_count", 1)
-  end,
-})
-
-tongqu:addEffect(fk.DrawNCards, {
-  anim_type = "drawcard",
+tongqu:addEffect(fk.AfterCardsMove, {
   can_refresh = function(self, event, target, player, data)
-    return target == player and player:hasSkill(tongqu.name) and
-    player:getMark("@tongqu_count") > 0
+    return player:hasSkill(tongqu.name, true)
   end,
   on_refresh = function(self, event, target, player, data)
-    local X = player:getMark("@tongqu_count")
-    data.n = data.n + X
+    local room = player.room
+    for _, move in ipairs(data) do
+      if move.to == player and move.toArea == Player.Hand then
+        for _, info in ipairs(move.moveInfo) do
+          if table.contains(player:getCardIds("h"), info.cardId) then
+            room:setCardMark(Fk:getCardById(info.cardId), "@@pang__tongqu-inhand-turn", 1)
+          end
+        end
+      end
+    end
   end,
 })
 
-tongqu:addLoseEffect(function (self, player, is_death)
-  local room = player.room
-  room:setPlayerMark(player,"@tongqu_count",0)
-end)
-
-tongqu:addAcquireEffect(function (self, player)
-  local room = player.room
-  local X = player:getMark("tongqu_hidden_count")
-  if X > 0 then
-    room:setPlayerMark(player,"@tongqu_count",X)
-  end
-end)
+tongqu:addEffect("viewas", {
+  anim_type = "drawcard",
+  pattern = "ex_nihilo",
+  prompt = "#pang__tongqu",
+  handly_pile = true,
+  filter_pattern = function (self, player, card_name)
+    local cards = table.filter(player:getCardIds("h"), function(id)
+      local card_id = Fk:getCardById(id)
+      return card_id and card_id:getMark("@@pang__tongqu-inhand-turn") == 0
+    end)
+    return {
+      max_num = #cards,
+      min_num = math.max(#cards, 1),
+      pattern = tostring(Exppattern{ id = cards }),
+      subcards = cards
+    }
+  end,
+  view_as = function(self, player, cards)
+    if #cards < 1 then return end
+    local c = Fk:cloneCard("ex_nihilo")
+    c.skillName = tongqu.name
+    c:addSubcard(cards)
+    return c
+  end,
+  enabled_at_play = function(self, player)
+    return true
+  end,
+  enabled_at_response = function(self, player, response)
+    return not response
+  end,
+})
 
 
 return tongqu
