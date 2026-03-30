@@ -36,7 +36,7 @@ tongqu:addEffect("viewas", {
   pattern = "ex_nihilo",
   prompt = "#pang__tongqu",
   handly_pile = true,
-  filter_pattern = function (self, player, card_name)
+  filter_pattern = function (self, player, card_name, selected)
     local cards = table.filter(player:getCardIds("h"), function(id)
       local card_id = Fk:getCardById(id)
       return card_id and card_id:getMark("@@pang__tongqu-inhand-turn") == 0
@@ -52,10 +52,14 @@ tongqu:addEffect("viewas", {
   end,
   card_filter = Util.FalseFunc,
   view_as = function(self, player, cards)
-    if #cards < 1 then return end
+    local card = table.filter(player:getCardIds("h"), function(id)
+      local card_id = Fk:getCardById(id)
+      return card_id and card_id:getMark("@@pang__tongqu-inhand-turn") == 0
+    end)
+    if #card < 1 then return end
     local c = Fk:cloneCard("ex_nihilo")
     c.skillName = tongqu.name
-    c:addSubcard(cards)
+    c:addSubcard(card)
     return c
   end,
   enabled_at_play = function(self, player)
