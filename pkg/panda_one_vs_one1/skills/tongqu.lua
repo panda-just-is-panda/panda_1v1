@@ -50,7 +50,6 @@ tongqu:addEffect("viewas", {
   end,
   card_filter = Util.FalseFunc,
   view_as = function(self, player, cards)
-    if #cards < 1 then return end
     local c = Fk:cloneCard("ex_nihilo")
     c.skillName = tongqu.name
     c:addSubcard(cards)
