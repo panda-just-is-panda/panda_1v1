@@ -22,7 +22,7 @@ diaodu:addEffect(U.AfterDebut,{
         player.room:setBanner(diaodu.name..player.role, 0)
     end
     return (player:hasSkill(diaodu.name) or player:usedSkillTimes(diaodu.name, Player.HistoryGame) > 0)
-      and not data.begingame and not player.room:getBanner(diaodu.name..player.role) == 7
+      and not data.begingame and player.room:getBanner(diaodu.name..player.role) ~= 7
   end,
   on_cost = Util.TrueFunc,
   on_use = function (self, event, target, player, data)
