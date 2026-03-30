@@ -61,14 +61,14 @@ tongqu:addEffect("viewas", {
     local card_id = Fk:getCardById(id)
       return card_id and card_id:getMark("@@pang__tongqu-inhand-turn") == 0
     end)
-    return cards > 0
+    return #cards > 0
   end,
   enabled_at_response = function(self, player, response)
     local cards = table.filter(player:getCardIds("h"), function(id)
     local card_id = Fk:getCardById(id)
       return card_id and card_id:getMark("@@pang__tongqu-inhand-turn") == 0
     end)
-    return not response and cards > 0
+    return not response and #cards > 0
   end,
 })
 
