@@ -7,7 +7,7 @@ Fk:loadTranslationTable{
   [":pang__tongqu"] = "你可以将所有不为本回合获得的手牌作为【无中生有】使用。",
   ["#pang__tongqu"] = "通渠：你可以将所有非本回合获得的手牌作为【无中生有】使用。",
 
-  ["@@pang__tongqu-inhand-turn"] = "通渠",
+  ["@@pang__tongqu-inhand-turn"] = "本回合获得",
 
   ["$pang__tongqu1"] = "兴凿修渠，依水屯军！",
   ["$pang__tongqu2"] = "开渠疏道，以备军实！",
