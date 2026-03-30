@@ -4,7 +4,7 @@ local tongqu = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__tongqu"] = "通渠",
-  [":pang__tongqu"] = "你可以将所有非本回合获得的手牌作为【无中生有】使用。",
+  [":pang__tongqu"] = "你可以将所有不为本回合获得的手牌作为【无中生有】使用。",
   ["#pang__tongqu"] = "通渠：你可以将所有非本回合获得的手牌作为【无中生有】使用。",
 
   ["@@pang__tongqu-inhand-turn"] = "通渠",
@@ -43,11 +43,12 @@ tongqu:addEffect("viewas", {
     end)
     return {
       max_num = #cards,
-      min_num = math.max(#cards, 1),
-      pattern = tostring(Exppattern{ id = cards }),
+      min_num = #cards,
+      pattern = ".|.|.|hand",
       subcards = cards
     }
   end,
+  card_filter = Util.FalseFunc,
   view_as = function(self, player, cards)
     if #cards < 1 then return end
     local c = Fk:cloneCard("ex_nihilo")
@@ -56,10 +57,18 @@ tongqu:addEffect("viewas", {
     return c
   end,
   enabled_at_play = function(self, player)
-    return true
+    local cards = table.filter(player:getCardIds("h"), function(id)
+    local card_id = Fk:getCardById(id)
+      return card_id and card_id:getMark("@@pang__tongqu-inhand-turn") == 0
+    end)
+    return cards > 0
   end,
   enabled_at_response = function(self, player, response)
-    return not response
+    local cards = table.filter(player:getCardIds("h"), function(id)
+    local card_id = Fk:getCardById(id)
+      return card_id and card_id:getMark("@@pang__tongqu-inhand-turn") == 0
+    end)
+    return not response and cards > 0
   end,
 })
 
