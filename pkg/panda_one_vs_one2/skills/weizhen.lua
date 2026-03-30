@@ -31,10 +31,10 @@ weizhen:addEffect("viewas", {
     local c = Fk:cloneCard("thunder__slash")
     c.skillName = weizhen.name
     c:addSubcard(cards[1])
-    player:broadcastSkillInvoke(weizhen.name, 2)
     return c
   end,
   before_use = function(self, player, use)
+    player:broadcastSkillInvoke(weizhen.name, 2)
   end,
   enabled_at_play = function(self, player)
     return U.getPlayercount(player)[1] ~= U.getPlayercount(player.next)[1]
@@ -62,7 +62,7 @@ weizhen:addEffect("maxcards", {
   end,
 })
 
-weizhen:addEffect(U.Debut, {
+weizhen:addEffect(U.AfterDebut, {
   can_refresh = function(self, event, target, player, data)
     return player:hasSkill(weizhen.name) and not data.begingame
     and U.getPlayercount(player)[1] == U.getPlayercount(player.next)[1]

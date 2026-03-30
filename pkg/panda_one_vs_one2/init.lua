@@ -65,7 +65,7 @@ Fk:loadTranslationTable{
   ["designer:pang__zhuling"] = "胖即是胖",
   ["illustrator:pang__zhuling"] = "官方",
 
-  ["~pang__zhuling"] = "半生曹家麾下将，终是丞相眼中…倒戈臣……",
+  ["~pang__zhuling"] = "母亲，弟弟，我来了……",
 }
 
 local zhangmancheng = General:new(extension, "pang__zhangmancheng", "qun", 4, 4, General.Male)
