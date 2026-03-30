@@ -52,14 +52,14 @@ tongqu:addEffect("viewas", {
   end,
   card_filter = Util.FalseFunc,
   view_as = function(self, player, cards)
-    local card = table.filter(player:getCardIds("h"), function(id)
+    local cards2 = table.filter(player:getCardIds("h"), function(id)
       local card_id = Fk:getCardById(id)
       return card_id and card_id:getMark("@@pang__tongqu-inhand-turn") == 0
     end)
-    if #card < 1 then return end
+    if #cards2 < 1 then return end
     local c = Fk:cloneCard("ex_nihilo")
     c.skillName = tongqu.name
-    c:addSubcard(card)
+    c:addSubcards(cards2)
     return c
   end,
   enabled_at_play = function(self, player)
