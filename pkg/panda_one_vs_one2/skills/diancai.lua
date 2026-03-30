@@ -4,7 +4,7 @@ local diancai = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__diancai"] = "典财",
-  [":pang__diancai"] = "弃牌阶段开始时，你可以摸X张牌（X为你的手牌数），然后弃置等量张牌。",
+  [":pang__diancai"] = "弃牌阶段开始时，你可以摸X张牌（X为你手牌数的一半向下取整）。",
 
   ["#pang__diancai"] = "典财：你可以摸%arg张牌，然后弃置%arg张牌",
   ["#pang__diancai_discard"] = "典财：弃置%arg张牌",
@@ -18,20 +18,22 @@ Fk:loadTranslationTable{
 
 diancai:addEffect(fk.EventPhaseStart, {
   can_trigger = function(self, event, target, player, data)
+    local X = player:getHandcardNum() // 2
     return target == player and player:hasSkill(diancai.name) and
-      player.phase == Player.Discard and not player:isKongcheng()
+      player.phase == Player.Discard and X > 0
   end,
   on_cost = function (self, event, target, player, data)
+    local X = player:getHandcardNum() // 2
     return player.room:askToSkillInvoke(player,{
-      prompt ="#pang__diancai:::"..#player:getCardIds("h"), 
+      prompt ="#pang__diancai:::"..X, 
       skill_name = diancai.name,
     })
   end,
   on_use = function(self, event, target, player, data)
     local room = player.room
-    local X = #player:getCardIds("h")
+    local X = player:getHandcardNum() // 2
     player:drawCards(X, diancai.name)
-    local nerf = 1
+    local nerf = 0
     if nerf == 1 then
     local card = room:askToDiscard(player, {
         skill_name = diancai.name,

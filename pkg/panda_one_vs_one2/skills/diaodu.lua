@@ -21,16 +21,15 @@ diaodu:addEffect(U.AfterDebut,{
     if player:hasSkill(diaodu.name) then
         player.room:setBanner(diaodu.name..player.role, 0)
     end
-    return (player:hasSkill(diaodu.name) or player:usedSkillTimes(diaodu.name, Player.HistoryGame) > 0)
-      and not data.begingame and player.room:getBanner(diaodu.name..player.role) ~= 7
+    return target == player and not data.begingame 
+    (player:hasSkill(diaodu.name) or player:usedSkillTimes(diaodu.name, Player.HistoryGame) > 0)
+    and player.room:getBanner(diaodu.name..player.role) ~= 7
   end,
   on_cost = Util.TrueFunc,
   on_use = function (self, event, target, player, data)
     local room = player.room
-    local choices = {}
-    if player.room:getBanner(diaodu.name..player.role) == 0 then
-        choices = {"pang__diaodu_maxcard","pang__diaodu_slash","pang__diaodu_draw"}
-    elseif player.room:getBanner(diaodu.name..player.role) == 1 then
+    local choices = {"pang__diaodu_maxcard","pang__diaodu_slash","pang__diaodu_draw"}
+    if player.room:getBanner(diaodu.name..player.role) == 1 then
         choices = {"pang__diaodu_slash","pang__diaodu_draw"}
     elseif player.room:getBanner(diaodu.name..player.role) == 2 then
         choices = {"pang__diaodu_maxcard","pang__diaodu_draw"}
@@ -49,7 +48,7 @@ diaodu:addEffect(U.AfterDebut,{
     })
     if choice == "pang__diaodu_maxcard" then
         room:addPlayerMark(player, MarkEnum.AddMaxCards)
-        if room:getBanner(diaodu.name..player.role) == 0 then
+        if #choices == 3 then
             room:setBanner(diaodu.name..player.role, 1)
         elseif room:getBanner(diaodu.name..player.role) == 2 then
             room:setBanner(diaodu.name..player.role, 6)
@@ -60,7 +59,7 @@ diaodu:addEffect(U.AfterDebut,{
         end
     elseif choice == "pang__diaodu_slash" then
         room:askToUseVirtualCard(player, {name = "slash", skill_name = diaodu.name, cancelable = false, skip = false})
-        if room:getBanner(diaodu.name..player.role) == 0 then
+        if #choices == 3 then
             room:setBanner(diaodu.name..player.role, 2)
         elseif room:getBanner(diaodu.name..player.role) == 1 then
             room:setBanner(diaodu.name..player.role, 6)
@@ -71,7 +70,7 @@ diaodu:addEffect(U.AfterDebut,{
         end
     elseif choice == "pang__diaodu_draw" then
         player:drawCards(2, diaodu.name)
-        if room:getBanner(diaodu.name..player.role) == 0 then
+        if #choices == 3 then
             room:setBanner(diaodu.name..player.role, 3)
         elseif room:getBanner(diaodu.name..player.role) == 1 then
             room:setBanner(diaodu.name..player.role, 5)
