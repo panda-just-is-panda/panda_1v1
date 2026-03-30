@@ -57,6 +57,17 @@ Fk:loadTranslationTable{
   ["~pang__jiangji"] = "洛水之誓，言犹在耳……咳咳咳……",
 }
 
+local zhuling = General:new(extension, "pang__zhuling", "wei", 4, 4, General.Male)
+zhuling:addSkill("pang__weizhen")
+Fk:loadTranslationTable{
+  ["pang__zhuling"] = "朱灵",
+  ["#pang__zhuling"] = "良将之亚",
+  ["designer:pang__zhuling"] = "胖即是胖",
+  ["illustrator:pang__zhuling"] = "官方",
+
+  ["~pang__zhuling"] = "半生曹家麾下将，终是丞相眼中…倒戈臣……",
+}
+
 local zhangmancheng = General:new(extension, "pang__zhangmancheng", "qun", 4, 4, General.Male)
 zhangmancheng:addSkill("pang__zhongji")
 zhangmancheng:addSkill("pang__lvecheng")
