@@ -73,7 +73,7 @@ tiansuan:addEffect("active", {
         if suit1 == "red" and suit2 == "red" then
             player:drawCards(1, tiansuan.name)
             player:broadcastSkillInvoke(tiansuan.name, 1)
-        elseif suit1 == "black" and suit2 == "black" then
+        elseif suit1 == "black" and suit2 == "black" and not target:isNude() then
             player:broadcastSkillInvoke(tiansuan.name, 1)
             local card = room:askToChooseCard(player, {
                 target = target,
