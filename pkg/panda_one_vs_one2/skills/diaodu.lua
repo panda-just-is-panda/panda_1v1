@@ -1,5 +1,5 @@
 local diaodu = fk.CreateSkill {
-  name = "pang__diaodu",
+  name = "pang__diaodu",  ---呀咩洛，不要看胖的代码
 }
 
 Fk:loadTranslationTable{
@@ -28,7 +28,7 @@ diaodu:addEffect(U.AfterDebut,{
   on_cost = Util.TrueFunc,
   on_use = function (self, event, target, player, data)
     local room = player.room
-    local choices = {"pang__diaodu_maxcard","pang__diaodu_slash","pang__diaodu_draw"}
+    local choices = {"pang__diaodu_maxcard","pang__diaodu_slash","pang__diaodu_draw"}  ---呜呜呜，胖是废物
     if player.room:getBanner(diaodu.name..player.role) == 1 then
         choices = {"pang__diaodu_slash","pang__diaodu_draw"}
     elseif player.room:getBanner(diaodu.name..player.role) == 2 then

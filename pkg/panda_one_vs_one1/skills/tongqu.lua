@@ -32,7 +32,7 @@ tongqu:addEffect(fk.EventPhaseEnd, {
   on_use = function(self, event, target, player, data)
     local room = player.room
     local card 
-    if player.phase == Player.Draw then
+    if player.phase == Player.Draw then  ---呀咩洛，不要看胖的代码
       card = room:askToDiscard(player, {
         skill_name = tongqu.name,
         prompt = "#pang__tongqu_discard_draw",
@@ -41,7 +41,7 @@ tongqu:addEffect(fk.EventPhaseEnd, {
         max_num = 1,
         include_equip = true,
       })
-    elseif player.phase == Player.Play then
+    elseif player.phase == Player.Play then  ---呜呜呜，胖是废物
       card = room:askToDiscard(player, {
         skill_name = tongqu.name,
         prompt = "#pang__tongqu_discard_play",
