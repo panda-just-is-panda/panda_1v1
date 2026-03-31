@@ -4,7 +4,7 @@ local tongqu = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__tongqu"] = "通渠",
-  [":pang__tongqu"] = "摸牌阶段结束时，你可以将手牌摸至三张，或弃置一张牌并于本回合的下个阶段结束时发动此技能。",
+  [":pang__tongqu"] = "摸牌阶段结束时，你可以将手牌摸至三张，或弃置两张牌并于本回合的下个阶段结束时发动此技能。",
   ["#pang__tongqu"] = "通渠：你可以选择将手牌摸至三张或弃牌",
 
   ["@@pang__tongqu-turn"] = "可通渠",
@@ -37,8 +37,8 @@ tongqu:addEffect(fk.EventPhaseEnd, {
         skill_name = tongqu.name,
         prompt = "#pang__tongqu_discard_draw",
         cancelable = true,
-        min_num = 1,
-        max_num = 1,
+        min_num = 2,
+        max_num = 2,
         include_equip = true,
       })
     elseif player.phase == Player.Play then  ---呜呜呜，胖是废物
@@ -46,8 +46,8 @@ tongqu:addEffect(fk.EventPhaseEnd, {
         skill_name = tongqu.name,
         prompt = "#pang__tongqu_discard_play",
         cancelable = true,
-        min_num = 1,
-        max_num = 1,
+        min_num = 2,
+        max_num = 2,
         include_equip = true,
       })
     elseif player.phase == Player.Discard then
@@ -55,8 +55,8 @@ tongqu:addEffect(fk.EventPhaseEnd, {
         skill_name = tongqu.name,
         prompt = "#pang__tongqu_discard_discard",
         cancelable = true,
-        min_num = 1,
-        max_num = 1,
+        min_num = 2,
+        max_num = 2,
         include_equip = true,
       })
     elseif player.phase == Player.Finish then
@@ -64,8 +64,8 @@ tongqu:addEffect(fk.EventPhaseEnd, {
         skill_name = tongqu.name,
         prompt = "#pang__tongqu_discard_finish",
         cancelable = true,
-        min_num = 1,
-        max_num = 1,
+        min_num = 2,
+        max_num = 2,
         include_equip = true,
       })
     end
