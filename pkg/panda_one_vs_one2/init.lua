@@ -23,16 +23,7 @@ Fk:loadTranslationTable{
   ["~pang__zhouqun"] = "知万物而不知己命，大谬也。",
 }
 
-local wangping = General:new(extension, "pang__wangping", "shu", 4, 4, General.Male)
-wangping:addSkill("pang__jianglve")
-Fk:loadTranslationTable{
-  ["pang__wangping"] = "王平",
-  ["#pang__wangping"] = "镇北柱国",
-  ["designer:pang__wangping"] = "胖即是胖",
-  ["illustrator:pang__wangping"] = "官方",
 
-  ["~pang__wangping"] = "无当飞军，也有困于深林之时。",
-}
 
 local lvfan = General:new(extension, "pang__lvfan", "wu", 3, 3, General.Male)
 lvfan:addSkill("pang__diaodu")
