@@ -4,7 +4,7 @@ local tongqu = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__tongqu"] = "通渠",
-  [":pang__tongqu"] = "每回合结束时，你可以重铸一张牌，然后若你最后三张因此重铸的牌点数递减，你摸一张牌。",
+  [":pang__tongqu"] = "每回合结束时，你可以重铸一张牌，然后若你最后四张因此重铸的牌点数递减，你摸一张牌。",
   ["#pang__tongqu"] = "通渠：你可以重铸一张牌",
 
   ["@pang__tongqu_numbers"] = "通渠",
@@ -41,11 +41,11 @@ tongqu:addEffect(fk.TurnEnd, {
     room:recastCard(card_ids, player, tongqu.name)
     local numbers = player:getTableMark("@pang__tongqu_numbers") or {}
     table.insert(numbers, number)
-    while #numbers > 3 do
+    while #numbers > 4 do
       table.remove(numbers, 1)
     end
     room:setPlayerMark(player, "@pang__tongqu_numbers", numbers)
-    if #numbers == 3 and numbers[1] > numbers[2] and numbers[2] > numbers[3] then
+    if #numbers == 4 and numbers[1] > numbers[2] and numbers[2] > numbers[3] and numbers[3] > numbers[4] then
       player:drawCards(1, tongqu.name)
     end
   end,

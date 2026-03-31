@@ -38,6 +38,7 @@ beizhan:addEffect(fk.EventPhaseStart, {
       cancelable = true,
     })
     if #cards > 0 then
+      player:showCards(cards)
       event:setCostData(self, { cards = cards })
       return true
     end
@@ -52,7 +53,7 @@ beizhan:addEffect(fk.EventPhaseStart, {
       local subcard = table.filter(player:getCardIds("h"), function(id)
         local card_id = Fk:getCardById(id)
         return card_id and card_id:getMark("@@pang__beizhan-inhand") > 0
-      end) > 0
+      end)
       if #subcard > 0 then
         local archery_attack = Fk:cloneCard("archery_attack")
         archery_attack:addSubcards(subcard)
