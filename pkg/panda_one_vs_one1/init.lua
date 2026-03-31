@@ -23,15 +23,15 @@ Fk:loadTranslationTable{
   ["~pang__yangyi"] = "魏延庸奴，吾誓杀汝！",
 }
 
-local weiyan = General:new(extension, "pang__weiyan", "shu", 4, 4, General.Male)
-weiyan:addSkill("pang__qimou")
+local chenshi = General:new(extension, "pang__chenshi", "shu", 4, 4, General.Male)
+chenshi:addSkill("pang__qingbei")
 Fk:loadTranslationTable{
-  ["pang__weiyan"] = "魏延",
-  ["#pang__weiyan"] = "嗜血的独狼",
-  ["designer:pang__weiyan"] = "胖即是胖",
-  ["illustrator:pang__weiyan"] = "瞌瞌一休",
+  ["pang__chenshi"] = "陈式",
+  ["#pang__chenshi"] = "擎北之柱",
+  ["designer:pang__chenshi"] = "胖即是胖",
+  ["illustrator:pang__chenshi"] = "官方",
 
-  ["~pang__weiyan"] = "汝，且勿为杨仪奸计所蔽……呃啊！",
+  ["~pang__chenshi"] = "丞相、丞相！是魏延指使我的！",
 }
 
 local sunshangxiang = General:new(extension, "pang__sunshangxiang", "wu", 3, 3, General.Female)
