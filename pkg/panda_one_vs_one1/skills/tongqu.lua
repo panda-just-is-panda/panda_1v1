@@ -8,7 +8,7 @@ Fk:loadTranslationTable{
   ["#pang__tongqu"] = "通渠：你可以选择将手牌摸至三张或弃牌",
 
   ["@@pang__tongqu-turn"] = "可通渠",
-  ["#pang__tongqu_discard"] = "通渠：你可以直接点确定将手牌摸至三张，或选择一张牌弃置并于本回合的下个阶段结束时发动此技能",
+  ["#pang__tongqu_discard"] = "通渠：点取消将手牌摸至三张，或选择一张牌弃置并于本回合的下个阶段结束时发动此技能",
 
   ["$pang__tongqu1"] = "兴凿修渠，依水屯军！",
   ["$pang__tongqu2"] = "开渠疏道，以备军实！",
