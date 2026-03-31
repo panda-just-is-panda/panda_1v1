@@ -4,7 +4,7 @@ local tongqu = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__tongqu"] = "通渠",
-  [":pang__tongqu"] = "摸牌阶段结束时，你可以将手牌摸至三张，然后你可以弃置一张牌并于本回合的下个阶段结束时发动此技能。",
+  [":pang__tongqu"] = "摸牌阶段结束时，你将手牌摸至三张；若你未因此摸牌，你可以弃置一张牌并于本回合的下个阶段结束时发动此技能。",
   ["#pang__tongqu"] = "通渠：你可以将手牌摸至三张",
 
   ["@@pang__tongqu-turn"] = "可通渠",
@@ -21,10 +21,7 @@ tongqu:addEffect(fk.EventPhaseEnd, {
   end,
   on_cost = function(self, event, target, player, data)
     player.room:setPlayerMark(player, "@@jutu", 0)
-    return player.room:askToSkillInvoke(player, {
-        skill_name = tongqu.name,
-        prompt = "#pang__tongqu",
-      })
+    return true 
   end,
   on_use = function(self, event, target, player, data)
     local room = player.room
