@@ -31,17 +31,44 @@ tongqu:addEffect(fk.EventPhaseEnd, {
   end,
   on_use = function(self, event, target, player, data)
     local room = player.room
-    local card = room:askToDiscard(player, {
-      skill_name = tongqu.name,
-      prompt = player.phase == (Player.Draw and "#pang__tongqu_discard_draw" 
-      or player.phase == Player.Play and "#pang__tongqu_discard_play" 
-      or player.phase == Player.Discard and "#pang__tongqu_discard_discard" 
-      or "#pang__tongqu_discard_finish"),
-      cancelable = true,
-      min_num = 1,
-      max_num = 1,
-      include_equip = true,
-    })
+    local card 
+    if player.phase == Player.Draw then
+      card = room:askToDiscard(player, {
+        skill_name = tongqu.name,
+        prompt = "#pang__tongqu_discard_draw",
+        cancelable = true,
+        min_num = 1,
+        max_num = 1,
+        include_equip = true,
+      })
+    elseif player.phase == Player.Play then
+      card = room:askToDiscard(player, {
+        skill_name = tongqu.name,
+        prompt = "#pang__tongqu_discard_play",
+        cancelable = true,
+        min_num = 1,
+        max_num = 1,
+        include_equip = true,
+      })
+    elseif player.phase == Player.Discard then
+      card = room:askToDiscard(player, {
+        skill_name = tongqu.name,
+        prompt = "#pang__tongqu_discard_discard",
+        cancelable = true,
+        min_num = 1,
+        max_num = 1,
+        include_equip = true,
+      })
+    elseif player.phase == Player.Finish then
+      card = room:askToDiscard(player, {
+        skill_name = tongqu.name,
+        prompt = "#pang__tongqu_discard_finish",
+        cancelable = true,
+        min_num = 1,
+        max_num = 1,
+        include_equip = true,
+      })
+    end
     if #card > 0 then
       room:setPlayerMark(player, "@@pang__tongqu-turn", 1)
     else
