@@ -4,78 +4,49 @@ local tongqu = fk.CreateSkill {
 
 Fk:loadTranslationTable{
   ["pang__tongqu"] = "通渠",
-  [":pang__tongqu"] = "摸牌阶段结束时，你可以将手牌摸至三张，或弃置两张牌并于本回合的下个阶段结束时发动此技能。",
-  ["#pang__tongqu"] = "通渠：你可以选择将手牌摸至三张或弃牌",
+  [":pang__tongqu"] = "每回合结束时，你可以重铸一张牌，然后若你最后三张因此重铸的牌点数递减，你摸一张牌。",
+  ["#pang__tongqu"] = "通渠：你可以重铸一张牌",
 
-  ["@@pang__tongqu-turn"] = "可通渠",
-  ["#pang__tongqu_discard_draw"] = "通渠：点取消将手牌摸至三张，或选择两张牌弃置并于 出牌阶段 结束时发动此技能",
-  ["#pang__tongqu_discard_play"] = "通渠：点取消将手牌摸至三张，或选择两张牌弃置并 弃牌阶段 结束时发动此技能",
-  ["#pang__tongqu_discard_discard"] = "通渠：点取消将手牌摸至三张，或选择两张牌弃置并于 结束阶段 结束时发动此技能",
-  ["#pang__tongqu_discard_finish"] = "通渠：点取消将手牌摸至三张，或选择两张牌弃置然后无事发生",
+  ["@pang__tongqu_numbers"] = "通渠",
+
 
   ["$pang__tongqu1"] = "兴凿修渠，依水屯军！",
   ["$pang__tongqu2"] = "开渠疏道，以备军实！",
 }
 
-tongqu:addEffect(fk.EventPhaseEnd, {
+tongqu:addEffect(fk.TurnEnd, {
   anim_type = "drawcard",
   can_trigger = function(self, event, target, player, data)
-    return target == player and player:hasSkill(tongqu.name) and (player.phase == Player.Draw or player:getMark("@@pang__tongqu-turn") > 0)
+    return player:hasSkill(tongqu.name) and not player:isNude()
   end,
   on_cost = function(self, event, target, player, data)
-    player.room:setPlayerMark(player, "@@pang__tongqu-turn", 0)
-    return player.room:askToSkillInvoke(player, {
+    local cards = player.room:askToCards(player, {
+      min_num = 1,
+      max_num = 1,
+      include_equip = true,
       skill_name = tongqu.name,
       prompt = "#pang__tongqu",
+      cancelable = true,
     })
+    if #cards == 1 then
+      event:setCostData(self, { cards = cards })
+      return true
+    end
   end,
   on_use = function(self, event, target, player, data)
     local room = player.room
-    local card 
-    if player.phase == Player.Draw then  ---呀咩洛，不要看胖的代码
-      card = room:askToDiscard(player, {
-        skill_name = tongqu.name,
-        prompt = "#pang__tongqu_discard_draw",
-        cancelable = true,
-        min_num = 2,
-        max_num = 2,
-        include_equip = true,
-      })
-    elseif player.phase == Player.Play then  ---呜呜呜，胖是废物
-      card = room:askToDiscard(player, {
-        skill_name = tongqu.name,
-        prompt = "#pang__tongqu_discard_play",
-        cancelable = true,
-        min_num = 2,
-        max_num = 2,
-        include_equip = true,
-      })
-    elseif player.phase == Player.Discard then
-      card = room:askToDiscard(player, {
-        skill_name = tongqu.name,
-        prompt = "#pang__tongqu_discard_discard",
-        cancelable = true,
-        min_num = 2,
-        max_num = 2,
-        include_equip = true,
-      })
-    elseif player.phase == Player.Finish then
-      card = room:askToDiscard(player, {
-        skill_name = tongqu.name,
-        prompt = "#pang__tongqu_discard_finish",
-        cancelable = true,
-        min_num = 2,
-        max_num = 2,
-        include_equip = true,
-      })
+    local card_ids = event:getCostData(self).cards
+    local card = Fk:getCardById(card_ids[1])
+    local number = card.number
+    room:recastCard(card_ids, player, tongqu.name)
+    local numbers = player:getTableMark("@pang__tongqu_numbers") or {}
+    table.insert(numbers, number)
+    while #numbers > 3 do
+      table.remove(numbers, 1)
     end
-    if #card > 0 then
-      room:setPlayerMark(player, "@@pang__tongqu-turn", 1)
-    else
-      local X = 3 - player:getHandcardNum()
-      if X > 0 then
-        player:drawCards(X, tongqu.name)
-      end
+    room:setPlayerMark(player, "@pang__tongqu_numbers", numbers)
+    if #numbers == 3 and numbers[1] > numbers[2] and numbers[2] > numbers[3] then
+      player:drawCards(1, tongqu.name)
     end
   end,
 })

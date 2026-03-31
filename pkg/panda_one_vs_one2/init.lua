@@ -79,6 +79,18 @@ Fk:loadTranslationTable{
   ["~pang__zhuling"] = "母亲，弟弟，我来了……",
 }
 
+local shenpei = General:new(extension, "pang__shenpei", "qun", 3, 3, General.Male)
+shenpei:addSkill("pang__beizhan")
+shenpei:addSkill("pang__liezhi")
+Fk:loadTranslationTable{
+  ["pang__shenpei"] = "审配",
+  ["#pang__shenpei"] = "正南义北",
+  ["designer:pang__shenpei"] = "胖即是胖",
+  ["illustrator:pang__shenpei"] = "官方",
+
+  ["~pang__shenpei"] = "吾君在北，但求面北而亡！",
+}
+
 local zhangmancheng = General:new(extension, "pang__zhangmancheng", "qun", 4, 4, General.Male)
 zhangmancheng:addSkill("pang__zhongji")
 zhangmancheng:addSkill("pang__lvecheng")
