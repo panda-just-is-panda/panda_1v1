@@ -5,7 +5,7 @@ local diaodu = fk.CreateSkill {
 Fk:loadTranslationTable{
   ["pang__diaodu"] = "调度",
   [":pang__diaodu"] = "当你登场后，你选择未选择过的一项：手牌上限+1；摸两张牌；视为使用【杀】。且此后登场的我方角色也如此做。",
-  ["#pang__duodao"] = "调度：选择未选择过的一项",
+  ["#pang__diaodu_choose"] = "调度：选择未选择过的一项",
   ["pang__diaodu_maxcard"] = "手牌上限+1",
   ["pang__diaodu_slash"] = "视为使用【杀】",
   ["pang__diaodu_draw"] = "摸两张牌",
