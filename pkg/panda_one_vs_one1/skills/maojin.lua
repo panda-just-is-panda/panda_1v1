@@ -1,21 +1,21 @@
 local qingbei = fk.CreateSkill{
-  name = "pang__qingbei",
+  name = "pang__maojin",
   tags = {  },
 }
 
 Fk:loadTranslationTable {
-  ["pang__qingbei"] = "擎北",
-  [":pang__qingbei"] = "出牌阶段限一次，你可以令对手摸两至四张牌，然后你视为使用一张伤害牌；若你因此造成伤害，你摸等量张牌。",
+  ["pang__maojin"] = "冒进",
+  [":pang__maojin"] = "出牌阶段限一次，你可以令对手摸两至四张牌，然后你视为使用一张伤害牌；若你因此造成伤害，你摸等量张牌。",
 
-  ["#pang__qingbei"] = "擎北：令对手摸两至四张牌，然后视为使用任意伤害牌，若造成伤害则你摸等量张牌",
+  ["#pang__maojin"] = "冒进：令对手摸两至四张牌，然后视为使用任意伤害牌，若造成伤害则你摸等量张牌",
 
-  ["$pang__qingbei1"] = "待追上那司马懿，定教他没好果子吃！",
-  ["$pang__qingbei2"] = "身若不周，吾一人可作擎北之柱。",
+  ["$pang__maojin1"] = "待追上那司马懿，定教他没好果子吃！",
+  ["$pang__maojin2"] = "身若不周，吾一人可作擎北之柱。",
 }
 
 qingbei:addEffect("active", {
   anim_type = "drawcard",
-  prompt = "#pang__qingbei",
+  prompt = "#pang__maojin",
   card_num = 0,
   target_num = 0,
   interaction = function(self, player)
@@ -46,9 +46,9 @@ qingbei:addEffect("active", {
             }
         })
     end
-    if player:getMark("qingbei_damage") > 0 then
+    if player:getMark("maojin_damage") > 0 then
         player:drawCards(to_draw, qingbei.name)
-        room:setPlayerMark(player, "qingbei_damage", 0)
+        room:setPlayerMark(player, "maojin_damage", 0)
     end
   end,
 })
@@ -58,7 +58,7 @@ qingbei:addEffect(fk.Damage, {
     return target == player and data.card and table.contains(data.card.skillNames, qingbei.name)
   end,
   on_refresh = function(self, event, target, player, data)
-      player.room:addPlayerMark(player, "qingbei_damage", 1)
+      player.room:addPlayerMark(player, "maojin_damage", 1)
   end,
 })
 

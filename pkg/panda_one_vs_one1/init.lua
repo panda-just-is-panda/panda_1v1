@@ -24,7 +24,7 @@ Fk:loadTranslationTable{
 }
 
 local chenshi = General:new(extension, "pang__chenshi", "shu", 4, 4, General.Male)
-chenshi:addSkill("pang__qingbei")
+chenshi:addSkill("pang__maojin")
 Fk:loadTranslationTable{
   ["pang__chenshi"] = "陈式",
   ["#pang__chenshi"] = "擎北之柱",
