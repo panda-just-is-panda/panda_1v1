@@ -23,7 +23,16 @@ Fk:loadTranslationTable{
   ["~pang__zhouqun"] = "知万物而不知己命，大谬也。",
 }
 
+local zhangyi = General:new(extension, "pang__zhangyi", "shu", 4, 4, General.Male)
+zhangyi:addSkill("pang__aorui")
+Fk:loadTranslationTable{
+  ["pang__zhangyi"] = "张翼",
+  ["#pang__zhangyi"] = "执忠守义",
+  ["designer:pang__zhangyi"] = "胖即是胖",
+  ["illustrator:pang__zhangyi"] = "官方",
 
+  ["~pang__zhangyi"] = "大汉，万胜！",
+}
 
 local lvfan = General:new(extension, "pang__lvfan", "wu", 3, 3, General.Male)
 lvfan:addSkill("pang__diaodu")
